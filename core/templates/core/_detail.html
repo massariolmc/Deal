@@ -1,0 +1,120 @@
+<!-- Line -->
+
+
+<div class="ap-line-dashed"></div>
+<h3 class="text-center">Período Jan/2021 à Abr/2021</h3>
+<div class="row">
+    
+    <div class="col-lg-6">
+        <h4>Detalhes - Pagamentos por Fornecedor </h4>
+        <div class="row ml-2">
+            <form method="POST" action="{% url 'core:rel' %}">
+                {% csrf_token %}
+            <div class="form-group row"><label class="col-sm-2 col-form-label">Fornecedores</label>
+                <div class="col-sm-6">
+                    <select class="form-control mb-15" name="account">
+                        {% for f in nome_fornecedores %}
+                        <option value="{{ f }}">{{ f }}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+                <button class="btn btn-sm btn-primary" type="submit"><strong>Enviar</strong></button>
+            </div>           
+            </form>  
+        </div>
+
+        <div class="row ml-2">
+            {% if detail %}
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>Fornecedor</th>
+                        <th>Data Lançamento</th>
+                        <th>Data Vencimento</th>
+                        <th>Nota Fiscal</th>
+                        <th>Valor</th>
+                        <th>Empresa</th>                                                                           
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fornecedor,dt_l, dt_v, nf, valor, empresa in detail %}
+                    <tr>
+                        <td>
+                            {{ fornecedor }}
+                        </td> 
+                        <td>
+                            {{ dt_l }}
+                        </td> 
+                        <td>
+                            {{ dt_v }}
+                        </td> 
+                        <td>
+                            {{ nf }}
+                        </td> 
+                        <td>
+                            {{ valor }}
+                        </td>
+                        <td>
+                            {{ empresa }}
+                        </td>                                          
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+
+    </div>
+    
+
+
+    
+    <div class="col-lg-6">        
+        <h4>Juros </h4>
+        <!--
+        <div class="row ml-2">
+            <form method="POST" action="{#% url 'core:rel' %}">
+                {% csrf_token %}
+            <div class="form-group row"><label class="col-sm-2 col-form-label">Fornecedores</label>
+                <div class="col-sm-6">
+                    <select class="form-control mb-15" name="account">
+                        {% for f,v in juros %}
+                        <option value="{#{ f }}">{#{ f }}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+                <button class="btn btn-sm btn-primary" type="submit"><strong>Enviar</strong></button>
+            </div>           
+            </form>  
+        </div>
+        -->
+
+        <div class="row ml-2">
+            
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>Fornecedor</th>
+                        <th>Valor</th>                                                                                                   
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fornecedor, valor in juros %}
+                    <tr>
+                        <td>
+                            {{ fornecedor }}
+                        </td> 
+                        <td>
+                            {{ valor }}
+                        </td>                                                           
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+<div class="ap-line-dashed"></div>

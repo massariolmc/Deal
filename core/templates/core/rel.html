@@ -1,0 +1,12 @@
+{% extends 'core/base.html'%}
+
+{% block content %}
+<div class="mt-5 col-lg-12">
+{% include 'core/_resumo.html' %} 
+{% include 'core/_detail.html' %}
+<!-- {#% include 'core/_pie_chart.html' %} -->
+{% include 'core/_table_cnpj.html' %} 
+{% include 'core/_table_fornecedores.html' %} 
+</div>
+
+{% endblock %}

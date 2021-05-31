@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="col-lg-12 mt-5">
+    <div class="ibox bg-boxshadow"> 
+        <div class="ibox-title mb-30">
+            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
+        </div>
+        <div class="ibox-content"> 
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="{% url 'service_type:url_service_types_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+                </div>                
+                <div class="col-sm-6">
+                    <span class="float-right">
+                        <a href="{% url 'service_type:url_service_type_edit' service_type.slug %}">
+                            <button type="button" class="btn btn-success">{{ edit }}
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            </br>           
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <th class="text-right">{% trans "Name" %}</th>
+                            <td>{{ service_type.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Description" %}</th>
+                            <td>{{ service_type.description }}</td>
+                        </tr>
+                                                                                       
+                        
+                        <tr>
+                            <th class="text-right">{% trans "Created by" %}:</th>
+                            <td>{{ service_type.user_created.get_full_name }} - {{ service_type.created_at }}</td>
+                        </tr>                    
+                        <tr>
+                            <th class="text-right">{% trans "Updated by" %}</th>
+                            <td>{{ service_type.user_updated.get_full_name }} - {{ service_type.updated_at }}</td>
+                        </tr>   
+                                                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'service_type/default/js/jquery.mask.min.js'%}"></script>
+<script src="{% static 'service_type/default/js/jquery_mask.js'%}"></script>
+{% endblock js %}

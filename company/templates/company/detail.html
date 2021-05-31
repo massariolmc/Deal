@@ -1,0 +1,89 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="col-lg-12 mt-5">
+    <div class="ibox bg-boxshadow"> 
+        <div class="ibox-title mb-30">
+            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="{% url 'company:url_companies_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+                </div>
+                <div class="col-sm-4">      
+                {% if company.image %}
+                 <!-- Thumb Title -->
+                 <div class="contact-thumb-title">
+                    <img src="{{ company.image.url }}" alt="" style="width:100px">                    
+                </div>                
+                
+                {% else %}    <h3><strong>{{ company.name }}</strong></h3>
+                {% endif %}
+                </div>
+                <div class="col-sm-4">
+                    <span class="float-right">
+                        <a href="{% url 'company:url_company_edit' company.slug %}">
+                            <button type="button" class="btn btn-success">{{ edit }}
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            </br>
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <th class="text-right">{% trans "Name" %}</th>
+                            <td>{{ company.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Fantasy name" %}</th>
+                            <td>{{ company.fantasy_name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "CNPJ" %}</th>                       
+                            <td class="cnpj">{{ company.cnpj }}</td>                       
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Number state" %}</th>
+                            <td>{{ company.number_state }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Email" %}</th>
+                            <td>{{ company.email }}</td>
+                        </tr>                                                                       
+                        <tr>
+                            <th class="text-right">{% trans "Address" %}</th>
+                            <td>{{ company.address}}, {{ company.address_number}}, {{company.neighborhood}} - {{company.city}}/{{company.state}} - {% trans "Zip Code" %}: <span class="cep">{{company.zip_code}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Phones" %}</th>
+                            <td>{{ company.phone_1 }} / {{ company.phone_2 }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Created by" %}:</th>
+                            <td>{{ company.user_created.get_full_name }} - {{ company.created_at }}</td>
+                        </tr>                    
+                        <tr>
+                            <th class="text-right">{% trans "Updated by" %}</th>
+                            <td>{{ company.user_updated.get_full_name }} - {{ company.updated_at }}</td>
+                        </tr>   
+                                                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'company/default/js/jquery.mask.min.js'%}"></script>
+<script src="{% static 'company/default/js/jquery_mask.js'%}"></script>
+{% endblock js %}

@@ -1,0 +1,33 @@
+<div class="col-lg-12">
+    <!-- Ibox -->
+    <div class="ibox">
+        <!-- Ibox Content -->
+        <div class="ibox-content">
+            <h2 class="text-center">Pagamentos por CNPJ Vetorial - Período Jan/2021 à Abr/2021</h2>
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Total</th>                        
+                        <th>Qtde</th>                                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empresa,total, qtde in data_2 %}
+                    <tr>
+                        <td>
+                            {{ empresa }}
+                        </td>                                          
+                        <td>
+                            {{ total }} 
+                        </td>                                        
+                        <td>
+                            {{ qtde }}
+                        </td>                                                              
+                    </tr>
+                    {% endfor %}                     
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

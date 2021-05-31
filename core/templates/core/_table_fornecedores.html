@@ -1,0 +1,53 @@
+<div class="col-lg-12">
+    <!-- Ibox -->
+    <div class="ibox">
+        <!-- Ibox Content -->
+        <div class="ibox-content">
+            <h2 class="text-center">Pagamentos fornecedores de T.I. - Período Jan/2021 à Abr/2021</h2>
+            <table class="table table-stripped">
+                <thead>
+                    <tr>
+                        <th>Fornecedor</th>
+                        <th>Total</th>
+                        <th>Média</th>
+                        <th>Menor</th>
+                        <th>Maior</th> 
+                        <th>Qtde</th>                                                           
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fornecedor,total, media, menor, maior,qtde in data_1 %}
+                    <tr>
+                        <td>
+                            {{ fornecedor }}
+                        </td>                                          
+                        <td>
+                            {{ total }} 
+                        </td>                                          
+                        <td>
+                            {{ media }}
+                        </td>                                          
+                        <td>
+                            {{ menor }}
+                        </td>                                          
+                        <td>
+                            {{ maior }}
+                        </td>    
+                        <td>
+                            {{ qtde }}
+                        </td>                                                                                      
+                    </tr>
+                    {% endfor %} 
+                    <tr>
+                        <td  class="text-danger">
+                            Total
+                        </td>
+                        <td class="text-danger" colspan="5">
+                            {{ total_pago_fornecedores }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

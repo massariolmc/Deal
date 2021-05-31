@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-30 20:40-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: models.py:8 templates/service_type/_table.html:16
+#: templates/service_type/detail.html:31
+msgid "Name"
+msgstr ""
+
+#: models.py:9
+msgid "Slug"
+msgstr ""
+
+#: models.py:10 templates/service_type/_table.html:17
+#: templates/service_type/detail.html:35
+msgid "Description"
+msgstr "Descrição"
+
+#: models.py:11 templates/service_type/detail.html:41
+msgid "Created by"
+msgstr "Criado por"
+
+#: models.py:12 templates/service_type/detail.html:45
+msgid "Updated by"
+msgstr "Atualizado por"
+
+#: models.py:13
+msgid "Created at"
+msgstr "Criado em"
+
+#: models.py:14
+msgid "Updated at"
+msgstr "Atualizado em"
+
+#: models.py:17
+msgid "ServiceType"
+msgstr "Tipo de serviço"
+
+#: models.py:18
+msgid "ServiceTypes"
+msgstr "Tipos de Serviços"
+
+#: templates/default/_messages.html:7 templates/default/_messages_async.html:6
+#: templates/service_type/_form_errors.html:6
+msgid "Alert!"
+msgstr "Alerta"
+
+#: templates/default/_messages.html:14
+msgid "Successful action."
+msgstr "Ação completada com sucesso."
+
+#: templates/default/_messages.html:16
+msgid " Alert! Action not performed"
+msgstr "Alerta! Ação não executada."
+
+#: templates/default/_messages.html:18
+msgid "Atention!"
+msgstr "Atenção"
+
+#: templates/default/_modal_checkbox.html:8
+#: templates/default/_modal_delete.html:8
+msgid "Alert"
+msgstr "Alerta"
+
+#: templates/default/_modal_checkbox.html:14
+msgid "Do you want to delete?"
+msgstr "Voce deseja deletar?"
+
+#: templates/default/_modal_checkbox.html:17
+#: templates/default/_modal_delete.html:17
+msgid "No"
+msgstr "Não"
+
+#: templates/default/_modal_checkbox.html:21
+#: templates/default/_modal_delete.html:20
+msgid "Yes"
+msgstr "Sim"
+
+#: templates/default/_modal_checkbox.html:38
+msgid "Warning"
+msgstr "Cuidado"
+
+#: templates/default/_modal_checkbox.html:43
+msgid "Choose some"
+msgstr "Escolha alguém"
+
+#: templates/default/_modal_checkbox.html:46
+msgid "Close"
+msgstr "Fechar"
+
+#: templates/default/_modal_delete.html:14
+msgid "Are you sure?"
+msgstr "Você tem certeza?"
+
+#: templates/service_type/_table.html:12
+msgid "Choose"
+msgstr "Escolha"
+
+#: templates/service_type/_table.html:18
+msgid "Options"
+msgstr "Opções"
+
+#: templates/service_type/_table.html:33
+msgid "edit"
+msgstr "editar"
+
+#: templates/service_type/_table.html:34
+msgid "details"
+msgstr "detalhes"
+
+#: templates/service_type/_table.html:35
+msgid "delete"
+msgstr "deletar"
+
+#: templates/service_type/list.html:45
+msgid "Remove"
+msgstr "Remover"
+
+#: views.py:36
+msgid "Create ServiceType"
+msgstr "Criar Tipo de Serviço"
+
+#: views.py:37 views.py:52
+msgid "Back"
+msgstr "Voltar"
+
+#: views.py:38 views.py:53
+msgid "Save"
+msgstr "Salvar"
+
+#: views.py:39 views.py:54
+msgid "Clear"
+msgstr "Limpar"
+
+#: views.py:51 views.py:80
+msgid "Edit"
+msgstr "Editar"
+
+#: views.py:69
+msgid "Registered Service Types"
+msgstr "Cadastrar tipos de serviços"
+
+#: views.py:70
+msgid "Add"
+msgstr "Adicionar"
+
+#: views.py:79
+msgid "Detail Info"
+msgstr "Informações detalhadas"
+
+#: views.py:81
+msgid "List All"
+msgstr "Listar todos"
+
+#: views.py:90 views.py:109
+msgid "Completed successful."
+msgstr "Completado com sucesso"
+
+#: views.py:93 views.py:111
+msgid "You cannot delete. This service_type has an existing deal."
+msgstr "Você não pode deletar. Este serviço tem um contrato."
