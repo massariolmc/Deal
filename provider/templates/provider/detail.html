@@ -1,0 +1,89 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="col-lg-12 mt-5">
+    <div class="ibox bg-boxshadow"> 
+        <div class="ibox-title mb-30">
+            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="{% url 'provider:url_providers_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+                </div>
+                <div class="col-sm-4">      
+                {% if provider.image %}
+                 <!-- Thumb Title -->
+                 <div class="contact-thumb-title">
+                    <img src="{{ provider.image.url }}" alt="" style="width:100px">                    
+                </div>                
+                
+                {% else %}    <h3><strong>{{ provider.name }}</strong></h3>
+                {% endif %}
+                </div>
+                <div class="col-sm-4">
+                    <span class="float-right">
+                        <a href="{% url 'provider:url_provider_edit' provider.slug %}">
+                            <button type="button" class="btn btn-success">{{ edit }}
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            </br>
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <th class="text-right">{% trans "Name" %}</th>
+                            <td>{{ provider.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Fantasy name" %}</th>
+                            <td>{{ provider.fantasy_name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "CNPJ" %}</th>                       
+                            <td class="cnpj">{{ provider.cnpj }}</td>                       
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Number state" %}</th>
+                            <td>{{ provider.number_state }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Email" %}</th>
+                            <td>{{ provider.email }}</td>
+                        </tr>                                                                       
+                        <tr>
+                            <th class="text-right">{% trans "Address" %}</th>
+                            <td>{{ provider.address}}, {{ provider.address_number}}, {{provider.neighborhood}} - {{provider.city}}/{{provider.state}} - {% trans "Zip Code" %}: <span class="cep">{{provider.zip_code}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Phones" %}</th>
+                            <td>{{ provider.phone_1 }} / {{ provider.phone_2 }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Created by" %}:</th>
+                            <td>{{ provider.user_created.get_full_name }} - {{ provider.created_at }}</td>
+                        </tr>                    
+                        <tr>
+                            <th class="text-right">{% trans "Updated by" %}</th>
+                            <td>{{ provider.user_updated.get_full_name }} - {{ provider.updated_at }}</td>
+                        </tr>   
+                                                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'provider/default/js/jquery.mask.min.js'%}"></script>
+<script src="{% static 'provider/default/js/jquery_mask.js'%}"></script>
+{% endblock js %}

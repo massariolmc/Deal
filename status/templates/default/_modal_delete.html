@@ -1,0 +1,28 @@
+{% load i18n %}
+
+<!-- MODAL DELETE -->
+<div class="modal fade" id="modal-danger" data-js="modal_delete">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{% trans "Alert"%}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{% trans "Are you sure?" %}</p>
+            </div>
+            <div class="modal-footer justify-content-between" data-js="insert_button">
+                <button type="button" class="btn btn-outline-light" data-dismiss="modal">{% trans "No"%}</button>
+                <form data-js="modal_link_delete" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" >{% trans "Yes"%}</button>
+                </form>                
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

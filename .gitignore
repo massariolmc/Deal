@@ -1,16 +1,18 @@
-.env
-.venv
-.sql3
-.sql
+*.env
+*.venv
+*.sqlite3
+*.sql3
+*.sql
 *.backup
-.jpg
-.png
-.jpeg
+*.jpg
+*.png
+*.jpeg
 *.detail
 /Materiais
 /media
 *.pyc
 /core/static/themeforest-ndVhIZu8-appwork-admin-template-ui-kit
+
 
 
 # Compiled source #

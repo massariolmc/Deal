@@ -1,0 +1,44 @@
+{% load static %}
+{% load i18n %}
+
+
+<table data-js="dataTables" class="table table-striped table-bordered table-hover" data-lang="{% url 'provider:url_translate_datables_js' %}">
+  <thead>
+    <tr class="text-sm-center">
+      <th>
+        <div class="form-check-arae-controls">
+            <!-- Form Check -->
+            <label for="checkbox_main" class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" data-js="check_all" id="checkbox_main"><span class="form-check-label">{% trans "Choose" %}</span>
+            </label>
+        </div>            
+      </th>
+      <th>{% trans "Name" %}</th>
+      <th>{% trans "Fantasy name" %}</th>
+      <th>{% trans "CNPJ" %}</th>                      
+      <th>{% trans "Email" %}</th>       
+      <th>{% trans "Options" %}</th>                                         
+    </tr>
+  </thead>                  
+  <tbody>
+    {% for provider in providers %}
+    <tr class="text-sm-center">
+      <td><div class="form-check-arae-controls">
+        <label for="checkbox_{{ provider.slug }}" class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="check_id" value="{{ provider.slug }}" id="checkbox_{{ provider.slug }}">        
+        </label>
+        </div></td>
+      <td>{{ provider.name }}</td>
+      <td>{{ provider.fantasy_name }}</td>                                
+      <td>{{ provider.cnpj }}</td>                                                                       
+      <td>{{ provider.email }}</td>                                                                 
+      <td class="text-center"> 
+        <a href="{% url 'provider:url_provider_edit' provider.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
+        <a href="{% url 'provider:url_provider_detail' provider.slug %}"><span class='badge badge-info'>{% trans "details" %}</span></a>                                                                          
+        <a href="" data-url="{% url 'provider:url_provider_delete' provider.slug %}" id="button_modal_{{ provider.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>
+        </form>
+      </td>                      
+    </tr>                 
+    {% endfor %}   
+  </tbody>                  
+</table>                

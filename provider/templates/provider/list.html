@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block css %}
+  
+  <!-- DATA TABLES -->
+  <link rel="stylesheet" href="{% static 'provider/css/plugins/data-table-css/datatables.min.css' %}">
+    
+{% endblock css %}
+
+{% block content %}
+
+{% block title %}
+{% endblock title %}
+
+          <!-- DataTales Example -->       
+              
+              <div class="col-lg-12 mt-5">
+                {% include 'default/_messages.html' %}
+                  <!-- Ibox -->
+                <div class="ibox bg-boxshadow"> 
+                  <div class="ibox-title mb-30">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+                      </div>
+                      <div class="col-sm-6">
+                        <span class="float-right">
+                          <a href="{% url 'provider:url_provider_create' %}">
+                            <button type="button" class="btn btn-success">{{ add }}
+                            </button>
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>                            
+          
+
+                  <!-- Ibox Content -->
+                  <div class="ibox-content">
+                    <div class="table-responsive">
+                      {% include 'provider/_table.html' %}
+                    </div>
+                    <button data-url="{% url 'provider:url_provider_delete_all' %}" data-js="click_checkbox" class="btn btn-danger" ><i class="fa fa-trash"></i>{% trans "Remove" %}</button>
+                  </div>
+                </div><!--ibox bg-boxshadow-->
+              </div><!--col-lg-12 -->
+             
+             
+{% include 'default/_modal_delete.html' %}
+
+{% include 'default/_modal_checkbox.html' %}
+
+{% endblock content %}
+
+{% block js %}
+
+<!-- Data Table js -->
+<script src="{% static 'provider/js/plugins-js/data-table-js/data-table.bootstrap.min.js'%}"></script>
+<script src="{% static 'provider/js/plugins-js/data-table-js/data-table.min.js'%}"></script>
+
+<script src="{% static 'provider/default/js/checkbox_delete_all.js'%}"></script>
+<script src="{% static 'provider/default/js/dataTables_default.js'%}"></script>
+{% endblock js %}

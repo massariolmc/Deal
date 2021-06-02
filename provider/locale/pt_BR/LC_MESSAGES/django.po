@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-26 17:05-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:31
+msgid "This field CNPJ exactly needs 14 digits. "
+msgstr "Este campo deve possiur exatamente 14 digitos."
+
+#: forms.py:32
+msgid "Maximum size allowed"
+msgstr "Tamanho maximo permitido"
+
+#: models.py:9 models.py:62 models.py:80 models.py:97
+#: templates/company/_table.html:13 templates/company/detail.html:36
+msgid "Name"
+msgstr "Nome"
+
+#: models.py:10
+msgid "Fantasy Name"
+msgstr "Nome Fantasia"
+
+#: models.py:11 templates/company/_table.html:15
+#: templates/company/detail.html:44
+msgid "CNPJ"
+msgstr "CNPJ"
+
+#: models.py:12
+msgid "Number State"
+msgstr "Insrição Estadual"
+
+#: models.py:13 templates/company/_table.html:16
+#: templates/company/detail.html:52
+msgid "Email"
+msgstr "Email"
+
+#: models.py:14 models.py:65 models.py:83 models.py:100
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:16
+msgid "Image"
+msgstr "Imagem"
+
+#: models.py:17 models.py:64 models.py:82 models.py:98
+msgid "Description"
+msgstr "Descrição"
+
+#: models.py:18 templates/company/detail.html:56
+msgid "Address"
+msgstr "Endereço"
+
+#: models.py:19
+msgid "Address Number"
+msgstr "Numero"
+
+#: models.py:20
+msgid "Neighborhood"
+msgstr "Bairro"
+
+#: models.py:21
+msgid "City"
+msgstr "Cidade"
+
+#: models.py:22
+msgid "State"
+msgstr "Estado"
+
+#: models.py:23 templates/company/detail.html:57
+msgid "Zip Code"
+msgstr "CEP"
+
+#: models.py:24
+msgid "Main Phone"
+msgstr "Telefone Principal"
+
+#: models.py:25
+msgid "Secundary Phone"
+msgstr "Telefone Secundario"
+
+#: models.py:26 models.py:67 models.py:84 models.py:101
+#: templates/company/detail.html:64
+msgid "Created by"
+msgstr "Criado por"
+
+#: models.py:27 models.py:85 models.py:102 templates/company/detail.html:68
+msgid "Updated by"
+msgstr "Atualizado por"
+
+#: models.py:28 models.py:69 models.py:86 models.py:103
+msgid "Created at"
+msgstr "Criado em"
+
+#: models.py:29 models.py:70 models.py:87 models.py:104
+msgid "Updated at"
+msgstr "Atualizado em"
+
+#: models.py:32 models.py:66
+msgid "Company"
+msgstr "Empresa"
+
+#: models.py:33
+msgid "Companies"
+msgstr "Empresas"
+
+#: models.py:63
+msgid "Abbreviation"
+msgstr "Abreviação"
+
+#: models.py:68
+msgid "Updated By"
+msgstr "Atualizado por"
+
+#: models.py:72
+msgid "Department"
+msgstr "Departamento"
+
+#: models.py:73
+msgid "Departments"
+msgstr "Departamentos"
+
+#: models.py:81
+msgid "Discount"
+msgstr "Desconto"
+
+#: models.py:89
+msgid "MaxDiscount"
+msgstr "DescontoMAx"
+
+#: models.py:90
+msgid "MaxDiscounts"
+msgstr "DescontosMax"
+
+#: models.py:99
+msgid "Max Discount"
+msgstr "Desconto maximo"
+
+#: models.py:106
+msgid "PersonType"
+msgstr "Tipos de Pessoa"
+
+#: models.py:107
+msgid "PersonTypes"
+msgstr "Tipos de pessoas"
+
+#: templates/company/_form_errors.html:6 templates/default/_messages.html:7
+msgid "Alert!"
+msgstr "Alerta!"
+
+#: templates/company/_table.html:10
+msgid "Choose"
+msgstr "Escolha"
+
+#: templates/company/_table.html:14 templates/company/detail.html:40
+msgid "Fantasy name"
+msgstr "Nome Fantasia"
+
+#: templates/company/_table.html:17
+msgid "Options"
+msgstr "Opções"
+
+#: templates/company/_table.html:33
+msgid "edit"
+msgstr "editar"
+
+#: templates/company/_table.html:34
+msgid "details"
+msgstr "detalhes"
+
+#: templates/company/_table.html:35
+msgid "delete"
+msgstr "deletar"
+
+#: templates/company/detail.html:48
+msgid "Number state"
+msgstr "Inscrição Estadual"
+
+#: templates/company/detail.html:60
+msgid "Phones"
+msgstr "Telefones"
+
+#: templates/company/list.html:24 templates/company/list.html:29
+msgid "Welcome to our page"
+msgstr ""
+
+#: templates/company/list.html:63
+msgid "Remove"
+msgstr "Remover"
+
+#: templates/default/_modal_checkbox.html:8
+#: templates/default/_modal_delete.html:8
+msgid "Alert"
+msgstr "Alerta"
+
+#: templates/default/_modal_checkbox.html:14
+msgid "Do you want to delete?"
+msgstr "Você deseja deletar?"
+
+#: templates/default/_modal_checkbox.html:17
+#: templates/default/_modal_delete.html:17
+msgid "No"
+msgstr "Não"
+
+#: templates/default/_modal_checkbox.html:21
+#: templates/default/_modal_delete.html:20
+msgid "Yes"
+msgstr "Sim"
+
+#: templates/default/_modal_checkbox.html:38
+msgid "Warning"
+msgstr "Atenção"
+
+#: templates/default/_modal_checkbox.html:43
+msgid "Choose some"
+msgstr "Selecione alguém"
+
+#: templates/default/_modal_checkbox.html:46
+msgid "Close"
+msgstr "Fechar"
+
+#: templates/default/_modal_delete.html:14
+msgid "Are you sure?"
+msgstr "Você tem certeza?"
+
+#: views.py:36
+msgid "Create Company"
+msgstr "Criar Empresa"
+
+#: views.py:37 views.py:52
+msgid "Back"
+msgstr "Voltar"
+
+#: views.py:38 views.py:53
+msgid "Save"
+msgstr "Salvar"
+
+#: views.py:39 views.py:54
+msgid "Clear"
+msgstr "Limpar"
+
+#: views.py:51 views.py:80
+msgid "Edit"
+msgstr "Editar"
+
+#: views.py:69
+msgid "Registered Companies"
+msgstr "Empresas Cadastradas"
+
+#: views.py:70
+msgid "Add"
+msgstr "Adicionar"
+
+#: views.py:79
+msgid "Detail Info"
+msgstr "Informações Detalhadas"
+
+#: views.py:81
+msgid "List All"
+msgstr "Listar todos"
+
+#: views.py:92 views.py:111
+msgid "Completed successful."
+msgstr "Completado com sucesso."
+
+#: views.py:95 views.py:113
+msgid "You cannot delete. This company has an existing department."
+msgstr "Você não pode deletar. Esta Empresa tem departamentos cadastrados."
