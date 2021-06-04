@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'service_type',
     'status',
     'provider',
+    'contact_provider',
     'crispy_forms',
 ]
 

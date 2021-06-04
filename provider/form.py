@@ -99,7 +99,7 @@ class ProviderForm(ModelForm):
                     </div>
                     <div class="col-sm-6">
                         <span class="float-right">
-                            <a href="{% url 'Provider:url_providers_list'%}" class="btn btn-warning">{{ back }}</a>
+                            <a href="{% url 'provider:url_providers_list'%}" class="btn btn-warning">{{ back }}</a>
                         </span>  
                     </div>
                 </div>'''

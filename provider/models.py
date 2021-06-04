@@ -41,7 +41,7 @@ class Provider(models.Model):
     number_state = models.CharField(_('Number State'), max_length=30, blank=True)
     email = models.EmailField(_('Email'), max_length=100, unique=True, blank=True)    
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
-    image = models.ImageField(upload_to = 'company/', verbose_name =_('Image'), blank=True, max_length=200)
+    image = models.ImageField(upload_to = 'provider/', verbose_name =_('Image'), blank=True, max_length=200)
     description = models.TextField(_('Description'), blank=True)        
     address = models.CharField(_("Address"), max_length=100, blank=True)
     address_number = models.CharField(_("Address Number"), max_length=100, blank=True)

@@ -4,9 +4,13 @@ from django.utils.translation import ugettext as _
 from django.contrib import messages
 from .models import Provider
 from .form import ProviderForm
+from django.forms import modelformset_factory, inlineformset_factory
 from account.models import User
+from contact_provider.models import ContactProvider
+from contact_provider.form import ContactProviderForm
 from django.db import IntegrityError
 from django.db.models import Q, Sum, Count, Prefetch
+from django.template.loader import render_to_string
 import os
 import json
 
@@ -73,12 +77,15 @@ def providers_list(request):
 
 def provider_detail(request, slug):    
     template_name = "provider/detail.html"
-    provider = get_object_or_404(Provider,slug=slug)
+    provider = get_object_or_404(Provider,slug=slug)    
+    contacts = contact_provider_create(request,provider)
     context = {
         'provider': provider,
         'title': _("Detail Info"),
         'edit': _("Edit"),
-        'list_all': _("List All")
+        'show': _("Show"),
+        'list_all': _("List All"),
+        'formset': contacts,
     }
     return render(request, template_name, context)
 
@@ -113,6 +120,35 @@ def provider_delete_all(request):
     return redirect('provider:url_providers_list')
     
 ########### FIM PROVIDER ############################
+
+########### PROVIDER WITH CONTACT_PROVIDER ###########
+
+def contact_provider_create(request, provider):     
+    if provider.__class__  is int:          
+        provider = get_object_or_404(Provider, pk=provider)
+    ContactProviderFormSet = inlineformset_factory(Provider, ContactProvider, form=ContactProviderForm, extra=1, can_delete=True)
+    if request.method == 'POST':
+        formset = ContactProviderFormSet(request.POST, instance = provider)        
+        if formset.is_valid():            
+            instances = formset.save(commit=False)                
+            for obj in formset.deleted_objects:  
+                obj.delete()             
+            for instance in instances:    
+                instance.user_created = request.user
+                instance.user_updated = request.user                                                                                  
+                instance.save()        
+           
+            return redirect('provider:url_provider_detail', provider.slug)
+        else:            
+            messages.warning(request, _("Contact not added. This name already exists or was entered incorrectly"))    
+            return redirect('provider:url_provider_detail', provider.slug)             
+    else:
+        formset = ContactProviderFormSet(instance = provider)
+        return formset
+
+
+
+########### PROVIDER WITH CONTACT_PROVIDER ###########
 
 # VIEW PARA TRADUZIR O DATATABLES. USO GERAL
 def translate_datables_js(request):    

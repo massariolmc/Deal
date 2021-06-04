@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-26 17:05-0400\n"
+"POT-Creation-Date: 2021-06-03 20:57-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,189 +17,121 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:31
+#: form.py:39
 msgid "This field CNPJ exactly needs 14 digits. "
 msgstr "Este campo deve possiur exatamente 14 digitos."
 
-#: forms.py:32
+#: form.py:47
 msgid "Maximum size allowed"
 msgstr "Tamanho maximo permitido"
 
-#: models.py:9 models.py:62 models.py:80 models.py:97
-#: templates/company/_table.html:13 templates/company/detail.html:36
+#: models.py:38 templates/provider/_table.html:16
+#: templates/provider/detail.html:41
 msgid "Name"
 msgstr "Nome"
 
-#: models.py:10
+#: models.py:39
 msgid "Fantasy Name"
 msgstr "Nome Fantasia"
 
-#: models.py:11 templates/company/_table.html:15
-#: templates/company/detail.html:44
+#: models.py:40 templates/provider/_table.html:18
+#: templates/provider/detail.html:49
 msgid "CNPJ"
 msgstr "CNPJ"
 
-#: models.py:12
+#: models.py:41
 msgid "Number State"
 msgstr "Insrição Estadual"
 
-#: models.py:13 templates/company/_table.html:16
-#: templates/company/detail.html:52
+#: models.py:42 templates/provider/_table.html:19
+#: templates/provider/detail.html:57
 msgid "Email"
 msgstr "Email"
 
-#: models.py:14 models.py:65 models.py:83 models.py:100
+#: models.py:43
 msgid "Slug"
 msgstr "Slug"
 
-#: models.py:16
+#: models.py:44
 msgid "Image"
 msgstr "Imagem"
 
-#: models.py:17 models.py:64 models.py:82 models.py:98
+#: models.py:45
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:18 templates/company/detail.html:56
+#: models.py:46 templates/provider/detail.html:61
 msgid "Address"
 msgstr "Endereço"
 
-#: models.py:19
+#: models.py:47
 msgid "Address Number"
 msgstr "Numero"
 
-#: models.py:20
+#: models.py:48
 msgid "Neighborhood"
 msgstr "Bairro"
 
-#: models.py:21
+#: models.py:49
 msgid "City"
 msgstr "Cidade"
 
-#: models.py:22
+#: models.py:50
 msgid "State"
 msgstr "Estado"
 
-#: models.py:23 templates/company/detail.html:57
+#: models.py:51 templates/provider/detail.html:62
 msgid "Zip Code"
 msgstr "CEP"
 
-#: models.py:24
+#: models.py:52
 msgid "Main Phone"
 msgstr "Telefone Principal"
 
-#: models.py:25
+#: models.py:53
 msgid "Secundary Phone"
 msgstr "Telefone Secundario"
 
-#: models.py:26 models.py:67 models.py:84 models.py:101
-#: templates/company/detail.html:64
+#: models.py:54 templates/provider/detail.html:76
 msgid "Created by"
 msgstr "Criado por"
 
-#: models.py:27 models.py:85 models.py:102 templates/company/detail.html:68
+#: models.py:55 templates/provider/detail.html:80
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: models.py:28 models.py:69 models.py:86 models.py:103
+#: models.py:56
 msgid "Created at"
 msgstr "Criado em"
 
-#: models.py:29 models.py:70 models.py:87 models.py:104
+#: models.py:57
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: models.py:32 models.py:66
-msgid "Company"
-msgstr "Empresa"
+#: models.py:60
+msgid "Provider"
+msgstr "Fornecedor"
 
-#: models.py:33
-msgid "Companies"
-msgstr "Empresas"
+#: models.py:61
+msgid "Providers"
+msgstr "Fornecedores"
 
-#: models.py:63
-msgid "Abbreviation"
-msgstr "Abreviação"
-
-#: models.py:68
-msgid "Updated By"
-msgstr "Atualizado por"
-
-#: models.py:72
-msgid "Department"
-msgstr "Departamento"
-
-#: models.py:73
-msgid "Departments"
-msgstr "Departamentos"
-
-#: models.py:81
-msgid "Discount"
-msgstr "Desconto"
-
-#: models.py:89
-msgid "MaxDiscount"
-msgstr "DescontoMAx"
-
-#: models.py:90
-msgid "MaxDiscounts"
-msgstr "DescontosMax"
-
-#: models.py:99
-msgid "Max Discount"
-msgstr "Desconto maximo"
-
-#: models.py:106
-msgid "PersonType"
-msgstr "Tipos de Pessoa"
-
-#: models.py:107
-msgid "PersonTypes"
-msgstr "Tipos de pessoas"
-
-#: templates/company/_form_errors.html:6 templates/default/_messages.html:7
+#: templates/default/_messages.html:7 templates/default/_messages_async.html:6
+#: templates/provider/_form_errors.html:6
 msgid "Alert!"
 msgstr "Alerta!"
 
-#: templates/company/_table.html:10
-msgid "Choose"
-msgstr "Escolha"
+#: templates/default/_messages.html:14
+msgid "Successful action."
+msgstr "Ação realizado com sucesso"
 
-#: templates/company/_table.html:14 templates/company/detail.html:40
-msgid "Fantasy name"
-msgstr "Nome Fantasia"
+#: templates/default/_messages.html:16
+msgid " Alert! Action not performed"
+msgstr "Alerta! Ação não realizada."
 
-#: templates/company/_table.html:17
-msgid "Options"
-msgstr "Opções"
-
-#: templates/company/_table.html:33
-msgid "edit"
-msgstr "editar"
-
-#: templates/company/_table.html:34
-msgid "details"
-msgstr "detalhes"
-
-#: templates/company/_table.html:35
-msgid "delete"
-msgstr "deletar"
-
-#: templates/company/detail.html:48
-msgid "Number state"
-msgstr "Inscrição Estadual"
-
-#: templates/company/detail.html:60
-msgid "Phones"
-msgstr "Telefones"
-
-#: templates/company/list.html:24 templates/company/list.html:29
-msgid "Welcome to our page"
-msgstr ""
-
-#: templates/company/list.html:63
-msgid "Remove"
-msgstr "Remover"
+#: templates/default/_messages.html:18
+msgid "Atention!"
+msgstr "Atenção!"
 
 #: templates/default/_modal_checkbox.html:8
 #: templates/default/_modal_delete.html:8
@@ -236,46 +168,129 @@ msgstr "Fechar"
 msgid "Are you sure?"
 msgstr "Você tem certeza?"
 
-#: views.py:36
-msgid "Create Company"
-msgstr "Criar Empresa"
+#: templates/provider/_modal_contact_provider.html:9
+msgid "Contacts"
+msgstr "Contatos"
 
-#: views.py:37 views.py:52
-msgid "Back"
-msgstr "Voltar"
-
-#: views.py:38 views.py:53
+#: templates/provider/_modal_contact_provider.html:21 views.py:42 views.py:57
 msgid "Save"
 msgstr "Salvar"
 
-#: views.py:39 views.py:54
+#: templates/provider/_table.html:12
+msgid "Choose"
+msgstr "Escolha"
+
+#: templates/provider/_table.html:17 templates/provider/detail.html:45
+msgid "Fantasy name"
+msgstr "Nome Fantasia"
+
+#: templates/provider/_table.html:20
+msgid "Options"
+msgstr "Opções"
+
+#: templates/provider/_table.html:36
+msgid "edit"
+msgstr "editar"
+
+#: templates/provider/_table.html:37
+msgid "details"
+msgstr "detalhes"
+
+#: templates/provider/_table.html:38
+msgid "delete"
+msgstr "deletar"
+
+#: templates/provider/detail.html:53
+msgid "Number state"
+msgstr "Inscrição Estadual"
+
+#: templates/provider/detail.html:65
+msgid "Contact Provider"
+msgstr "Contatos"
+
+#: templates/provider/detail.html:72
+msgid "Phones"
+msgstr "Telefones"
+
+#: templates/provider/list.html:45
+msgid "Remove"
+msgstr "Remover"
+
+#: views.py:40
+msgid "Create Provider"
+msgstr "Criar Fornecedor"
+
+#: views.py:41 views.py:56
+msgid "Back"
+msgstr "Voltar"
+
+#: views.py:43 views.py:58
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:51 views.py:80
+#: views.py:55 views.py:85
 msgid "Edit"
 msgstr "Editar"
 
-#: views.py:69
-msgid "Registered Companies"
-msgstr "Empresas Cadastradas"
+#: views.py:73
+msgid "Registered Providers"
+msgstr "Fornecedores Cadastradas"
 
-#: views.py:70
+#: views.py:74
 msgid "Add"
 msgstr "Adicionar"
 
-#: views.py:79
+#: views.py:84
 msgid "Detail Info"
 msgstr "Informações Detalhadas"
 
-#: views.py:81
+#: views.py:86
+msgid "Show"
+msgstr "Exibir"
+
+#: views.py:87
 msgid "List All"
 msgstr "Listar todos"
 
-#: views.py:92 views.py:111
+#: views.py:97 views.py:116
 msgid "Completed successful."
 msgstr "Completado com sucesso."
 
-#: views.py:95 views.py:113
-msgid "You cannot delete. This company has an existing department."
-msgstr "Você não pode deletar. Esta Empresa tem departamentos cadastrados."
+#: views.py:100 views.py:118
+msgid "You cannot delete. This provider has an existing department."
+msgstr "Você não pode deletar. Esta Fornecedor tem departamentos cadastrados."
+
+#: views.py:143
+msgid "Contact not added. This name already exists or was entered incorrectly"
+msgstr ""
+"Contato não adicionado. Este nome já existe ou foi inserido incorretamente"
+
+#~ msgid "Abbreviation"
+#~ msgstr "Abreviação"
+
+#~ msgid "Updated By"
+#~ msgstr "Atualizado por"
+
+#~ msgid "Department"
+#~ msgstr "Departamento"
+
+#~ msgid "Departments"
+#~ msgstr "Departamentos"
+
+#~ msgid "Discount"
+#~ msgstr "Desconto"
+
+#~ msgid "MaxDiscount"
+#~ msgstr "DescontoMAx"
+
+#~ msgid "MaxDiscounts"
+#~ msgstr "DescontosMax"
+
+#~ msgid "Max Discount"
+#~ msgstr "Desconto maximo"
+
+#~ msgid "PersonType"
+#~ msgstr "Tipos de Pessoa"
+
+#~ msgid "PersonTypes"
+#~ msgstr "Tipos de pessoas"
