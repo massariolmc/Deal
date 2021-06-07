@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'status',
     'provider',
     'contact_provider',
+    'contract',
     'crispy_forms',
 ]
 

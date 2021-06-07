@@ -1,0 +1,89 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="col-lg-12 mt-5">
+    <div class="ibox bg-boxshadow"> 
+        <div class="ibox-title mb-30">
+            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="{% url 'contract:url_contracts_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+                </div>
+                <div class="col-sm-4">      
+                {% if contract.image %}
+                 <!-- Thumb Title -->
+                 <div class="contact-thumb-title">
+                    <img src="{{ contract.image.url }}" alt="" style="width:100px">                    
+                </div>                
+                
+                {% else %}    <h3><strong>{{ contract.name }}</strong></h3>
+                {% endif %}
+                </div>
+                <div class="col-sm-4">
+                    <span class="float-right">
+                        <a href="{% url 'contract:url_contract_edit' contract.slug %}">
+                            <button type="button" class="btn btn-success">{{ edit }}
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            </br>
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <th class="text-right">{% trans "Name" %}</th>
+                            <td>{{ contract.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Fantasy name" %}</th>
+                            <td>{{ contract.fantasy_name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "CNPJ" %}</th>                       
+                            <td class="cnpj">{{ contract.cnpj }}</td>                       
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Number state" %}</th>
+                            <td>{{ contract.number_state }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Email" %}</th>
+                            <td>{{ contract.email }}</td>
+                        </tr>                                                                       
+                        <tr>
+                            <th class="text-right">{% trans "Address" %}</th>
+                            <td>{{ contract.address}}, {{ contract.address_number}}, {{contract.neighborhood}} - {{contract.city}}/{{contract.state}} - {% trans "Zip Code" %}: <span class="cep">{{contract.zip_code}}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Phones" %}</th>
+                            <td>{{ contract.phone_1 }} / {{ contract.phone_2 }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Created by" %}:</th>
+                            <td>{{ contract.user_created.get_full_name }} - {{ contract.created_at }}</td>
+                        </tr>                    
+                        <tr>
+                            <th class="text-right">{% trans "Updated by" %}</th>
+                            <td>{{ contract.user_updated.get_full_name }} - {{ contract.updated_at }}</td>
+                        </tr>   
+                                                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'contract/default/js/jquery.mask.min.js'%}"></script>
+<script src="{% static 'contract/default/js/jquery_mask.js'%}"></script>
+{% endblock js %}
