@@ -10,6 +10,16 @@ def delete_old_image(Model,pk, image):
         if c.image != image:            
             c.image.delete(save=False)# O padrão é true se for deletar tudo. Se for deletar só a imagem ou arquivo é false 
             marc = 1            
+    return marc 
+
+#Deleta os arquivos em um update, caso não sejam iguais
+def delete_old_file(Model,pk, image):
+    marc = 0   
+    if pk:
+        c = Model.objects.get(id=pk)        
+        if c.pdf_contract != image:            
+            c.pdf_contract.delete(save=False)# O padrão é true se for deletar tudo. Se for deletar só a imagem ou arquivo é false 
+            marc = 1            
     return marc      
 
 #Comprime imagens

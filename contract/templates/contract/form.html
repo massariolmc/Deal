@@ -3,6 +3,14 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 
+
+{% block css %}
+  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.min.css'%}" rel="stylesheet">
+  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.structure.min.css'%}" rel="stylesheet">  
+  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.theme.min.css'%}" rel="stylesheet">  
+{% endblock css %}
+
+
 {% block title %} {{ title }}
 {% endblock title %}
 
@@ -23,5 +31,10 @@
 {% endblock content %}
 
 {% block js %}
-<script src="{% static 'contract/js/only_number_input.js'%}"></script>
+<!-- <script src="{% static 'contract/js/only_number_input.js'%}"></script> -->
+
+<!-- Dateepicker js -->
+<script src="{% static 'contract/js/plugins-js/datepicker/js/jquery-ui.min.js'%}"></script>
+<script src="{% static 'contract/js/datepicker.js'%}"></script>
+
 {% endblock js %}

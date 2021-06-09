@@ -1,4 +1,4 @@
-
+{% load i18n %}
 <!-- Navbar -->
 <div class="classy-nav-container home-2 breakpoint-off">
     <!-- Classy Menu -->
@@ -20,18 +20,19 @@
             <!-- Nav Start -->
             <div class="classynav">
                 <ul id="nav">
-                    <li><a href="#"><i class="icon_drive"></i> Dashboard</a>
+                    <li><a href="#"><i class="icon_drive"></i> {% trans 'Register'%}</a>
                         <ul class="dropdown home-2">
-                            <li><a href="dashboard-1.html">- Dashboard - 1</a></li>
-                            <li><a href="dashboard-2.html">- Dashboard - 2</a></li>
-                            <li><a href="dashboard-3.html">- Dashboard - 3</a></li>
+                            <li><a href="{% url 'company:url_companies_list' %}">- {% trans 'Companies'%}</a></li>
+                            <li><a href="{% url 'provider:url_providers_list' %}">- {% trans 'Providers'%}</a></li>
+                            <li><a href="{% url 'service_type:url_service_types_list' %}">- {% trans 'Service Types'%}</a></li>
+                            <li><a href="{% url 'status:url_status_list' %}">- {% trans 'Status'%}</a></li>
                         </ul>
                     </li>
-                    <li><a href="#"><i class="icon_mail_alt"></i> Mailbox</a>
+                    <li><a href="#"><i class="icon_mail_alt"></i> {% trans 'Contracts'%}</a>
                         <ul class="dropdown home-2">
-                            <li><a href="inbox.html">- Inbox</a></li>
-                            <li><a href="email-view.html">- E-mail View</a></li>
-                            <li><a href="compose-email.html">- Compose Email</a></li>
+                            <li><a href="{% url 'contract:url_contracts_list' %}">- {% trans 'List Contracts'%}</a></li>
+                            <li><a href="{% url 'contract:url_contract_create' %}">- {% trans 'Create Contracts'%}</a></li>
+                            <li><a href="compose-email.html">- {% trans 'Deep Search Contracts'%}</a></li>
                         </ul>
                     </li>                               
                     <li><a href="#"><i class="icon_piechart"></i> Charts</a>

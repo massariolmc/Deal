@@ -66,7 +66,7 @@ def status_list(request):
     status = Status.objects.all()    
     context = {
         'status': status,
-        'title': _("Registered Service Types"),
+        'title': _("Registered Status"),
         'add': _("Add")      
     }
     return render(request,template_name,context)

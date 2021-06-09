@@ -5,12 +5,12 @@ from provider.models import Provider
 from company.models import Company
 from status.models import Status
 from django.utils.translation import ugettext_lazy as _
-from .compress_image import compress, delete_old_image
+from .compress_image import compress, delete_old_image, delete_old_file
 from .slug_file import unique_uuid
 
 class Contract(models.Model):
     name = models.CharField(_('Name'), max_length=100, unique=True, blank=False, null=False)
-    object = models.TextField(_('Fantasy Name'), blank=False, null=False)
+    object = models.TextField(_('Object'), blank=False, null=False)
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
     type = models.ForeignKey(ServiceType, related_name="contract_type_created_id", verbose_name=_("Type"), blank=False, on_delete=models.PROTECT)
     dt_start = models.DateField(_('Date Initial'), max_length=100, blank=True)
@@ -19,7 +19,7 @@ class Contract(models.Model):
     provider = models.ForeignKey(Provider, related_name="contract_provider_created_id", verbose_name=_("Provider"), blank=False, on_delete=models.PROTECT)
     status = models.ForeignKey(Status, related_name="contract_status_created_id", verbose_name=_("Status"), blank=False, on_delete=models.PROTECT)
     pdf_contract = models.FileField(upload_to = 'contract/', verbose_name =_('File'), blank=True, max_length=200)
-    value = models.DecimalField(_('Contract Value'), decimal_places=2, max_digits=5, blank=False)
+    value = models.DecimalField(_('Contract Value'), decimal_places=2, max_digits=12, blank=False)
     company = models.ForeignKey(Company, related_name="contract_company_created_id", verbose_name=_("Company"), blank=False, on_delete=models.PROTECT)
     description = models.TextField(_('Description'), blank=True)        
     user_created = models.ForeignKey(User, related_name="contract_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
@@ -36,15 +36,11 @@ class Contract(models.Model):
         marc = 0
         if self.id:            
             #Deleta a imagem antiga, caso não for igual
-            marc = delete_old_image(self.__class__, self.id, self.pdf_contract)            
+            marc = delete_old_file(self.__class__, self.id, self.pdf_contract)            
         else:
             #Insere um valor para o Slug            
-            self.slug = unique_uuid(self.__class__)        
+            self.slug = unique_uuid(self.__class__)                
         
-        # Comprime a imagem
-        if marc:           
-            new_image = compress(self.pdf_contract)                
-            self.pdf_contract = new_image           
         # save
         super().save(*args, **kwargs)
 

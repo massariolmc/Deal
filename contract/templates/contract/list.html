@@ -5,7 +5,7 @@
 {% block css %}
   
   <!-- DATA TABLES -->
-  <link rel="stylesheet" href="{% static 'Contract/css/plugins/data-table-css/datatables.min.css' %}">
+  <link rel="stylesheet" href="{% static 'contract/css/plugins/data-table-css/datatables.min.css' %}">
     
 {% endblock css %}
 
@@ -27,7 +27,7 @@
                       </div>
                       <div class="col-sm-6">
                         <span class="float-right">
-                          <a href="{% url 'Contract:url_Contract_create' %}">
+                          <a href="{% url 'contract:url_contract_create' %}">
                             <button type="button" class="btn btn-success">{{ add }}
                             </button>
                           </a>
@@ -40,9 +40,9 @@
                   <!-- Ibox Content -->
                   <div class="ibox-content">
                     <div class="table-responsive">
-                      {% include 'Contract/_table.html' %}
+                      {% include 'contract/_table.html' %}
                     </div>
-                    <button data-url="{% url 'Contract:url_Contract_delete_all' %}" data-js="click_checkbox" class="btn btn-danger" ><i class="fa fa-trash"></i>{% trans "Remove" %}</button>
+                    <button data-url="{% url 'contract:url_contract_delete_all' %}" data-js="click_checkbox" class="btn btn-danger" ><i class="fa fa-trash"></i>{% trans "Remove" %}</button>
                   </div>
                 </div><!--ibox bg-boxshadow-->
               </div><!--col-lg-12 -->
@@ -57,9 +57,9 @@
 {% block js %}
 
 <!-- Data Table js -->
-<script src="{% static 'Contract/js/plugins-js/data-table-js/data-table.bootstrap.min.js'%}"></script>
-<script src="{% static 'Contract/js/plugins-js/data-table-js/data-table.min.js'%}"></script>
+<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.bootstrap.min.js'%}"></script>
+<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.min.js'%}"></script>
 
-<script src="{% static 'Contract/default/js/checkbox_delete_all.js'%}"></script>
-<script src="{% static 'Contract/default/js/dataTables_default.js'%}"></script>
+<script src="{% static 'contract/default/js/checkbox_delete_all.js'%}"></script>
+<script src="{% static 'contract/default/js/dataTables_default.js'%}"></script>
 {% endblock js %}

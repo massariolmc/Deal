@@ -32,6 +32,7 @@ urlpatterns += i18n_patterns(
     path('contact_providers/',include('contact_provider.urls')),
     path('service_types/',include('service_type.urls')),
     path('status/',include('status.urls')),
+    path('contracts/',include('contract.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     prefix_default_language=True
 #]

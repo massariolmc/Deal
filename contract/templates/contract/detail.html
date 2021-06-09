@@ -42,28 +42,50 @@
                             <td>{{ contract.name }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right">{% trans "Fantasy name" %}</th>
-                            <td>{{ contract.fantasy_name }}</td>
+                            <th class="text-right">{% trans "Object" %}</th>
+                            <td>{{ contract.object }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right">{% trans "CNPJ" %}</th>                       
-                            <td class="cnpj">{{ contract.cnpj }}</td>                       
+                            <th class="text-right">{% trans "Provider" %}</th>
+                            <td>{{ contract.provider }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right">{% trans "Number state" %}</th>
-                            <td>{{ contract.number_state }}</td>
+                            <th class="text-right">{% trans "Company" %}</th>
+                            <td >{{ contract.company }} - {{ contract.company.cnpj }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Type" %}</th>                       
+                            <td>{{ contract.type }}</td>                       
                         </tr>
                         <tr>
-                            <th class="text-right">{% trans "Email" %}</th>
-                            <td>{{ contract.email }}</td>
-                        </tr>                                                                       
+                            <th class="text-right">{% trans "Value" %}</th>
+                            <td>{{ contract.value|safe }}</td>
+                        </tr> 
                         <tr>
-                            <th class="text-right">{% trans "Address" %}</th>
-                            <td>{{ contract.address}}, {{ contract.address_number}}, {{contract.neighborhood}} - {{contract.city}}/{{contract.state}} - {% trans "Zip Code" %}: <span class="cep">{{contract.zip_code}}</span></td>
+                            <th class="text-right">{% trans "Date Start" %}</th>
+                            <td>{{ contract.dt_start}}</td>
                         </tr>
                         <tr>
-                            <th class="text-right">{% trans "Phones" %}</th>
-                            <td>{{ contract.phone_1 }} / {{ contract.phone_2 }}</td>
+                            <th class="text-right">{% trans "Date End" %}</th>
+                            <td>{{ contract.dt_end }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Date Renovation" %}</th>
+                            <td>{{ contract.dt_renovation }}</td>
+                        </tr>                                                                    
+                        <tr>
+                            <th class="text-right">{% trans "Status" %}</th>
+                            <td>{{ contract.status }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Contract" %}</th>
+                            {% if contract.pdf_contract %}<td><a href="{{ contract.pdf_contract.url }}">{% trans "Download" %}</a></td>
+                            {% else %} <td>{% trans "No File" %}</td>
+                            {% endif %}
+                        </tr>                       
+                        <tr>
+                            <th class="text-right">{% trans "Description" %}</th>
+                            <td>{{ contract.description }}</td>
                         </tr> 
                         <tr>
                             <th class="text-right">{% trans "Created by" %}:</th>
