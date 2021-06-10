@@ -16,7 +16,7 @@ class ContractForm(ModelForm):
 
     class Meta:        
         model = Contract
-        fields = ['name','object','type','dt_start','dt_end','dt_renovation','provider','status','pdf_contract','value','company','description']
+        fields = ['name','object','type','dt_start','dt_end','dt_renovation', 'pay_day', 'number_months', 'value_month', 'number_contract', 'provider','status','pdf_contract','value','company','description']
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'object': Textarea(attrs={'class': 'form-control'}),
@@ -24,6 +24,10 @@ class ContractForm(ModelForm):
             'dt_start': DateInput(attrs={'class': 'form-control calendario'}),            
             'dt_end': DateInput(attrs={'class': 'form-control calendario'}),
             'dt_renovation': DateInput(attrs={'class': 'form-control calendario'}),
+            'pay_day': DateInput(attrs={'class': 'form-control calendario'}),
+            'number_months': TextInput(attrs={'class': 'form-control'}),
+            'value_month': TextInput(attrs={'class': 'form-control'}),
+            'number_contract': TextInput(attrs={'class': 'form-control'}),
             'provider': Select(attrs={'class': 'form-control'}),
             'status': Select(attrs={'class': 'form-control'}),
             'pdf_contract': FileInput(attrs={'class': 'form-control'}),            
@@ -68,27 +72,32 @@ class ContractForm(ModelForm):
             Row(
                 Column('name', css_class='form-group col-md-12 mb-0'),             
                 css_class='form-row'
+            ),
+            Row(
+                Column('provider', css_class='form-group col-md-3 mb-0'),
+                Column('company', css_class='form-group col-md-3 mb-0'),
+                Column('status', css_class='form-group col-md-2 mb-0'),
+                Column('value', css_class='form-group col-md-2 mb-0'),
+                Column('number_contract', css_class='form-group col-md-2 mb-0'),                                
+                css_class='form-row'
             ),        
             Row(               
                 Column('object', css_class='form-group col-md-12 mb-0'),                
                 css_class='form-row'
             ),     
-            Row(                
-                Column('type', css_class='form-group col-md-3 mb-0'),
+            Row(                                
                 Column('dt_start', css_class='form-group col-md-3 mb-0'),  
                 Column('dt_end', css_class='form-group col-md-3 mb-0'),
                 Column('dt_renovation', css_class='form-group col-md-3 mb-0'),              
+                Column('pay_day', css_class='form-group col-md-3 mb-0'),              
                 css_class='form-row'
-            ),        
+            ),     
+                       
             Row(
-                Column('provider', css_class='form-group col-md-4 mb-0'),
-                Column('company', css_class='form-group col-md-4 mb-0'),
-                Column('status', css_class='form-group col-md-4 mb-0'),                              
-                css_class='form-row'
-            ),           
-            Row(                
-                Column('pdf_contract', css_class='form-group col-md-4 mb-0'),
-                Column('value', css_class='form-group col-md-4 mb-0'),                                                
+                Column('value_month', css_class='form-group col-md-3 mb-0'),  
+                Column('number_months', css_class='form-group col-md-3 mb-0'),                
+                Column('type', css_class='form-group col-md-3 mb-0'),   
+                Column('pdf_contract', css_class='form-group col-md-3 mb-0'),                                                                           
                 css_class='form-row'
             ),                       
             Row(               
