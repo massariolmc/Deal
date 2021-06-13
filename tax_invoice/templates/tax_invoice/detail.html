@@ -1,0 +1,108 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="col-lg-12 mt-5">
+    <div class="ibox bg-boxshadow"> 
+        <div class="ibox-title mb-30">
+            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="{% url 'tax_invoice:url_tax_invoices_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+                </div>
+                <div class="col-sm-4">      
+                {% if tax_invoice.image %}
+                 <!-- Thumb Title -->
+                 <div class="contact-thumb-title">
+                    <img src="{{ tax_invoice.image.url }}" alt="" style="width:100px">                    
+                </div>                
+                
+                {% else %}    <h3><strong>{{ tax_invoice.contract.provider.name }} - {{ tax_invoice.number_invoice }}</strong></h3>
+                {% endif %}
+                </div>
+                <div class="col-sm-4">
+                    <span class="float-right">
+                        <a href="{% url 'tax_invoice:url_tax_invoice_edit' tax_invoice.slug %}">
+                            <button type="button" class="btn btn-success">{{ edit }}
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            </br>
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <th class="text-right">{% trans "Provider Name" %}</th>
+                            <td>{{ tax_invoice.contract.provider.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Contract Name" %}</th>
+                            <td>{{ tax_invoice.contract.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Number Invoice" %}</th>
+                            <td>{{ tax_invoice.number_invoice }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Reference Month" %}</th>
+                            <td>{{ tax_invoice.ref_month }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Value" %}</th>
+                            <td >{{ tax_invoice.value }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Pay Day" %}</th>                       
+                            <td>{{ tax_invoice.pay_day }}</td>                       
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Time Start" %}</th>
+                            <td>{{ tax_invoice.time_start }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Time End" %}</th>
+                            <td>{{ tax_invoice.time_end}}</td>
+                        </tr>                        
+                        <tr>
+                            <th class="text-right">{% trans "Forfeit" %}</th>
+                            <td>{{ tax_invoice.forfeit_satus }} - {{ tax_invoice.value_forfeit }}</td>
+                        </tr>                                                                                            
+                        
+                        <tr>
+                            <th class="text-right">{% trans "Tax Invoice" %}</th>
+                            {% if tax_invoice.pdf_invoice %}<td><a href="{{ tax_invoice.pdf_invoice.url }}">{% trans "Download" %}</a></td>
+                            {% else %} <td>{% trans "No File" %}</td>
+                            {% endif %}
+                        </tr>                       
+                        <tr>
+                            <th class="text-right">{% trans "Description" %}</th>
+                            <td>{{ tax_invoice.description }}</td>
+                        </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Created by" %}:</th>
+                            <td>{{ tax_invoice.user_created.get_full_name }} - {{ tax_invoice.created_at }}</td>
+                        </tr>                    
+                        <tr>
+                            <th class="text-right">{% trans "Updated by" %}</th>
+                            <td>{{ tax_invoice.user_updated.get_full_name }} - {{ tax_invoice.updated_at }}</td>
+                        </tr>   
+                                                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'tax_invoice/default/js/jquery.mask.min.js'%}"></script>
+<script src="{% static 'tax_invoice/default/js/jquery_mask.js'%}"></script>
+{% endblock js %}

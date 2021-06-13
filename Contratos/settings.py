@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'provider',
     'contact_provider',
     'contract',
+    'tax_invoice',
     'crispy_forms',
 ]
 

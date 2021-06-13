@@ -35,15 +35,10 @@
                             <li><a href="compose-email.html">- {% trans 'Deep Search Contracts'%}</a></li>
                         </ul>
                     </li>                               
-                    <li><a href="#"><i class="icon_piechart"></i> Charts</a>
+                    <li><a href="#"><i class="icon_piechart"></i> {% trans 'Tax invoices'%}</a>
                         <ul class="dropdown home-2">
-                            <li><a href="flot-js.html">- Flot Charts</a></li>
-                            <li><a href="chart-js.html">- Chart Js</a></li>
-                            <li><a href="chartist.html">- Chartist Js</a></li>
-                            <li><a href="c3-charts.html">- C3 Charts</a></li>
-                            <li><a href="charts-sparkline.html">- Charts Sparkline</a></li>
-                            <li><a href="grap-rickshaw.html">- Grap Rickshaw</a></li>
-                            <li><a href="graph-morris.html">- Grap Morris</a></li>
+                            <li><a href="{% url 'tax_invoice:url_providers_choose' %}">- {% trans 'Create Tax Invoice'%}</a></li>
+                            <li><a href="">- {% trans 'Search Tax invoices'%}</a></li>                            
                         </ul>
                     </li>                                                                
                     <li><a href="#"><i class="icon_document_alt"></i> Forms</a>

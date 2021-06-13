@@ -54,4 +54,4 @@ class Contract(models.Model):
         super().delete(*args, **kwargs)
     
     def __str__(self):
-        return self.name
+        return f"{self.provider.name} - {self.name}"

@@ -26,7 +26,7 @@ class ContractForm(ModelForm):
             'dt_renovation': DateInput(attrs={'class': 'form-control calendario'}),
             'pay_day': DateInput(attrs={'class': 'form-control calendario'}),
             'number_months': TextInput(attrs={'class': 'form-control'}),
-            'value_month': TextInput(attrs={'class': 'form-control'}),
+            'value_month': NumberInput(attrs={'class': 'form-control'}),
             'number_contract': TextInput(attrs={'class': 'form-control'}),
             'provider': Select(attrs={'class': 'form-control'}),
             'status': Select(attrs={'class': 'form-control'}),
