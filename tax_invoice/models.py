@@ -23,7 +23,7 @@ class TaxInvoice(models.Model):
     telecom_data = models.CharField(_('Telecom Data'), max_length=100, blank=True)
     time_start = models.DateField(_('Time Start'), max_length=100, blank=True, null=True)
     time_end = models.DateField(_('Time End'), max_length=100, blank=True, null=True)
-    forfeit_satus = models.CharField(_('Forfeit Status'), max_length=100, choices = yes_or_no, blank=True, null=True)
+    forfeit_status = models.CharField(_('Forfeit Status'), max_length=100, choices = yes_or_no, blank=True, null=True)
     value_forfeit = models.DecimalField(_('Value Forfeit'), decimal_places=2, max_digits=20, default = "0,00", blank=True, null=True)    
     description = models.TextField(_('Description'), blank=True)        
     pdf_invoice = models.FileField(upload_to = 'tax_invoice/', verbose_name =_('File'), blank=True, max_length=200)

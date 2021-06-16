@@ -17,7 +17,7 @@ class TaxInvoiceForm(ModelForm):
 
     class Meta:        
         model = TaxInvoice
-        fields = ['contract','dt_issue','number_invoice','ref_month','value','pay_day', 'telecom_data', 'time_start', 'time_end', 'forfeit_satus', 'value_forfeit','description','pdf_invoice']
+        fields = ['contract','dt_issue','number_invoice','ref_month','value','pay_day', 'telecom_data', 'time_start', 'time_end', 'forfeit_status', 'value_forfeit','description','pdf_invoice']
         widgets = {
             'contract': Select(attrs={'class': 'form-control'}),
             'dt_issue': DateInput(attrs={'class': 'form-control calendario'}),
@@ -28,7 +28,7 @@ class TaxInvoiceForm(ModelForm):
             'telecom_data': DateInput(attrs={'class': 'form-control'}),
             'time_start': TextInput(attrs={'class': 'form-control calendario'}),
             'time_end': TextInput(attrs={'class': 'form-control calendario'}),
-            'forfeit_satus': Select(attrs={'class': 'form-control'}),
+            'forfeit_status': Select(attrs={'class': 'form-control'}),
             'value_forfeit': TextInput(attrs={'class': 'form-control money'}),
             'description': Textarea(attrs={'class': 'form-control'}),
             'pdf_invoice': FileInput(attrs={'class': 'form-control'}),                                                        
@@ -52,6 +52,21 @@ class TaxInvoiceForm(ModelForm):
                 raise ValidationError(msg_format)
         return pdf_contract
     
+    def clean(self):
+        cleaned_data = super(TaxInvoiceForm,self).clean()        
+        status = cleaned_data.get('forfeit_status', None)
+        value = cleaned_data.get('value_forfeit')        
+        msg_1 = _(f"The field Status is checked like No.")
+        msg_2 = _(f"The field Status is checked like Yes.")
+        
+        if status == 'No' and value != 0.0:
+            self.add_error('value_forfeit',msg_1)
+        elif status == 'Yes' and value == 0.0:
+            self.add_error('value_forfeit',msg_2)          
+        
+        return cleaned_data
+
+
     def __init__(self, *args, **kwargs):
         self.contract = kwargs.get('contract',None)
         if self.contract:
@@ -78,7 +93,7 @@ class TaxInvoiceForm(ModelForm):
             Row(                               
                 Column('time_start', css_class='form-group col-md-2 mb-0'),
                 Column('time_end', css_class='form-group col-md-2 mb-0'),   
-                Column('forfeit_satus', css_class='form-group col-md-2 mb-0'),  
+                Column('forfeit_status', css_class='form-group col-md-2 mb-0'),  
                 Column('value_forfeit', css_class='form-group col-md-2 mb-0'),           
                 Column('pdf_invoice', css_class='form-group col-md-2 mb-0'),             
                 css_class='form-row'
