@@ -23,11 +23,12 @@
                   <div class="ibox-title mb-30">
                     <div class="row">
                       <div class="col-sm-6">
-                        <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">{{ title }} </h6>
+                        <h6 class="m-0 font-weight-bold text-muted">{{ vars|first }}: {{ contract.name }} - {{ vars|last }}: {{ contract.provider.name }} </h6>
                       </div>
                       <div class="col-sm-6">
                         <span class="float-right">
-                          <a href="{% url 'tax_invoice:url_providers_choose' %}">
+                          <a href="{% url 'tax_invoice:url_tax_invoice_create' contract.slug %}">
                             <button type="button" class="btn btn-success">{{ add }}
                             </button>
                           </a>

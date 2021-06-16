@@ -12,7 +12,7 @@
         <div class="ibox-content">
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="{% url 'tax_invoice:url_tax_invoices_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+                    <a href="{% url 'tax_invoice:url_tax_invoices_list' contract.slug %}" class="btn btn-info float-left">{{ list_all }}</a>
                 </div>
                 <div class="col-sm-4">      
                 {% if tax_invoice.image %}
@@ -21,7 +21,7 @@
                     <img src="{{ tax_invoice.image.url }}" alt="" style="width:100px">                    
                 </div>                
                 
-                {% else %}    <h3><strong>{{ tax_invoice.contract.provider.name }} - {{ tax_invoice.number_invoice }}</strong></h3>
+                {% else %}    <h4 class="text-left"><strong>{{ vars|first }}: {{ tax_invoice.contract.provider.name }} - {{ vars|last }}: {{ tax_invoice.number_invoice }}</strong></h4>
                 {% endif %}
                 </div>
                 <div class="col-sm-4">
@@ -52,6 +52,10 @@
                         <tr>
                             <th class="text-right">{% trans "Reference Month" %}</th>
                             <td>{{ tax_invoice.ref_month }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Date Issue" %}</th>
+                            <td>{{ tax_invoice.dt_issue }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">{% trans "Value" %}</th>

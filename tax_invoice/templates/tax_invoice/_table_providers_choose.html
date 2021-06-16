@@ -20,8 +20,8 @@
       <td class="cnpj">{{ contract.provider.cnpj }}</td>                                                                       
       <td>{{ contract.pay_day }}</td>                                                                 
       <td class="text-center"> 
-        <a href="{% url 'tax_invoice:url_tax_invoice_create' contract.slug %}"><span class='badge badge-info'>{% trans "register" %}</span></a>        
-        </form>
+        <a href="{% url 'tax_invoice:url_tax_invoice_create' contract.slug %}"><span class='badge badge-info'>{% trans "register" %}</span></a>       
+        <a href="{% url 'tax_invoice:url_tax_invoices_list' contract.slug %}"><span class='badge badge-secondary'>{% trans "tax" %}</span></a>       
       </td>                      
     </tr>                 
     {% endfor %}   

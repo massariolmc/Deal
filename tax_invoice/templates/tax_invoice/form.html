@@ -19,7 +19,8 @@
   <!-- Ibox -->
   <div class="ibox bg-boxshadow">
     <div class="ibox-title mb-30">
-        <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>                 
+        <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+        <h6 class="m-0 font-weight-bold text-muted">{{ vars|first }} - {{ contract.provider.name }} </h6>                 
     </div>
     {% include 'tax_invoice/_form_errors.html' %}    
     <div class="ibox-content">        
@@ -31,7 +32,10 @@
 {% endblock content %}
 
 {% block js %}
-<!-- <script src="{% static 'tax_invoice/js/only_number_input.js'%}"></script> -->
+<script src="{% static 'tax_invoice/js/only_number_input.js'%}"></script>
+<script src="{% static 'tax_invoice/default/js/jquery.mask.min.js'%}"></script>
+<script src="{% static 'tax_invoice/default/js/jquery_mask.js'%}"></script>
+
 
 <!-- Dateepicker js -->
 <script src="{% static 'tax_invoice/js/plugins-js/datepicker/js/jquery-ui.min.js'%}"></script>

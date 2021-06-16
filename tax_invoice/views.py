@@ -10,6 +10,7 @@ from django.db import IntegrityError
 from django.db.models import Q, Sum, Count, Prefetch
 import os
 import json
+import sys
 
 ####### CONTRACT  ################
 
@@ -24,7 +25,7 @@ def tax_invoice_save_form(request,form,template_name, data, user_created=None):
             obj.user_updated = request.user  
             obj.save()         
                 
-            return redirect('tax_invoice:url_tax_invoices_list')
+            return redirect('tax_invoice:url_tax_invoices_list', data['contract'].slug)
         else:
             print("algo não está valido.")               
     
@@ -39,6 +40,8 @@ def tax_invoice_create(request, contract):
             "back":_("Back"),
             "save":_("Save"),
             "clear":_("Clear"),
+            "contract": contract,
+            "vars": [_("Provider"),], 
         }    
     if request.method == 'POST':                       
         form = TaxInvoiceForm(request.POST, request.FILES,contract=contract.id)                
@@ -47,15 +50,19 @@ def tax_invoice_create(request, contract):
     
     return tax_invoice_save_form(request, form, template_name, data)
 
-def tax_invoice_edit(request, slug):    
+def tax_invoice_edit(request, slug): 
+    tax_invoice = get_object_or_404(TaxInvoice, slug=slug)           
+    contract = get_object_or_404(Contract, slug=tax_invoice.contract.slug)   
     template_name='tax_invoice/form.html'
     data = {
             "title": _("Edit"),
             "back":_("Back"),
             "save":_("Save"),
             "clear":_("Clear"),
+            "contract": contract,
+            "vars": [_("Provider"),],
         }    
-    tax_invoice = get_object_or_404(TaxInvoice, slug=slug)           
+    
     user_created = tax_invoice.user_created # Esta linha faz com que o user_created não seja modificado, para mostrar quem criou esta pessoa    
     if request.method == 'POST':        
         form = TaxInvoiceForm(request.POST, request.FILES, instance=tax_invoice)                
@@ -63,13 +70,16 @@ def tax_invoice_edit(request, slug):
         form = TaxInvoiceForm(instance=tax_invoice)       
     return tax_invoice_save_form(request, form, template_name, data, user_created=user_created)
     
-def tax_invoices_list(request):
+def tax_invoices_list(request,contract):
+    contract = get_object_or_404(Contract, slug=contract)  
     template_name = "tax_invoice/list.html"
-    tax_invoices = TaxInvoice.objects.all()    
+    tax_invoices = TaxInvoice.objects.filter(contract=contract.id)    
     context = {
         'tax_invoices': tax_invoices,
+        'contract': contract,
         'title': _("Registered TaxInvoices"),
-        'add': _("Add")      
+        'add': _("Add"),
+        'vars': [_("Contract"), _("Provider")],      
     }
     return render(request,template_name,context)
 
@@ -86,31 +96,37 @@ def providers_choose(request):
 def tax_invoice_detail(request, slug):    
     template_name = "tax_invoice/detail.html"
     tax_invoice = get_object_or_404(TaxInvoice,slug=slug)
+    contract = get_object_or_404(Contract,slug=tax_invoice.contract.slug)
     context = {
         'tax_invoice': tax_invoice,
+        'contract': contract,
         'title': _("Detail Info"),
         'edit': _("Edit"),
-        'list_all': _("List All")
+        'list_all': _("List All"),
+        'vars': [_("Provider"),_("Number Invoice")]
     }
     return render(request, template_name, context)
 
 def tax_invoice_delete(request, slug):    
-    tax_invoice = get_object_or_404(TaxInvoice, slug=slug)    
+    tax_invoice = get_object_or_404(TaxInvoice, slug=slug)  
+    slug = tax_invoice.contract.slug      
     if request.method == 'POST':        
        try:
            tax_invoice.delete()
            messages.success(request, _('Completed successful.'))
-           return redirect('tax_invoice:url_tax_invoices_list')
+           return redirect('tax_invoice:url_tax_invoices_list', contract=slug)
        except IntegrityError:
            messages.warning(request, _('You cannot delete. This tax_invoice has an existing department.'))
-           return redirect('tax_invoice:url_tax_invoices_list')    
+           return redirect('tax_invoice:url_tax_invoices_list', contract=slug)    
 
 def tax_invoice_delete_all(request):
     marc = 0    
     if request.method == "POST":        
         context = request.POST["checkbox_selected"].split(",")
-        context = [str(x) for x in context]      
+        context = [str(x) for x in context]              
         if context:                
+            contract_slug = TaxInvoice.objects.prefetch_related('contract').values('contract__slug').distinct()
+            contract_slug = contract_slug[0]['contract__slug']                        
             b = TaxInvoice.objects.filter(slug__in=context)            
             for i in b:                
                 try:
@@ -122,7 +138,7 @@ def tax_invoice_delete_all(request):
     else:
         messages.warning(request, _('You cannot delete. This tax_invoice has an existing department.'))
     
-    return redirect('tax_invoice:url_tax_invoices_list')
+    return redirect('tax_invoice:url_tax_invoices_list', contract=contract_slug)
     
 ########### FIM COMPANY ############################
 

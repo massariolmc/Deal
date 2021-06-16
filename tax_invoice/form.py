@@ -23,13 +23,13 @@ class TaxInvoiceForm(ModelForm):
             'dt_issue': DateInput(attrs={'class': 'form-control calendario'}),
             'number_invoice': TextInput(attrs={'class': 'form-control'}),            
             'ref_month': DateInput(attrs={'class': 'form-control calendario'}),            
-            'value': NumberInput(attrs={'class': 'form-control'}),
+            'value': TextInput(attrs={'class': 'form-control money'}),
             'pay_day': DateInput(attrs={'class': 'form-control calendario'}),
             'telecom_data': DateInput(attrs={'class': 'form-control'}),
             'time_start': TextInput(attrs={'class': 'form-control calendario'}),
             'time_end': TextInput(attrs={'class': 'form-control calendario'}),
             'forfeit_satus': Select(attrs={'class': 'form-control'}),
-            'value_forfeit': NumberInput(attrs={'class': 'form-control'}),
+            'value_forfeit': TextInput(attrs={'class': 'form-control money'}),
             'description': Textarea(attrs={'class': 'form-control'}),
             'pdf_invoice': FileInput(attrs={'class': 'form-control'}),                                                        
         }              
@@ -57,6 +57,10 @@ class TaxInvoiceForm(ModelForm):
         if self.contract:
             del(kwargs['contract'])
         super().__init__(*args, **kwargs) 
+        self.fields['value'].localize = True
+        self.fields['value'].widget.is_localized = True
+        self.fields['value_forfeit'].localize = True
+        self.fields['value_forfeit'].widget.is_localized = True
         if self.contract:  
             self.fields['contract'].queryset = Contract.objects.filter(pk=self.contract)     
         self.helper = FormHelper()
@@ -98,7 +102,7 @@ class TaxInvoiceForm(ModelForm):
                     </div>
                     <div class="col-sm-6">
                         <span class="float-right">
-                            <a href="{% url 'tax_invoice:url_providers_choose'%}" class="btn btn-warning">{{ back }}</a>
+                            <a href="{% url 'tax_invoice:url_tax_invoices_list' contract.slug %}" class="btn btn-warning">{{ back }}</a>
                         </span>  
                     </div>
                 </div>'''

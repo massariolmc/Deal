@@ -47,6 +47,10 @@ SESSION_COOKIE_AGE = 1209600 # Duas semanas
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# SEPARAÇÃO DE MILHAR
+DECIMAL_SEPARATOR = ','
+USE_THOUSAND_SEPARATOR = True
+
 #Atributo que define o conjunto de linguas que o site pode ter na tradução
 LANGUAGES = [
     ('pt-br', _('Portuguese Brazilian')),

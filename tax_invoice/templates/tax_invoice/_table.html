@@ -35,8 +35,7 @@
       <td class="text-center"> 
         <a href="{% url 'tax_invoice:url_tax_invoice_edit' tax_invoice.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
         <a href="{% url 'tax_invoice:url_tax_invoice_detail' tax_invoice.slug %}"><span class='badge badge-info'>{% trans "details" %}</span></a>                                                                          
-        <a href="" data-url="{% url 'tax_invoice:url_tax_invoice_delete' tax_invoice.slug %}" id="button_modal_{{ tax_invoice.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>
-        </form>
+        <a href="" data-url="{% url 'tax_invoice:url_tax_invoice_delete' tax_invoice.slug %}" id="button_modal_{{ tax_invoice.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>        
       </td>                      
     </tr>                 
     {% endfor %}   
