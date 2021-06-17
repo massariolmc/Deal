@@ -11,6 +11,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from hurry.filesize import size, iec, si # converter GB,MB para template
 import magic # Mesma coisa que o file no linux, verificar o formato do arquivo
+from datetime import datetime
 
 
 class TaxInvoiceForm(ModelForm):   
@@ -22,9 +23,9 @@ class TaxInvoiceForm(ModelForm):
             'contract': Select(attrs={'class': 'form-control'}),
             'dt_issue': DateInput(attrs={'class': 'form-control calendario'}),
             'number_invoice': TextInput(attrs={'class': 'form-control'}),            
-            'ref_month': DateInput(attrs={'class': 'form-control calendario'}),            
+            'ref_month': TextInput(attrs={'class': 'form-control ref'}),            
             'value': TextInput(attrs={'class': 'form-control money'}),
-            'pay_day': DateInput(attrs={'class': 'form-control calendario'}),
+            'pay_day': Select(attrs={'class': 'form-control'}),
             'telecom_data': DateInput(attrs={'class': 'form-control'}),
             'time_start': TextInput(attrs={'class': 'form-control calendario'}),
             'time_end': TextInput(attrs={'class': 'form-control calendario'}),
@@ -51,6 +52,18 @@ class TaxInvoiceForm(ModelForm):
             elif not formats in file: 
                 raise ValidationError(msg_format)
         return pdf_contract
+    
+    def clean_ref_month(self):
+        ref_month = self.cleaned_data['ref_month']
+        msg_format =  _(f"This format not allowed.")
+        try:
+            datetime.strptime(ref_month, '%m/%Y')
+
+        except ValueError:
+            raise ValidationError(msg_format)
+        
+        return ref_month
+
     
     def clean(self):
         cleaned_data = super(TaxInvoiceForm,self).clean()        

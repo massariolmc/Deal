@@ -17,6 +17,7 @@
         doc.querySelector(element).addEventListener(event,callback,false);
     }
     on('input[name=value_forfeit]', 'keypress', somenteNumeros);
-    on('input[name=value]', 'keypress', somenteNumeros);    
+    on('input[name=value]', 'keypress', somenteNumeros);   
+    on('input[name=ref_month]', 'keypress', somenteNumeros);    
     
   })(document,window)

@@ -12,18 +12,23 @@ class TaxInvoice(models.Model):
         ('Yes', _('Yes')), 
         ('No', _('No')),
     )
+    days = (
+        ("1", "1"),("2", "2"),("3", "3"),("4", "4"),("5", "5"),("6", "6"),("7", "7"),("8", "8"),("9", "9"),("10", "10"),("11", "11"),("12", "12"),
+        ("13", "13"),("14", "14"),("14", "14"),("15", "15"),("16", "16"),("17", "17"),("18", "18"),("19", "19"),("20", "20"),("21", "21"),("22", "22"),
+        ("23", "23"),("24", "24"),("25", "25"),("26", "26"),("27", "27"),("28", "28"),("29", "29"),("30", "30"),("31", "31"),        
+    )
 
     contract = models.ForeignKey(Contract, related_name="tax_invoice_contract_created_id", verbose_name=_("Contract"), blank=False, on_delete=models.PROTECT)
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
     dt_issue = models.DateField(_('Issue Date'), max_length=100, blank=True, null=True)
     number_invoice = models.CharField(_('Number Invoice'), max_length=100, blank=False)    
-    ref_month = models.DateField(_('Reference Month'), max_length=100, blank=False)
+    ref_month = models.CharField(_('Reference Month'), max_length=7, blank=False, help_text = "Formato: DDAAAA")
     value = models.DecimalField(_('Invoice Value'), decimal_places=2, max_digits=20, blank=False)
-    pay_day = models.DateField(_('Payment Day'),max_length=100, blank=True, null=True)
-    telecom_data = models.CharField(_('Telecom Data'), max_length=100, blank=True)
+    pay_day = models.CharField(_('Payment Day'),max_length=100, choices = days,blank=True, null=True)
+    telecom_data = models.CharField(_('Telecom Data'), max_length=100, blank=True, help_text="Campo utlizado para Contratos de telecomunicações.")
     time_start = models.DateField(_('Time Start'), max_length=100, blank=True, null=True)
     time_end = models.DateField(_('Time End'), max_length=100, blank=True, null=True)
-    forfeit_status = models.CharField(_('Forfeit Status'), max_length=100, choices = yes_or_no, blank=True, null=True)
+    forfeit_status = models.CharField(_('Forfeit Status'), max_length=100, choices = yes_or_no, default="No",blank=False)
     value_forfeit = models.DecimalField(_('Value Forfeit'), decimal_places=2, max_digits=20, default = "0,00", blank=True, null=True)    
     description = models.TextField(_('Description'), blank=True)        
     pdf_invoice = models.FileField(upload_to = 'tax_invoice/', verbose_name =_('File'), blank=True, max_length=200)
