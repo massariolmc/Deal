@@ -24,7 +24,7 @@ class TaxInvoice(models.Model):
     number_invoice = models.CharField(_('Number Invoice'), max_length=100, blank=False)    
     ref_month = models.CharField(_('Reference Month'), max_length=7, blank=False, help_text = "Formato: DDAAAA")
     value = models.DecimalField(_('Invoice Value'), decimal_places=2, max_digits=20, blank=False)
-    pay_day = models.CharField(_('Payment Day'),max_length=100, choices = days,blank=True, null=True)
+    pay_day = models.DateField(_('Payment Day'), max_length=100, blank=True, null = True)
     telecom_data = models.CharField(_('Telecom Data'), max_length=100, blank=True, help_text="Campo utlizado para Contratos de telecomunicações.")
     time_start = models.DateField(_('Time Start'), max_length=100, blank=True, null=True)
     time_end = models.DateField(_('Time End'), max_length=100, blank=True, null=True)
@@ -32,6 +32,16 @@ class TaxInvoice(models.Model):
     value_forfeit = models.DecimalField(_('Value Forfeit'), decimal_places=2, max_digits=20, default = "0,00", blank=True, null=True)    
     description = models.TextField(_('Description'), blank=True)        
     pdf_invoice = models.FileField(upload_to = 'tax_invoice/', verbose_name =_('File'), blank=True, max_length=200)
+    
+    #Campos para informações de pesquisa no Nimbi
+    number_req_nimbi = models.CharField(_('Number Requisition Nimbi'), default = "0", max_length=100, blank=True)
+    number_cod_nimbi = models.CharField(_('Number Cod Nimbi'), default = "0", max_length=100, blank=True)
+    number_pc_nimbi = models.CharField(_('Number PC Nimbi'), default = "0", max_length=100, blank=True)
+    number_cod_project = models.CharField(_('Number Cod Project'), default = "0", max_length=100, blank=True)
+    number_cost_center = models.CharField(_('Number Cost  Center'), default = "0", max_length=100, blank=True)
+    dt_create_rc = models.DateField(_('Create RC Date Nimbi'), default = "1950-01-01", max_length=100, blank=True)
+    dt_send_nf_fiscal = models.DateField(_('Send Date Fiscal'), default = "1950-01-01", max_length=100, blank=True)
+
     user_created = models.ForeignKey(User, related_name="tax_invoice_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
     user_updated = models.ForeignKey(User, related_name="tax_invoice_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
     created_at = models.DateTimeField(_('Created at'),auto_now_add=True)

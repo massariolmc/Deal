@@ -59,7 +59,7 @@
                         </tr>
                         <tr>
                             <th class="text-right">{% trans "Value" %}</th>
-                            <td>{{ contract.value|safe }}</td>
+                            <td>{{ contract.value }}</td>
                         </tr> 
                         <tr>
                             <th class="text-right">{% trans "Date Start" %}</th>
@@ -93,6 +93,10 @@
                             <th class="text-right">{% trans "Status" %}</th>
                             <td>{{ contract.status }}</td>
                         </tr> 
+                        <tr>
+                            <th class="text-right">{% trans "Date Conclusion" %}</th>
+                            <td>{{ contract.dt_conclusion|default_if_none:"" }}</td>
+                        </tr>
                         <tr>
                             <th class="text-right">{% trans "Contract" %}</th>
                             {% if contract.pdf_contract %}<td><a href="{{ contract.pdf_contract.url }}">{% trans "Download" %}</a></td>

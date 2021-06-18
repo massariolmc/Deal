@@ -31,7 +31,7 @@
       <td>{{ tax_invoice.ref_month }}</td>
       <td>{{ tax_invoice.number_invoice }}</td>                                
       <td>{{ tax_invoice.value }}</td>                                                                       
-      <td>{{ tax_invoice.pay_day }}</td>                                                                       
+      <td>{{ tax_invoice.pay_day|default_if_none:"" }}</td>                                                                       
       <td class="text-center"> 
         <a href="{% url 'tax_invoice:url_tax_invoice_edit' tax_invoice.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
         <a href="{% url 'tax_invoice:url_tax_invoice_detail' tax_invoice.slug %}"><span class='badge badge-info'>{% trans "details" %}</span></a>                                                                          

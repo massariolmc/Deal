@@ -33,13 +33,18 @@ states = (
     ('SE', 'Sergipe'),
     ('TO', 'Tocantins'),
 )
+select_status = (
+        ('Ativo','Ativo'),
+        ('Inativo','Inativo'),
+    )
 
 class Company(models.Model):
     name = models.CharField(_('Name'), max_length=100, unique=True, blank=False, null=False)
     fantasy_name = models.CharField(_('Fantasy Name'), max_length=100, blank=True)
     cnpj = models.CharField(_('CNPJ'), max_length=14, unique=True, blank=False, null=False)
     number_state = models.CharField(_('Number State'), max_length=30, blank=True)
-    email = models.EmailField(_('Email'), max_length=100, unique=True, blank=True)    
+    email = models.EmailField(_('Email'), max_length=100, unique=True, blank=True) 
+    status = models.CharField(_('Status'), max_length=100, choices = select_status, default="Ativo",blank=False)       
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
     image = models.ImageField(upload_to = 'company/', verbose_name =_('Image'), blank=True, max_length=200)
     description = models.TextField(_('Description'), blank=True)        

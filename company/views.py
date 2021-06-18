@@ -90,7 +90,7 @@ def company_delete(request, slug):
            messages.success(request, _('Completed successful.'))
            return redirect('company:url_companies_list')
        except IntegrityError:
-           messages.warning(request, _('You cannot delete. This company has an existing department.'))
+           messages.warning(request, _('You cannot delete. This company has an existing dependency.'))
            return redirect('company:url_companies_list')    
 
 def company_delete_all(request):
@@ -108,7 +108,7 @@ def company_delete_all(request):
     if marc == 0:
         messages.success(request, _('Completed successful.'))
     else:
-        messages.warning(request, _('You cannot delete. This company has an existing department.'))
+        messages.warning(request, _('You cannot delete. This company has an existing dependency.'))
     
     return redirect('company:url_companies_list')
     

@@ -32,7 +32,7 @@
                         <ul class="dropdown home-2">
                             <li><a href="{% url 'contract:url_contracts_list' %}">- {% trans 'List Contracts'%}</a></li>
                             <li><a href="{% url 'contract:url_contract_create' %}">- {% trans 'Create Contracts'%}</a></li>
-                            <li><a href="compose-email.html">- {% trans 'Deep Search Contracts'%}</a></li>
+                            <li><a href="{% url 'contract:url_contracts_list_inactives' %}">- {% trans 'Contracts Inactives'%}</a></li>                            
                         </ul>
                     </li>                               
                     <li><a href="#"><i class="icon_piechart"></i> {% trans 'Tax invoices'%}</a>

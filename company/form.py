@@ -14,13 +14,14 @@ class CompanyForm(ModelForm):
 
     class Meta:
         model = Company
-        fields = ['name','fantasy_name','cnpj','number_state','email','image','description','address','address_number','neighborhood','city','state','zip_code','phone_1','phone_2']
+        fields = ['name','fantasy_name','cnpj','number_state','email','status','image','description','address','address_number','neighborhood','city','state','zip_code','phone_1','phone_2']
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'fantasy_name': TextInput(attrs={'class': 'form-control'}),
             'cnpj': TextInput(attrs={'class': 'form-control'}),
             'number_state': TextInput(attrs={'class': 'form-control'}),
-            'email': TextInput(attrs={'class': 'form-control'}),            
+            'email': TextInput(attrs={'class': 'form-control'}),    
+            'status': Select(attrs={'class': 'form-control'}),        
             'image': FileInput(attrs={'class': 'form-control'}),
             'description': Textarea(attrs={'class': 'form-control'}),
             'address': TextInput(attrs={'class': 'form-control'}),
@@ -62,8 +63,9 @@ class CompanyForm(ModelForm):
             Row(
                 Column('name', css_class='form-group col-md-3 mb-0'),
                 Column('fantasy_name', css_class='form-group col-md-3 mb-0'),
-                Column('cnpj', css_class='form-group col-md-3 mb-0'),
-                Column('number_state', css_class='form-group col-md-3 mb-0'),                
+                Column('cnpj', css_class='form-group col-md-2 mb-0'),
+                Column('number_state', css_class='form-group col-md-2 mb-0'),  
+                Column('status', css_class='form-group col-md-2 mb-0'),                
                 css_class='form-row'
             ),        
             Row(

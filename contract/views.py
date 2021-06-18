@@ -63,10 +63,20 @@ def contract_edit(request, slug):
     
 def contracts_list(request):
     template_name = "contract/list.html"
-    contracts = Contract.objects.all()    
+    contracts = Contract.objects.filter(status='Ativo')   
     context = {
         'contracts': contracts,
         'title': _("Registered Contracts"),
+        'add': _("Add")      
+    }
+    return render(request,template_name,context)
+
+def contracts_list_inactives(request):
+    template_name = "contract/list.html"
+    contracts = Contract.objects.filter(status='Encerrado')    
+    context = {
+        'contracts': contracts,
+        'title': _("Inactives Contracts"),
         'add': _("Add")      
     }
     return render(request,template_name,context)
@@ -90,7 +100,7 @@ def contract_delete(request, slug):
            messages.success(request, _('Completed successful.'))
            return redirect('contract:url_contracts_list')
        except IntegrityError:
-           messages.warning(request, _('You cannot delete. This contract has an existing department.'))
+           messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
            return redirect('contract:url_contracts_list')    
 
 def contract_delete_all(request):
@@ -108,7 +118,7 @@ def contract_delete_all(request):
     if marc == 0:
         messages.success(request, _('Completed successful.'))
     else:
-        messages.warning(request, _('You cannot delete. This contract has an existing department.'))
+        messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
     
     return redirect('contract:url_contracts_list')
     

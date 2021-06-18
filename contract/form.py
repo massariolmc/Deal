@@ -3,6 +3,7 @@ from django.forms import BaseModelFormSet, ModelChoiceField, MultipleChoiceField
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Contract
+from company.models import Company
 from account.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Div, Row, Column, Button, ButtonHolder, HTML, Hidden, Button
@@ -16,7 +17,7 @@ class ContractForm(ModelForm):
 
     class Meta:        
         model = Contract
-        fields = ['name','object','type','dt_start','dt_end','dt_renovation', 'pay_day', 'number_months', 'value_month', 'number_contract', 'provider','status','pdf_contract','value','company','description']
+        fields = ['name','object','type','dt_start','dt_end','dt_renovation', 'pay_day', 'number_months', 'value_month', 'number_contract', 'provider','status', 'dt_conclusion', 'pdf_contract','value','company','description']
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'object': Textarea(attrs={'class': 'form-control'}),
@@ -24,14 +25,15 @@ class ContractForm(ModelForm):
             'dt_start': DateInput(attrs={'class': 'form-control calendario'}),            
             'dt_end': DateInput(attrs={'class': 'form-control calendario'}),
             'dt_renovation': DateInput(attrs={'class': 'form-control calendario'}),
-            'pay_day': DateInput(attrs={'class': 'form-control calendario'}),
+            'pay_day': Select(attrs={'class': 'form-control'}),
             'number_months': TextInput(attrs={'class': 'form-control'}),
-            'value_month': NumberInput(attrs={'class': 'form-control'}),
+            'value_month': TextInput(attrs={'class': 'form-control money'}),
             'number_contract': TextInput(attrs={'class': 'form-control'}),
             'provider': Select(attrs={'class': 'form-control'}),
             'status': Select(attrs={'class': 'form-control'}),
+            'dt_conclusion': DateInput(attrs={'class': 'form-control calendario'}),
             'pdf_contract': FileInput(attrs={'class': 'form-control'}),            
-            'value': NumberInput(attrs={'class': 'form-control'}),
+            'value': TextInput(attrs={'class': 'form-control money'}),
             'company': Select(attrs={'class': 'form-control'}),
             'description': Textarea(attrs={'class': 'form-control'}),                                   
         }              
@@ -63,9 +65,25 @@ class ContractForm(ModelForm):
             elif not formats in file: 
                 raise ValidationError(msg_format)
         return pdf_contract
+
+    def clean(self):
+        cleaned_data = super(ContractForm,self).clean()        
+        status = cleaned_data.get('status', None)
+        dt_conclusion = cleaned_data.get('dt_conclusion')        
+        msg_1 = _(f"Input the date conclusion.")        
+        print("Valor do dt conclusion", dt_conclusion)
+        if status == 'Encerrado' and dt_conclusion == None:
+            self.add_error('dt_conclusion',msg_1)        
+        
+        return cleaned_data
     
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)        
+        super().__init__(*args, **kwargs)   
+        self.fields['company'].queryset = Company.objects.filter(status='Ativo')
+        self.fields['value'].localize = True
+        self.fields['value'].widget.is_localized = True
+        self.fields['value_month'].localize = True
+        self.fields['value_month'].widget.is_localized = True    
         self.helper = FormHelper()
         self.enctype = "multipart/form-data"
         self.helper.layout = Layout(                                               
@@ -76,7 +94,7 @@ class ContractForm(ModelForm):
             Row(
                 Column('provider', css_class='form-group col-md-3 mb-0'),
                 Column('company', css_class='form-group col-md-3 mb-0'),
-                Column('status', css_class='form-group col-md-2 mb-0'),
+                Column('type', css_class='form-group col-md-2 mb-0'),  
                 Column('value', css_class='form-group col-md-2 mb-0'),
                 Column('number_contract', css_class='form-group col-md-2 mb-0'),                                
                 css_class='form-row'
@@ -94,9 +112,10 @@ class ContractForm(ModelForm):
             ),     
                        
             Row(
-                Column('value_month', css_class='form-group col-md-3 mb-0'),  
-                Column('number_months', css_class='form-group col-md-3 mb-0'),                
-                Column('type', css_class='form-group col-md-3 mb-0'),   
+                Column('value_month', css_class='form-group col-md-2 mb-0'),  
+                Column('number_months', css_class='form-group col-md-2 mb-0'), 
+                Column('status', css_class='form-group col-md-3 mb-0'),  
+                Column('dt_conclusion', css_class='form-group col-md-2 mb-0'),                              
                 Column('pdf_contract', css_class='form-group col-md-3 mb-0'),                                                                           
                 css_class='form-row'
             ),                       

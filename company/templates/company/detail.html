@@ -56,7 +56,11 @@
                         <tr>
                             <th class="text-right">{% trans "Email" %}</th>
                             <td>{{ company.email }}</td>
-                        </tr>                                                                       
+                        </tr>    
+                        <tr>
+                            <th class="text-right">{% trans "Status" %}</th>
+                            <td>{{ company.status }}</td>
+                        </tr>                                                                    
                         <tr>
                             <th class="text-right">{% trans "Address" %}</th>
                             <td>{{ company.address}}, {{ company.address_number}}, {{company.neighborhood}} - {{company.city}}/{{company.state}} - {% trans "Zip Code" %}: <span class="cep">{{company.zip_code}}</span></td>
