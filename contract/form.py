@@ -1,8 +1,8 @@
-from django.forms import ModelForm, TextInput, Textarea, NumberInput, DateInput, Select, SelectDateWidget, HiddenInput, DateTimeInput, EmailInput, FileInput, CheckboxInput
+from django.forms import ModelForm, TextInput, Textarea, NumberInput, DateInput, Select, SelectDateWidget, HiddenInput, DateTimeInput, EmailInput, FileInput, ClearableFileInput, CheckboxInput
 from django.forms import BaseModelFormSet, ModelChoiceField, MultipleChoiceField, SelectMultiple
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Contract
+from .models import Contract, UploadContract
 from company.models import Company
 from account.models import User
 from crispy_forms.helper import FormHelper
@@ -11,13 +11,14 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from hurry.filesize import size, iec, si # converter GB,MB para template
 import magic # Mesma coisa que o file no linux, verificar o formato do arquivo
+import sys
 
 
 class ContractForm(ModelForm):   
 
     class Meta:        
         model = Contract
-        fields = ['name','object','type','dt_start','dt_end','dt_renovation', 'pay_day', 'number_months', 'value_month', 'number_contract', 'provider','status', 'dt_conclusion', 'pdf_contract','value','company','description']
+        fields = ['name','object','type','dt_start','dt_end','dt_renovation', 'pay_day', 'number_months', 'value_month', 'number_contract', 'provider','status', 'dt_conclusion', 'value','company','description']
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'object': Textarea(attrs={'class': 'form-control'}),
@@ -31,8 +32,7 @@ class ContractForm(ModelForm):
             'number_contract': TextInput(attrs={'class': 'form-control'}),
             'provider': Select(attrs={'class': 'form-control'}),
             'status': Select(attrs={'class': 'form-control'}),
-            'dt_conclusion': DateInput(attrs={'class': 'form-control calendario'}),
-            'pdf_contract': FileInput(attrs={'class': 'form-control'}),            
+            'dt_conclusion': DateInput(attrs={'class': 'form-control calendario'}),            
             'value': TextInput(attrs={'class': 'form-control money'}),
             'company': Select(attrs={'class': 'form-control'}),
             'description': Textarea(attrs={'class': 'form-control'}),                                   
@@ -49,22 +49,7 @@ class ContractForm(ModelForm):
         if n:
             raise ValidationError(msg)
 
-        return name
-    
-    def clean_pdf_contract(self):        
-        pdf_contract = self.cleaned_data['pdf_contract']
-        size_max = 3000000
-        formats = "PDF"
-        msg_size =  _(f"Maximum size allowed {size(size_max, system=si)}")
-        msg_format =  _(f"This format not allowed {formats}")
-        if pdf_contract:   
-            file = magic.from_buffer(pdf_contract.read()) 
-            print("valor do file",file)  
-            if pdf_contract.size > size_max:
-                raise ValidationError(msg_size)
-            elif not formats in file: 
-                raise ValidationError(msg_format)
-        return pdf_contract
+        return name   
 
     def clean(self):
         cleaned_data = super(ContractForm,self).clean()        
@@ -85,7 +70,7 @@ class ContractForm(ModelForm):
         self.fields['value_month'].localize = True
         self.fields['value_month'].widget.is_localized = True    
         self.helper = FormHelper()
-        self.enctype = "multipart/form-data"
+        self.enctype = "multipart/form-data"        
         self.helper.layout = Layout(                                               
             Row(
                 Column('name', css_class='form-group col-md-12 mb-0'),             
@@ -115,10 +100,9 @@ class ContractForm(ModelForm):
                 Column('value_month', css_class='form-group col-md-2 mb-0'),  
                 Column('number_months', css_class='form-group col-md-2 mb-0'), 
                 Column('status', css_class='form-group col-md-3 mb-0'),  
-                Column('dt_conclusion', css_class='form-group col-md-2 mb-0'),                              
-                Column('pdf_contract', css_class='form-group col-md-3 mb-0'),                                                                           
+                Column('dt_conclusion', css_class='form-group col-md-2 mb-0'),                                              
                 css_class='form-row'
-            ),                       
+            ),             
             Row(               
                 Column('description', css_class='form-group col-md-12 mb-0'),                
                 css_class='form-row'
@@ -142,3 +126,42 @@ class ContractForm(ModelForm):
             
             
         )
+
+class UploadContractForm(ModelForm):       
+    
+    class Meta:        
+        model = UploadContract
+        fields = ['pdf_contract']
+        widgets = {           
+            'pdf_contract': ClearableFileInput(attrs={'multiple': True}),                        
+        }              
+      
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)             
+        self.helper = FormHelper()
+        self.enctype = "multipart/form-data"
+        self.helper.form_tag = False        
+        self.helper.layout = Layout(                                               
+            Row(
+                Column('pdf_contract', css_class='form-group col-md-12 mb-0'),             
+                css_class='form-row'
+            ),
+        )
+
+def validation_files(pdf_contract):
+        print("validação")                    
+        size_max = 3000000
+        formats = "PDF"
+        msg_size =  _(f"Maximum size allowed {size(size_max, system=si)}")
+        msg_format =  _(f"This format not allowed {formats}")
+        if pdf_contract:   
+            file = magic.from_buffer(pdf_contract.read()) 
+            print("valor do file",file)  
+            if pdf_contract.size > size_max:
+                return False
+            elif not formats in file: 
+                return False
+            else:
+                return True
+        return False

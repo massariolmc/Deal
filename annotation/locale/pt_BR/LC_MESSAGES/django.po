@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-23 12:01-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: models.py:10 views.py:78 views.py:92
+msgid "Contract"
+msgstr ""
+
+#: models.py:11 templates/annotation/_table.html:16
+#: templates/annotation/detail.html:32
+msgid "Name"
+msgstr "Nome"
+
+#: models.py:12
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:14 templates/annotation/detail.html:36
+msgid "Description"
+msgstr "Descrição"
+
+#: models.py:15 templates/annotation/detail.html:41
+msgid "Created by"
+msgstr "Criado por"
+
+#: models.py:16 templates/annotation/detail.html:45
+msgid "Updated by"
+msgstr "Atualizado por"
+
+#: models.py:17
+msgid "Created at"
+msgstr "Criado em"
+
+#: models.py:18
+msgid "Updated at"
+msgstr "Atualizado em"
+
+#: models.py:21
+msgid "Annotation"
+msgstr "Anotação"
+
+#: models.py:22
+msgid "Annotations"
+msgstr "Anotações"
+
+#: templates/annotation/_form_errors.html:6 templates/default/_messages.html:7
+#: templates/default/_messages_async.html:6
+msgid "Alert!"
+msgstr "Alerta!"
+
+#: templates/annotation/_table.html:12
+msgid "Choose"
+msgstr "Escolher"
+
+#: templates/annotation/_table.html:17
+msgid "Updated At"
+msgstr "Atualizado em"
+
+#: templates/annotation/_table.html:18
+msgid "Options"
+msgstr "opções"
+
+#: templates/annotation/_table.html:32
+msgid "edit"
+msgstr "editar"
+
+#: templates/annotation/_table.html:33
+msgid "details"
+msgstr "detalhes"
+
+#: templates/annotation/_table.html:34
+msgid "delete"
+msgstr "deletar"
+
+#: templates/annotation/list.html:47
+msgid "Remove"
+msgstr "Remover"
+
+#: templates/default/_messages.html:14
+msgid "Successful action."
+msgstr "Ação completado com sucesso"
+
+#: templates/default/_messages.html:16
+msgid " Alert! Action not performed"
+msgstr "Alerta! Ação não executada"
+
+#: templates/default/_messages.html:18
+msgid "Atention!"
+msgstr "Atenção!"
+
+#: templates/default/_modal_checkbox.html:8
+#: templates/default/_modal_delete.html:8
+msgid "Alert"
+msgstr "Alerta"
+
+#: templates/default/_modal_checkbox.html:14
+msgid "Do you want to delete?"
+msgstr "VOcê deseja deletar?"
+
+#: templates/default/_modal_checkbox.html:17
+#: templates/default/_modal_delete.html:17
+msgid "No"
+msgstr "Não"
+
+#: templates/default/_modal_checkbox.html:21
+#: templates/default/_modal_delete.html:20
+msgid "Yes"
+msgstr "Sim"
+
+#: templates/default/_modal_checkbox.html:38
+msgid "Warning"
+msgstr "Cuidado"
+
+#: templates/default/_modal_checkbox.html:43
+msgid "Choose some"
+msgstr "Escolha alguém"
+
+#: templates/default/_modal_checkbox.html:46
+msgid "Close"
+msgstr "Fechar"
+
+#: templates/default/_modal_delete.html:14
+msgid "Are you sure?"
+msgstr "Você tem certeza?"
+
+#: views.py:38
+msgid "Create Annotation"
+msgstr "Criar uma nota"
+
+#: views.py:39 views.py:57
+msgid "Back"
+msgstr "Voltar"
+
+#: views.py:40 views.py:58
+msgid "Save"
+msgstr "Salvar"
+
+#: views.py:41 views.py:59
+msgid "Clear"
+msgstr "Limpar"
+
+#: views.py:56 views.py:90
+msgid "Edit"
+msgstr "Editar"
+
+#: views.py:76
+msgid "Registered Annotations"
+msgstr "Cadastrar Notas"
+
+#: views.py:77
+msgid "Add"
+msgstr "Adicionar"
+
+#: views.py:78 views.py:92
+msgid "Provider"
+msgstr "Fornecedor"
+
+#: views.py:89
+msgid "Detail Info"
+msgstr "Informações detalhadas"
+
+#: views.py:91
+msgid "List All"
+msgstr "Listar todos"
+
+#: views.py:102 views.py:123
+msgid "Completed successful."
+msgstr "Ação completada com sucesso."
+
+#: views.py:105 views.py:125
+msgid "You cannot delete. This annotation has an existing deal."
+msgstr "Você não pode deletar. Esta nota tem um contrato existente."

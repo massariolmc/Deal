@@ -7,7 +7,7 @@
 {% block css %}
   <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.min.css'%}" rel="stylesheet">
   <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.structure.min.css'%}" rel="stylesheet">  
-  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.theme.min.css'%}" rel="stylesheet">  
+  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.theme.min.css'%}" rel="stylesheet">    
 {% endblock css %}
 
 
@@ -23,7 +23,7 @@
     </div>
     {% include 'contract/_form_errors.html' %}    
     <div class="ibox-content">        
-         {% crispy form %}            
+         {% crispy form %}                                 
     </div>
   </div>
  </div>
@@ -36,7 +36,7 @@
 <script src="{% static 'contract/js/habilita_desabilita_campo.js'%}"></script>
 <script src="{% static 'contract/default/js/jquery.mask.min.js'%}"></script>
 <script src="{% static 'contract/default/js/jquery_mask.js'%}"></script>
-
+<script src="{% static 'contract/js/ckeditor.js'%}"></script>
 <!-- Dateepicker js -->
 <script src="{% static 'contract/js/plugins-js/datepicker/js/jquery-ui.min.js'%}"></script>
 <script src="{% static 'contract/js/datepicker.js'%}"></script>

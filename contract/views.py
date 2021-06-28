@@ -2,32 +2,34 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
-from .models import Contract
-from .form import ContractForm
+from .models import Contract, UploadContract
+from .form import ContractForm,UploadContractForm, validation_files
+from django.forms import modelformset_factory, inlineformset_factory
 from account.models import User
 from django.db import IntegrityError
 from django.db.models import Q, Sum, Count, Prefetch
 import os
+import sys
 import json
 
 ####### CONTRACT  ################
 
-def contract_save_form(request,form,template_name, data, user_created=None):    
-    if request.method == 'POST':                                              
-        if form.is_valid():
+def contract_save_form(request,form, template_name, data, user_created=None):    
+    if request.method == 'POST':                                                 
+        if form.is_valid():           
             obj = form.save(commit=False)                                   
             if user_created:# Se cair aqui é EDIT                               
                 obj.user_created = user_created                
             else:# Se cair aqui é CREATE                
                 obj.user_created = request.user
             obj.user_updated = request.user  
-            obj.save()         
+            obj.save()            
                 
             return redirect('contract:url_contracts_list')
         else:
             print("algo não está valido.")               
     
-    data['form'] = form
+    data['form'] = form    
     return render(request,template_name,data)
 
 def contract_create(request):
@@ -39,10 +41,10 @@ def contract_create(request):
             "clear":_("Clear"),
         }    
     if request.method == 'POST':                       
-        form = ContractForm(request.POST, request.FILES)                
+        form = ContractForm(request.POST, request.FILES)                        
     else:
-        form = ContractForm()             
-    
+        form = ContractForm()           
+                        
     return contract_save_form(request, form, template_name, data)
 
 def contract_edit(request, slug):    
@@ -84,11 +86,18 @@ def contracts_list_inactives(request):
 def contract_detail(request, slug):    
     template_name = "contract/detail.html"
     contract = get_object_or_404(Contract,slug=slug)
+    upload_contract = upload_contract_create(request,contract)
+    pdfs = UploadContract.objects.prefetch_related('contract').filter(contract=contract)
+    #pdfs = [(i.pdf_contract.url.split("/")[3],i) for i in pdfs]    
     context = {
         'contract': contract,
         'title': _("Detail Info"),
         'edit': _("Edit"),
-        'list_all': _("List All")
+        'annotations': _("Annotations"),
+        'attachments': _("Attachments"),
+        'list_all': _("List All"),
+        'form': upload_contract,
+        'pdfs': pdfs,
     }
     return render(request, template_name, context)
 
@@ -121,8 +130,53 @@ def contract_delete_all(request):
         messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
     
     return redirect('contract:url_contracts_list')
-    
-########### FIM COMPANY ############################
+   
+########### FIM CONTRACT ############################
+
+########### CONTRACT WITH UPLOAD CONTACT ###########
+
+def upload_contract_create(request, contract):      
+    if contract.__class__  is int:          
+        contract = get_object_or_404(Contract, pk=contract)  
+        val = list()  
+        arqs = ""
+    if request.method == 'POST':
+        if not request.FILES.getlist('pdf_contract'):
+            return redirect('contract:url_contract_detail', contract.slug)    
+        files = request.FILES.getlist('pdf_contract')    
+        form = UploadContractForm(request.POST, request.FILES)                                            
+        print("Files", files)                
+        if form.is_valid():                                                           
+            for file in files:
+                if validation_files(file):
+                    UploadContract.objects.create(pdf_contract=file, contract=contract, user_created=request.user,user_updated=request.user )
+                else:
+                   val.append(file)                              
+            if val:
+                for i in val:
+                    arqs += f"{i}, "
+                messages.warning(request, _(f"Errors in the following files: {arqs}. Maximum size allowed: 3MB. This format is allowed: PDF"))                
+            return redirect('contract:url_contract_detail', contract.slug)
+
+        else:                    
+            print("não validou",form.errors)   
+            messages.warning(request, _("File not added. This name already exists or was entered incorrectly"))                
+            return redirect('contract:url_contract_detail', contract.slug)             
+    else:
+        form = UploadContractForm()
+        return form
+
+def upload_delete(request, slug):    
+    upload_contract = get_object_or_404(UploadContract, slug=slug)   
+    contract =  upload_contract.contract.slug
+    if request.method == 'POST':        
+       try:
+           upload_contract.delete()
+           messages.success(request, _('Completed successful.'))
+           return redirect('contract:url_contract_detail', contract)
+       except IntegrityError:
+           messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
+           return redirect('contract:url_contract_detail', contract)
 
 # VIEW PARA TRADUZIR O DATATABLES. USO GERAL
 def translate_datables_js(request):    

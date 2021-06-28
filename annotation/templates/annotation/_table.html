@@ -1,0 +1,40 @@
+{% load static %}
+{% load i18n %}
+
+
+<table data-js="dataTables" class="table table-striped table-bordered table-hover" data-lang="{% url 'annotation:url_translate_datables_js' %}">
+  <thead>
+    <tr class="text-sm-center">
+      <th>
+        <div class="form-check-arae-controls">
+            <!-- Form Check -->
+            <label for="checkbox_main" class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" data-js="check_all" id="checkbox_main"><span class="form-check-label">{% trans "Choose" %}</span>
+            </label>
+        </div>            
+      </th>
+      <th>{% trans "Name" %}</th>      
+      <th>{% trans "Updated At" %}</th>            
+      <th>{% trans "Options" %}</th>                                         
+    </tr>
+  </thead>                  
+  <tbody>
+    {% for annotation in annotations %}
+    <tr class="text-sm-center">     
+      <td><div class="form-check-arae-controls">
+        <label for="checkbox_{{ annotation.slug }}" class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="check_id" value="{{ annotation.slug }}" id="checkbox_{{ annotation.slug }}">        
+        </label>
+        </div></td>
+      <td>{{ annotation.name }}</td>      
+      <td>{{ annotation.updated_at }}</td>                                                                     
+      <td class="text-center"> 
+        <a href="{% url 'annotation:url_annotation_edit' annotation.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
+        <a href="{% url 'annotation:url_annotation_detail' annotation.slug %}"><span class='badge badge-info'>{% trans "details" %}</span></a>
+        <a href="" data-url="{% url 'annotation:url_annotation_delete' annotation.slug %}" id="button_modal_{{ annotation.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>
+        </form>
+      </td>                      
+    </tr>                 
+    {% endfor %}   
+  </tbody>                  
+</table>                

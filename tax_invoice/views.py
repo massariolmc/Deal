@@ -85,7 +85,7 @@ def tax_invoices_list(request,contract):
 
 def providers_choose(request):
     template_name = "tax_invoice/providers_choose.html"
-    contracts = Contract.objects.prefetch_related('status').filter(status__name='Ativo')        
+    contracts = Contract.objects.filter(status='Ativo')        
     context = {
         'contracts': contracts,
         'title': _("Choose Provider"),

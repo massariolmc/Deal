@@ -23,7 +23,8 @@ $(document).ready(function () {
         }
       }
     ],    
-    ordering: true,
+    //ordering: true,
+    order: [ 1, 'asc' ],
     oLanguage: {
         sUrl:          url,
     },

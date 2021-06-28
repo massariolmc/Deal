@@ -15,6 +15,10 @@ urlpatterns = [
     path('<slug:slug>/delete', views.contract_delete, name='url_contract_delete'),
     path('delete_all/', views.contract_delete_all, name='url_contract_delete_all'),
 
+    #Upload Contract
+    path('<int:contract>/upload_contract_create', views.upload_contract_create, name='url_upload_contract_create'),
+    path('<slug:slug>/pdf/delete', views.upload_delete, name='url_upload_delete'),
+
     # URL PARA TRADUZIR O DATATABLES. USO GERAL
     path('contract/translate-js/', views.translate_datables_js, name='url_translate_datables_js'),
 

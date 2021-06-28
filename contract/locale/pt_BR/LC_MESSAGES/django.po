@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-09 09:34-0400\n"
+"POT-Creation-Date: 2021-06-23 11:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,97 +18,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: form.py:38
+#: form.py:45
 msgid "There is a alias for this Contract. Choose other name. "
 msgstr "Já existe um alias para este Contrato. Escolha outro nome."
 
-#: form.py:52
+#: form.py:59
 msgid "Maximum size allowed {size(size_max, system=si)}"
 msgstr "Tamanho maximo permitido {size(size_max, system=si)}"
 
-#: form.py:53
+#: form.py:60
 #, python-brace-format
 msgid "This format not allowed {formats}"
 msgstr "Este formato {formats} não é permitido."
 
-#: models.py:12 templates/contract/_table.html:18
-#: templates/contract/detail.html:41
+#: form.py:74
+msgid "Input the date conclusion."
+msgstr "Insera a data de conslusão/cancelamento do contrato"
+
+#: models.py:22 templates/contract/_table.html:18
+#: templates/contract/detail.html:47
 msgid "Name"
 msgstr "Nome"
 
-#: models.py:13 templates/contract/detail.html:45
+#: models.py:24 templates/contract/detail.html:51
 msgid "Object"
 msgstr "Objeto"
 
-#: models.py:14
+#: models.py:25
 msgid "Slug"
 msgstr "Slug"
 
-#: models.py:15 templates/contract/_table.html:19
-#: templates/contract/detail.html:57
+#: models.py:26 templates/contract/_table.html:19
+#: templates/contract/detail.html:63
 msgid "Type"
 msgstr "Tipo"
 
-#: models.py:16
+#: models.py:27
 msgid "Date Initial"
 msgstr "Data de inicio"
 
-#: models.py:17 templates/contract/detail.html:69
+#: models.py:28 models.py:36 templates/contract/detail.html:75
 msgid "Date End"
 msgstr "Data final"
 
-#: models.py:18 templates/contract/detail.html:73
+#: models.py:29 templates/contract/detail.html:79
 msgid "Date Renovation"
 msgstr "Data de renovação"
 
-#: models.py:19 templates/contract/_table.html:17
-#: templates/contract/detail.html:49
+#: models.py:30
+msgid "Payment Day"
+msgstr "Dia do pagamento"
+
+#: models.py:31
+msgid "Number of Months"
+msgstr "Número de meses"
+
+#: models.py:32 templates/contract/detail.html:91
+#, fuzzy
+#| msgid "Value"
+msgid "Value Month"
+msgstr "Valor"
+
+#: models.py:33 templates/contract/detail.html:95
+#, fuzzy
+#| msgid "Contract"
+msgid "Number Contract"
+msgstr "Contrato"
+
+#: models.py:34 templates/contract/_table.html:17
+#: templates/contract/detail.html:55
 msgid "Provider"
 msgstr "Fornecedor"
 
-#: models.py:20 templates/contract/_table.html:20
-#: templates/contract/detail.html:77
+#: models.py:35 templates/contract/_table.html:20
+#: templates/contract/detail.html:99
 msgid "Status"
 msgstr "Status"
 
-#: models.py:21
+#: models.py:37
 msgid "File"
 msgstr "Arquivo"
 
-#: models.py:22
+#: models.py:38
 msgid "Contract Value"
 msgstr "Valor do contrato"
 
-#: models.py:23 templates/contract/_table.html:16
-#: templates/contract/detail.html:53
+#: models.py:39 templates/contract/_table.html:16
+#: templates/contract/detail.html:59
 msgid "Company"
 msgstr "Empresa"
 
-#: models.py:24 templates/contract/detail.html:87
+#: models.py:40 templates/contract/detail.html:113
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:25 templates/contract/detail.html:91
+#: models.py:42 templates/contract/detail.html:117
 msgid "Created by"
 msgstr "Criado por"
 
-#: models.py:26 templates/contract/detail.html:95
+#: models.py:43 templates/contract/detail.html:121
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: models.py:27
+#: models.py:44
 msgid "Created at"
 msgstr "Criado em"
 
-#: models.py:28
+#: models.py:45
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: models.py:31 templates/contract/detail.html:81
+#: models.py:48 templates/contract/detail.html:107
 msgid "Contract"
 msgstr "Contrato"
 
-#: models.py:32
+#: models.py:49
 msgid "Contracts"
 msgstr "Contratos"
 
@@ -137,19 +161,33 @@ msgstr "detalhes"
 msgid "delete"
 msgstr "deletar"
 
-#: templates/contract/detail.html:61
+#: templates/contract/detail.html:67
 msgid "Value"
 msgstr "Valor"
 
-#: templates/contract/detail.html:65
+#: templates/contract/detail.html:71
 msgid "Date Start"
 msgstr "Data de inicio"
 
-#: templates/contract/detail.html:82
+#: templates/contract/detail.html:83
+msgid "Pay Day"
+msgstr "Dia do pagamento"
+
+#: templates/contract/detail.html:87
+msgid "Number of Month"
+msgstr "Número de meses"
+
+#: templates/contract/detail.html:103
+#, fuzzy
+#| msgid "Date Renovation"
+msgid "Date Conclusion"
+msgstr "Data de renovação"
+
+#: templates/contract/detail.html:108
 msgid "Download"
 msgstr "Download"
 
-#: templates/contract/detail.html:83
+#: templates/contract/detail.html:109
 msgid "No File"
 msgstr "Nenhum Arquivo"
 
@@ -220,7 +258,7 @@ msgstr "Salvar"
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:51 views.py:80
+#: views.py:51 views.py:90
 msgid "Edit"
 msgstr "Editar"
 
@@ -228,22 +266,36 @@ msgstr "Editar"
 msgid "Registered Contracts"
 msgstr "Cadastrar Contratos"
 
-#: views.py:70
+#: views.py:70 views.py:80
 msgid "Add"
 msgstr "Adicionar"
 
 #: views.py:79
+#, fuzzy
+#| msgid "Create Contract"
+msgid "Inactives Contracts"
+msgstr "Criar um contrato"
+
+#: views.py:89
 msgid "Detail Info"
 msgstr "Informações detalhadas"
 
-#: views.py:81
+#: views.py:91
+#, fuzzy
+#| msgid "Atention!"
+msgid "Annotations"
+msgstr "Atenção"
+
+#: views.py:92
 msgid "List All"
 msgstr "Listar todos"
 
-#: views.py:90 views.py:109
+#: views.py:101 views.py:120
 msgid "Completed successful."
 msgstr "Completado com sucesso"
 
-#: views.py:93 views.py:111
-msgid "You cannot delete. This contract has an existing department."
+#: views.py:104 views.py:122
+#, fuzzy
+#| msgid "You cannot delete. This contract has an existing department."
+msgid "You cannot delete. This contract has an existing tax invoices."
 msgstr "Você não pode deletar. Este contrato tem um departamento existente."

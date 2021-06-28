@@ -34,6 +34,7 @@ urlpatterns += i18n_patterns(
     path('status/',include('status.urls')),
     path('contracts/',include('contract.urls')),
     path('tax_invoices/',include('tax_invoice.urls')),
+    path('annotations/',include('annotation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     prefix_default_language=True
 #]
