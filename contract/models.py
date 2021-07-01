@@ -19,14 +19,13 @@ class Contract(models.Model):
         ('Ativo','Ativo'),
         ('Encerrado','Encerrado'),
     )
-    name = models.CharField(_('Name'), max_length=100, unique=True, blank=False, null=False)
-    #object = models.TextField(_('Object'), blank=False, null=False)
+    name = models.CharField(_('Name'), max_length=100, unique=True, blank=False, null=False)    
     object = RichTextField(_('Object'), blank=False, null=False)
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
     type = models.ForeignKey(ServiceType, related_name="contract_type_created_id", verbose_name=_("Type"), blank=False, on_delete=models.PROTECT)
-    dt_start = models.DateField(_('Date Initial'), max_length=100, blank=True)
-    dt_end = models.DateField(_('Date End'), max_length=100, blank=True)
-    dt_renovation = models.DateField(_('Date Renovation'), max_length=100, blank=True)    
+    dt_start = models.DateField(_('Date Initial'), max_length=100, blank=True, null=True)
+    dt_end = models.DateField(_('Date End'), max_length=100, blank=True, null=True)
+    dt_renovation = models.DateField(_('Date Renovation'), max_length=100, blank=True, null=True)    
     pay_day = models.CharField(_('Payment Day'),max_length=100, choices = days,blank=True, null=True)
     number_months = models.PositiveIntegerField(_('Number of Months'), default = 0 , blank=True)
     value_month = models.DecimalField(_('Value Month'), default = 0, decimal_places=2, max_digits=20, blank=True)
@@ -34,13 +33,13 @@ class Contract(models.Model):
     provider = models.ForeignKey(Provider, related_name="contract_provider_created_id", verbose_name=_("Provider"), blank=False, on_delete=models.PROTECT)
     status = models.CharField(_('Status'), max_length=100, choices = select_status, default="Ativo",blank=False)    
     dt_conclusion =  models.DateField(_('Date End'), max_length=100, blank=True, null=True)    
-    value = models.DecimalField(_('Contract Value'), decimal_places=2, max_digits=20, blank=False)
-    company = models.ForeignKey(Company, related_name="contract_company_created_id", verbose_name=_("Company"), blank=False, on_delete=models.PROTECT)
+    value = models.DecimalField(_('Contract Value'), decimal_places=2, max_digits=20, blank=False)    
     description = models.TextField(_('Description'), blank=True)            
     user_created = models.ForeignKey(User, related_name="contract_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
     user_updated = models.ForeignKey(User, related_name="contract_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
     created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+    members_contract = models.ManyToManyField(Company, through='ContractCompany', blank=False, verbose_name=_("Contract Companies"))
 
     class Meta:
         verbose_name = _("Contract")
@@ -79,6 +78,28 @@ class UploadContract(models.Model):
     def delete(self, *args, **kwargs):
         self.pdf_contract.delete(save=False)# Se deixar save=True ele deleta o arquivo e chama o metodo save automaticamente e ai isso gerar erro.
         super().delete(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.contract}"
+
+class ContractCompany(models.Model):
+    company = models.ForeignKey(Company, related_name="cc_company", verbose_name=_("Company"), blank=False, on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract, related_name="cc_contract", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
+    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
+    user_created = models.ForeignKey(User, related_name="contract_company_cc_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
+    user_updated = models.ForeignKey(User, related_name="contract_company_cc_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Contract Company")
+        verbose_name_plural = _("Contract Companies")
+        ordering = ["updated_at"]   
+
+    def save(self, *args, **kwargs):                       
+        #Insere um valor para o Slug         
+        self.slug = unique_uuid(self.__class__)                     
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return f"{self.contract}"

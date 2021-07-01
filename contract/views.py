@@ -2,12 +2,14 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
-from .models import Contract, UploadContract
+from .models import Contract, UploadContract, ContractCompany
 from .form import ContractForm,UploadContractForm, validation_files
+from company.models import Company
 from django.forms import modelformset_factory, inlineformset_factory
 from account.models import User
 from django.db import IntegrityError
 from django.db.models import Q, Sum, Count, Prefetch
+from .slug_file import unique_uuid
 import os
 import sys
 import json
@@ -15,15 +17,47 @@ import json
 ####### CONTRACT  ################
 
 def contract_save_form(request,form, template_name, data, user_created=None):    
-    if request.method == 'POST':                                                 
-        if form.is_valid():           
-            obj = form.save(commit=False)                                   
+    if request.method == 'POST':
+        ### USADO PARA O MANY TO MANY ###################### 
+        members_contract_list = list()        
+        company_list = list() 
+        compare = set() 
+        if user_created:# Se cair aqui é EDIT 
+            print("mudou",form.has_changed())    
+            print("quem",form.changed_data) 
+            print("instance",form.instance.members_contract.values('id'))                                                
+            members_contract_initals = form.instance.members_contract.values('id')                  
+            for v in members_contract_initals:
+                members_contract_list.append(v['id'])
+            print("mostra todos",members_contract_list)
+        ### FIM USADO PARA O MANY TO MANY #################
+
+        if form.is_valid():               
+            companies = form.cleaned_data["members_contract"]                    
+            obj = form.save(commit=False)                                               
             if user_created:# Se cair aqui é EDIT                               
-                obj.user_created = user_created                
+                obj.user_created = user_created # Não deixa atualizar quem criou                
             else:# Se cair aqui é CREATE                
                 obj.user_created = request.user
             obj.user_updated = request.user  
-            obj.save()            
+            obj.save()
+            #form.save_m2m()
+            
+            ### USADO PARA O MANY TO MANY ###################### 
+            for company in companies:           
+                print("company",company.id)
+                company_list.append(company.id)
+                #ContractCompany.objects.create(company=company, contract=obj, user_created = request.user, user_updated = request.user)  
+                #obj.members_contract.add(company, through_defaults={'user_created':request.user, 'user_updated':request.user})
+                obj.members_contract.add(company, through_defaults={'slug': unique_uuid(ContractCompany),'user_created':request.user, 'user_updated':request.user})
+                #obj.save()
+            compare.update(members_contract_list)
+            id_cc = compare.difference(company_list)
+            if id_cc:
+                print("valor", id_cc)
+                for i in id_cc:
+                    obj.members_contract.remove(get_object_or_404(Company, id=i))
+             ### FIM USADO PARA O MANY TO MANY #################
                 
             return redirect('contract:url_contracts_list')
         else:
@@ -65,7 +99,7 @@ def contract_edit(request, slug):
     
 def contracts_list(request):
     template_name = "contract/list.html"
-    contracts = Contract.objects.filter(status='Ativo')   
+    contracts = Contract.objects.prefetch_related('members_contract').filter(status='Ativo')   
     context = {
         'contracts': contracts,
         'title': _("Registered Contracts"),
@@ -75,7 +109,7 @@ def contracts_list(request):
 
 def contracts_list_inactives(request):
     template_name = "contract/list.html"
-    contracts = Contract.objects.filter(status='Encerrado')    
+    contracts = Contract.objects.prefetch_related('members_contract').filter(status='Encerrado')    
     context = {
         'contracts': contracts,
         'title': _("Inactives Contracts"),
@@ -88,9 +122,12 @@ def contract_detail(request, slug):
     contract = get_object_or_404(Contract,slug=slug)
     upload_contract = upload_contract_create(request,contract)
     pdfs = UploadContract.objects.prefetch_related('contract').filter(contract=contract)
+    contract = Contract.objects.prefetch_related('members_contract').get(slug=slug)    
+    companies = contract.members_contract.all()    
     #pdfs = [(i.pdf_contract.url.split("/")[3],i) for i in pdfs]    
     context = {
         'contract': contract,
+        'companies': companies,
         'title': _("Detail Info"),
         'edit': _("Edit"),
         'annotations': _("Annotations"),

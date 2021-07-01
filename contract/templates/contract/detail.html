@@ -65,7 +65,10 @@
                         </tr>
                         <tr>
                             <th class="text-right">{% trans "Company" %}</th>
-                            <td >{{ contract.company }} - {{ contract.company.cnpj }}</td>
+                            <td > {% for cc in companies %}
+                                    {{ cc.name }} - <span class="cnpj">{{ cc.cnpj }}</span> <br/>
+                                    {% endfor %}
+                            </td>
                         </tr> 
                         <tr>
                             <th class="text-right">{% trans "Type" %}</th>                       
