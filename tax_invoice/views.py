@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
-from .models import TaxInvoice
+from .models import TaxInvoice, UploadTaxInvoice
 from .form import TaxInvoiceForm
 from contract.models import Contract
 from account.models import User
@@ -11,11 +11,32 @@ from django.db.models import Q, Sum, Count, Prefetch
 import os
 import json
 import sys
+from hurry.filesize import size, iec, si # converter GB,MB para template
+import magic # Mesma coisa que o file no linux, verificar o formato do arquivo
 
 ####### CONTRACT  ################
 
+###validação do upload
+def validation_files(pdf_contract):
+        print("validação")                    
+        size_max = 3000000
+        formats = "PDF"
+        msg_size =  _(f"Maximum size allowed {size(size_max, system=si)}")
+        msg_format =  _(f"This format not allowed {formats}")
+        if pdf_contract:   
+            file = magic.from_buffer(pdf_contract.read()) 
+            print("valor do file",file)  
+            if pdf_contract.size > size_max:
+                return False
+            elif not formats in file: 
+                return False
+            else:
+                return True
+        return False
+
 def tax_invoice_save_form(request,form,template_name, data, user_created=None):    
-    if request.method == 'POST':                                              
+    if request.method == 'POST':  
+        files = request.FILES.getlist('pdf_invoice')                                            
         if form.is_valid():
             obj = form.save(commit=False)                                   
             if user_created:# Se cair aqui é EDIT                               
@@ -23,8 +44,20 @@ def tax_invoice_save_form(request,form,template_name, data, user_created=None):
             else:# Se cair aqui é CREATE                
                 obj.user_created = request.user
             obj.user_updated = request.user  
-            obj.save()         
-                
+            obj.save()   
+            ###### Faz a parte do Upload #################
+            val = list()
+            arqs = ""
+            for file in files:
+                if validation_files(file):
+                    UploadTaxInvoice.objects.create(pdf_tax_invoice=file, tax_invoice=obj, user_created=request.user,user_updated=request.user )
+                else:
+                   val.append(file)                              
+            if val:
+                for i in val:
+                    arqs += f"{i}, "
+                messages.warning(request, _(f"Errors in the following files: {arqs}. Maximum size allowed: 3MB. This format is allowed: PDF"))       
+            ###### FIM Faz a parte do Upload #################    
             return redirect('tax_invoice:url_tax_invoices_list', data['contract'].slug)
         else:
             print("algo não está valido.")               
@@ -44,9 +77,9 @@ def tax_invoice_create(request, contract):
             "vars": [_("Provider"),], 
         }    
     if request.method == 'POST':                       
-        form = TaxInvoiceForm(request.POST, request.FILES,contract=contract.id)                
+        form = TaxInvoiceForm(request.POST, request.FILES,contract=contract)                
     else:
-        form = TaxInvoiceForm(contract=contract.id)             
+        form = TaxInvoiceForm(contract=contract)             
     
     return tax_invoice_save_form(request, form, template_name, data)
 
@@ -79,6 +112,7 @@ def tax_invoices_list(request,contract):
         'contract': contract,
         'title': _("Registered TaxInvoices"),
         'add': _("Add"),
+        'back': _("Back"),
         'vars': [_("Contract"), _("Provider")],      
     }    
     return render(request,template_name,context)
@@ -88,8 +122,8 @@ def providers_choose(request):
     contracts = Contract.objects.filter(status='Ativo')        
     context = {
         'contracts': contracts,
-        'title': _("Choose Provider"),
-        'add': _("Add Provider")      
+        'title': _("Entry with a tax invoice"),
+        'add': _("Add Contract")      
     }
     return render(request,template_name,context)
 
@@ -97,13 +131,15 @@ def tax_invoice_detail(request, slug):
     template_name = "tax_invoice/detail.html"
     tax_invoice = get_object_or_404(TaxInvoice,slug=slug)
     contract = get_object_or_404(Contract,slug=tax_invoice.contract.slug)
+    pdfs = UploadTaxInvoice.objects.prefetch_related('tax_invoice').filter(tax_invoice=tax_invoice)
     context = {
         'tax_invoice': tax_invoice,
         'contract': contract,
         'title': _("Detail Info"),
         'edit': _("Edit"),
         'list_all': _("List All"),
-        'vars': [_("Provider"),_("Number Invoice")]
+        'vars': [_("Provider"),_("Number Invoice")],
+        'pdfs': pdfs,
     }
     return render(request, template_name, context)
 
@@ -139,8 +175,20 @@ def tax_invoice_delete_all(request):
         messages.warning(request, _('You cannot delete. This tax_invoice has an existing department.'))
     
     return redirect('tax_invoice:url_tax_invoices_list', contract=contract_slug)
+
+def upload_delete(request, slug):    
+    upload = get_object_or_404(UploadTaxInvoice, slug=slug)   
+    tax_invoice =  upload.tax_invoice.slug
+    if request.method == 'POST':        
+       try:
+           upload.delete()
+           messages.success(request, _('Completed successful.'))
+           return redirect('tax_invoice:url_tax_invoice_detail', tax_invoice)
+       except IntegrityError:
+           messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
+           return redirect('tax_invoice:url_tax_invoice_detail', tax_invoice)
     
-########### FIM COMPANY ############################
+########### FIM TAX INVOICE ############################
 
 # VIEW PARA TRADUZIR O DATATABLES. USO GERAL
 def translate_datables_js(request):    

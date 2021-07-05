@@ -45,6 +45,11 @@
                       {% include 'annotation/_table.html' %}
                     </div>
                     <button data-url="{% url 'annotation:url_annotation_delete_all' %}" data-js="click_checkbox" class="btn btn-danger" ><i class="fa fa-trash"></i>{% trans "Remove" %}</button>
+                    <span class="float-right">
+                      <a href="{% url 'contract:url_contract_detail' contract.slug %}">
+                        <button type="button" class="btn btn-warning">{{ back }}</button>
+                      </a>
+                    </span>
                   </div>
                 </div><!--ibox bg-boxshadow-->
               </div><!--col-lg-12 -->

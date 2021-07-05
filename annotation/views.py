@@ -76,6 +76,7 @@ def annotations_list(request,contract):
         'title': _("Registered Annotations"),
         'add': _("Add"),
         'vars': [_("Contract"), _("Provider")],   
+        'back': _("Back"),    
     }
     return render(request,template_name,context)
 

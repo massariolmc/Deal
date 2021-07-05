@@ -15,12 +15,13 @@ from datetime import datetime
 
 
 class TaxInvoiceForm(ModelForm):   
-
+    pdf_invoice = forms.FileField(label=_("Files"), required=True, widget = forms.FileInput(attrs={'multiple': True}))
     class Meta:        
         model = TaxInvoice
-        fields = ['contract','dt_issue','number_invoice','ref_month','value','pay_day', 'telecom_data', 'time_start', 'time_end', 'forfeit_status', 'value_forfeit','description','pdf_invoice', 'number_req_nimbi', 'number_cod_nimbi', 'number_pc_nimbi', 'number_cod_project', 'number_cost_center', 'dt_create_rc', 'dt_send_nf_fiscal']
+        fields = ['contract','company','dt_issue','number_invoice','ref_month','value','pay_day', 'telecom_data', 'time_start', 'time_end', 'forfeit_status', 'value_forfeit','description', 'number_req_nimbi', 'number_cod_nimbi', 'number_pc_nimbi', 'number_cod_project', 'number_cost_center', 'dt_create_rc', 'dt_send_nf_fiscal']
         widgets = {
             'contract': Select(attrs={'class': 'form-control'}),
+            'company': Select(attrs={'class': 'form-control'}),
             'dt_issue': DateInput(attrs={'class': 'form-control calendario'}),
             'number_invoice': TextInput(attrs={'class': 'form-control'}),            
             'ref_month': TextInput(attrs={'class': 'form-control ref'}),            
@@ -31,8 +32,7 @@ class TaxInvoiceForm(ModelForm):
             'time_end': TextInput(attrs={'class': 'form-control calendario'}),
             'forfeit_status': Select(attrs={'class': 'form-control'}),
             'value_forfeit': TextInput(attrs={'class': 'form-control money'}),
-            'description': Textarea(attrs={'class': 'form-control'}),
-            'pdf_invoice': FileInput(attrs={'class': 'form-control'}),  
+            'description': Textarea(attrs={'class': 'form-control'}),             
             # Fields Nimbi
             'number_req_nimbi': TextInput(attrs={'class': 'form-control'}),
             'number_cod_nimbi': TextInput(attrs={'class': 'form-control'}),
@@ -46,20 +46,20 @@ class TaxInvoiceForm(ModelForm):
     #VALIDAÇÃO 
    
     
-    def clean_pdf_invoice(self):        
-        pdf_contract = self.cleaned_data['pdf_invoice']
-        size_max = 3000000
-        formats = "PDF"
-        msg_size =  _(f"Maximum size allowed {size(size_max, system=si)}")
-        msg_format =  _(f"This format not allowed {formats}")
-        if pdf_contract:   
-            file = magic.from_buffer(pdf_contract.read()) 
-            print("valor do file",file)  
-            if pdf_contract.size > size_max:
-                raise ValidationError(msg_size)
-            elif not formats in file: 
-                raise ValidationError(msg_format)
-        return pdf_contract
+    # def clean_pdf_invoice(self):        
+    #     pdf_contract = self.cleaned_data['pdf_invoice']
+    #     size_max = 3000000
+    #     formats = "PDF"
+    #     msg_size =  _(f"Maximum size allowed {size(size_max, system=si)}")
+    #     msg_format =  _(f"This format not allowed {formats}")
+    #     if pdf_contract:   
+    #         file = magic.from_buffer(pdf_contract.read()) 
+    #         print("valor do file",file)  
+    #         if pdf_contract.size > size_max:
+    #             raise ValidationError(msg_size)
+    #         elif not formats in file: 
+    #             raise ValidationError(msg_format)
+    #     return pdf_contract
     
     def clean_ref_month(self):
         ref_month = self.cleaned_data['ref_month']
@@ -77,8 +77,8 @@ class TaxInvoiceForm(ModelForm):
         cleaned_data = super(TaxInvoiceForm,self).clean()        
         status = cleaned_data.get('forfeit_status', None)
         value = cleaned_data.get('value_forfeit')        
-        msg_1 = _(f"The field Status is checked like No.")
-        msg_2 = _(f"The field Status is checked like Yes.")
+        msg_1 = _(f"The field Forfeit is checked like No.")
+        msg_2 = _(f"The field Forfeit is checked like Yes.")
         
         if status == 'No' and value != 0.0:
             self.add_error('value_forfeit',msg_1)
@@ -97,16 +97,21 @@ class TaxInvoiceForm(ModelForm):
         self.fields['value'].widget.is_localized = True
         self.fields['value_forfeit'].localize = True
         self.fields['value_forfeit'].widget.is_localized = True
-        if self.contract:  
-            self.fields['contract'].queryset = Contract.objects.filter(pk=self.contract)     
+        if self.instance.id:  
+            self.fields['contract'].queryset = Contract.objects.filter(pk=self.instance.contract.id)          
+            self.fields['company'].queryset = self.instance.contract.members_contract.all()
+        else:
+            self.fields['contract'].queryset = Contract.objects.filter(pk=self.contract.id)          
+            self.fields['company'].queryset = self.contract.members_contract.all()
         self.helper = FormHelper()
         self.enctype = "multipart/form-data"
         self.helper.layout = Layout(                                                           
             Row(
                 Column('contract', css_class='form-group col-md-2 mb-0'),
+                Column('company', css_class='form-group col-md-2 mb-0'),
                 Column('number_invoice', css_class='form-group col-md-2 mb-0'),
-                Column('dt_issue', css_class='form-group col-md-2 mb-0'),                
-                Column('ref_month', css_class='form-group col-md-2 mb-0'),
+                Column('dt_issue', css_class='form-group col-md-1 mb-0'),                
+                Column('ref_month', css_class='form-group col-md-1 mb-0'),
                 Column('value', css_class='form-group col-md-2 mb-0'),  
                 Column('pay_day', css_class='form-group col-md-2 mb-0'),                              
                 css_class='form-row'
@@ -115,8 +120,8 @@ class TaxInvoiceForm(ModelForm):
                 Column('time_start', css_class='form-group col-md-2 mb-0'),
                 Column('time_end', css_class='form-group col-md-2 mb-0'),   
                 Column('forfeit_status', css_class='form-group col-md-2 mb-0'),  
-                Column('value_forfeit', css_class='form-group col-md-2 mb-0'),           
-                Column('pdf_invoice', css_class='form-group col-md-2 mb-0'),             
+                Column('value_forfeit', css_class='form-group col-md-2 mb-0'), 
+                Column('pdf_invoice', css_class='form-group col-md-4 mb-0'),         
                 css_class='form-row'
             ),  
              Row(                               

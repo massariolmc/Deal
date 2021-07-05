@@ -7,10 +7,9 @@ from ckeditor.fields import RichTextField
 
 
 class Annotation(models.Model):
-    contract = models.ForeignKey(Contract, related_name="annotation_contract_created_id", verbose_name=_("Contract"), blank=False, on_delete=models.PROTECT)
+    contract = models.ForeignKey(Contract, related_name="annotation_contract_created_id", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
     name = models.CharField(_('Name'), max_length=100, unique=True, blank=False, null=False)    
-    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)    
-    #description = models.TextField(_('Description'), blank=True)            
+    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)                    
     description = RichTextField(_('Description'), blank=True)            
     user_created = models.ForeignKey(User, related_name="annotation_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
     user_updated = models.ForeignKey(User, related_name="annotation_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)

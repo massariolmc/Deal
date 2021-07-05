@@ -8,7 +8,7 @@ from .slug_file import unique_uuid
 class ContactProvider(models.Model):
     name = models.CharField(_('Name'), max_length=100, blank=False, null=False)    
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)    
-    provider_id = models.ForeignKey(Provider, verbose_name=_("Provider"), on_delete=models.PROTECT, blank=False, null=False)
+    provider = models.ForeignKey(Provider, verbose_name=_("Provider"), on_delete=models.CASCADE, blank=False, null=False)
     description = models.TextField(_('Description'), blank=True)   
     phone_1 = models.CharField(_("Main Phone"), max_length=20, blank=True)
     phone_2 = models.CharField(_("Secundary Phone"), max_length=20, blank=True)         

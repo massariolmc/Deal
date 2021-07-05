@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-23 11:47-0400\n"
+"POT-Creation-Date: 2021-07-02 15:57-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,142 +18,150 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: form.py:53
+#: form.py:54
 msgid "Maximum size allowed {size(size_max, system=si)}"
 msgstr "Tamanho máximo permitido {size(size_max, system=si)}"
 
-#: form.py:54
+#: form.py:55
 #, python-brace-format
 msgid "This format not allowed {formats}"
 msgstr "Este formato não é permitido {formats}"
 
-#: form.py:66
+#: form.py:67
 msgid "This format not allowed."
-msgstr ""
-
-#: form.py:80
-msgid "The field Status is checked like No."
-msgstr "O campo Status está marcado como Não"
+msgstr "Este formato não é permitido."
 
 #: form.py:81
-msgid "The field Status is checked like Yes."
+msgid "The field Forfeit is checked like No."
+msgstr "O campo Status está marcado como Não"
+
+#: form.py:82
+msgid "The field Forfeit is checked like Yes."
 msgstr "O campo Status está marcado como Sim"
 
-#: models.py:12 templates/default/_modal_checkbox.html:21
+#: models.py:13 templates/default/_modal_checkbox.html:21
 #: templates/default/_modal_delete.html:20
 msgid "Yes"
 msgstr "Sim"
 
-#: models.py:13 templates/default/_modal_checkbox.html:17
+#: models.py:14 templates/default/_modal_checkbox.html:17
 #: templates/default/_modal_delete.html:17
 msgid "No"
 msgstr "Não"
 
-#: models.py:21 views.py:82
+#: models.py:22 views.py:83
 msgid "Contract"
 msgstr "Contrato"
 
-#: models.py:22
+#: models.py:23
+msgid "Company"
+msgstr "Empresa"
+
+#: models.py:24
 msgid "Slug"
 msgstr "Slug"
 
-#: models.py:23
+#: models.py:25
 msgid "Issue Date"
 msgstr "Data de Emissão"
 
-#: models.py:24 templates/tax_invoice/detail.html:49 views.py:106
+#: models.py:26 templates/tax_invoice/detail.html:53 views.py:107
 msgid "Number Invoice"
 msgstr "Número da nota fiscal"
 
-#: models.py:25 templates/tax_invoice/detail.html:53
+#: models.py:27 templates/tax_invoice/detail.html:57
 msgid "Reference Month"
 msgstr "Mês de Referência"
 
-#: models.py:26
+#: models.py:28
 msgid "Invoice Value"
 msgstr "Valor da Nota Fiscal"
 
-#: models.py:27
+#: models.py:29
 msgid "Payment Day"
 msgstr "Dia do Pagamento"
 
-#: models.py:28
+#: models.py:30
 msgid "Telecom Data"
 msgstr "Circuito de dados"
 
-#: models.py:29 templates/tax_invoice/detail.html:69
+#: models.py:30
+msgid "Field used for telecommunications contracts.."
+msgstr "Campo usado apenas para contratos de telecomunicações."
+
+#: models.py:31 templates/tax_invoice/detail.html:73
 msgid "Time Start"
 msgstr "Período Inicial"
 
-#: models.py:30 templates/tax_invoice/detail.html:73
+#: models.py:32 templates/tax_invoice/detail.html:77
 msgid "Time End"
 msgstr "Período Final"
 
-#: models.py:31
+#: models.py:33
 msgid "Forfeit Status"
 msgstr "Multa"
 
-#: models.py:32
+#: models.py:34
 msgid "Value Forfeit"
 msgstr "Valor da Multa"
 
-#: models.py:33 templates/tax_invoice/detail.html:89
+#: models.py:35 templates/tax_invoice/detail.html:93
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:34
+#: models.py:36
 msgid "File"
 msgstr "Arquivo"
 
-#: models.py:37 templates/tax_invoice/_table_nimbi.html:8
+#: models.py:39 templates/tax_invoice/_table_nimbi.html:8
 msgid "Number Requisition Nimbi"
 msgstr "Número da Req do Nimbi"
 
-#: models.py:38 templates/tax_invoice/_table_nimbi.html:9
+#: models.py:40 templates/tax_invoice/_table_nimbi.html:9
 msgid "Number Cod Nimbi"
 msgstr "Número Cod Nimbi"
 
-#: models.py:39 templates/tax_invoice/_table_nimbi.html:10
+#: models.py:41 templates/tax_invoice/_table_nimbi.html:10
 msgid "Number PC Nimbi"
 msgstr "Número PC Nimbi"
 
-#: models.py:40 templates/tax_invoice/_table_nimbi.html:11
+#: models.py:42 templates/tax_invoice/_table_nimbi.html:11
 msgid "Number Cod Project"
 msgstr "Número Cod Projeto"
 
-#: models.py:41 templates/tax_invoice/_table_nimbi.html:12
+#: models.py:43 templates/tax_invoice/_table_nimbi.html:12
 msgid "Number Cost  Center"
 msgstr "Número Centro de Custo"
 
-#: models.py:42 templates/tax_invoice/_table_nimbi.html:13
+#: models.py:44 templates/tax_invoice/_table_nimbi.html:13
 msgid "Create RC Date Nimbi"
 msgstr "Data de criação RC Nimbi"
 
-#: models.py:43 templates/tax_invoice/_table_nimbi.html:14
+#: models.py:45 templates/tax_invoice/_table_nimbi.html:14
 msgid "Send Date Fiscal"
 msgstr "Data de envio para o Dep. Fiscal"
 
-#: models.py:45 templates/tax_invoice/detail.html:93
+#: models.py:47 templates/tax_invoice/detail.html:97
 msgid "Created by"
 msgstr "Criado por"
 
-#: models.py:46 templates/tax_invoice/detail.html:97
+#: models.py:48 templates/tax_invoice/detail.html:101
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: models.py:47
+#: models.py:49
 msgid "Created at"
 msgstr "Criado em"
 
-#: models.py:48
+#: models.py:50
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: models.py:51 templates/tax_invoice/detail.html:83
+#: models.py:53 templates/tax_invoice/detail.html:87
 msgid "Tax Invoice"
 msgstr "Nota Fiscal"
 
-#: models.py:52
+#: models.py:54
 msgid "Tax Invoices"
 msgstr "Notas Fiscais"
 
@@ -211,7 +219,7 @@ msgstr "Mês de Referência"
 msgid "number_invoice"
 msgstr "Número da Nota"
 
-#: templates/tax_invoice/_table.html:18 templates/tax_invoice/detail.html:61
+#: templates/tax_invoice/_table.html:18 templates/tax_invoice/detail.html:65
 msgid "Value"
 msgstr "Valor"
 
@@ -250,7 +258,7 @@ msgid "CNPJ"
 msgstr "CNPJ"
 
 #: templates/tax_invoice/_table_providers_choose.html:11
-#: templates/tax_invoice/detail.html:65
+#: templates/tax_invoice/detail.html:69
 msgid "Pay Day"
 msgstr "Dia do Pagamento"
 
@@ -266,23 +274,27 @@ msgstr "notas"
 msgid "Contract Name"
 msgstr "Contrato"
 
-#: templates/tax_invoice/detail.html:57
+#: templates/tax_invoice/detail.html:49
+msgid "Company Name"
+msgstr "Empresa"
+
+#: templates/tax_invoice/detail.html:61
 msgid "Date Issue"
 msgstr "Data de Emissão"
 
-#: templates/tax_invoice/detail.html:77
+#: templates/tax_invoice/detail.html:81
 msgid "Forfeit"
 msgstr "Multa"
 
-#: templates/tax_invoice/detail.html:78
+#: templates/tax_invoice/detail.html:82
 msgid "No forfeit"
 msgstr "Sem Multa"
 
-#: templates/tax_invoice/detail.html:84
+#: templates/tax_invoice/detail.html:88
 msgid "Download"
 msgstr "Download"
 
-#: templates/tax_invoice/detail.html:85
+#: templates/tax_invoice/detail.html:89
 msgid "No File"
 msgstr "Sem arquivo"
 
@@ -294,7 +306,7 @@ msgstr "Remover"
 msgid "Create TaxInvoice"
 msgstr "Inserir Nota Fiscal"
 
-#: views.py:40 views.py:59
+#: views.py:40 views.py:59 views.py:82
 msgid "Back"
 msgstr "Voltar"
 
@@ -306,11 +318,11 @@ msgstr "Salvar"
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:44 views.py:63 views.py:82 views.py:106
+#: views.py:44 views.py:63 views.py:83 views.py:107
 msgid "Provider"
 msgstr "Fornecedor"
 
-#: views.py:58 views.py:104
+#: views.py:58 views.py:105
 msgid "Edit"
 msgstr "Editar"
 
@@ -322,26 +334,32 @@ msgstr "Cadastrar notas fiscais"
 msgid "Add"
 msgstr "Adicionar"
 
-#: views.py:91
-msgid "Choose Provider"
-msgstr "Escolhar o fornecedor"
-
 #: views.py:92
-msgid "Add Provider"
-msgstr "Adicionar Fornecedor"
+msgid "Entry with a tax invoice"
+msgstr "Insera uma nota fiscal"
 
-#: views.py:103
+#: views.py:93
+msgid "Add Contract"
+msgstr "Adicionar Contrato"
+
+#: views.py:104
 msgid "Detail Info"
 msgstr "Informações detalhadas"
 
-#: views.py:105
+#: views.py:106
 msgid "List All"
 msgstr "Listar todos"
 
-#: views.py:116 views.py:137
+#: views.py:117 views.py:138
 msgid "Completed successful."
 msgstr "Completado com sucesso"
 
-#: views.py:119 views.py:139
+#: views.py:120 views.py:140
 msgid "You cannot delete. This tax_invoice has an existing department."
 msgstr "Você não pode deletar. Esta nota tem contrato existente."
+
+#~ msgid "Choose Provider"
+#~ msgstr "Escolha o fornecedor"
+
+#~ msgid "Add Provider"
+#~ msgstr "Adicionar Fornecedor"

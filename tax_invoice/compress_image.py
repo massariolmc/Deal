@@ -17,8 +17,8 @@ def delete_old_file(Model,pk, image):
     marc = 0   
     if pk:
         c = Model.objects.get(id=pk)        
-        if c.pdf_invoice != image:            
-            c.pdf_invoice.delete(save=False)# O padrão é true se for deletar tudo. Se for deletar só a imagem ou arquivo é false 
+        if c.pdf_tax_invoice != image:            
+            c.pdf_tax_invoice.delete(save=False)# O padrão é true se for deletar tudo. Se for deletar só a imagem ou arquivo é false 
             marc = 1            
     return marc      
 

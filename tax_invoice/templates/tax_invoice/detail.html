@@ -46,6 +46,10 @@
                             <td>{{ tax_invoice.contract.name }}</td>
                         </tr>
                         <tr>
+                            <th class="text-right">{% trans "Company Name" %}</th>
+                            <td>{{ tax_invoice.company.name }}</td>
+                        </tr>
+                        <tr>
                             <th class="text-right">{% trans "Number Invoice" %}</th>
                             <td>{{ tax_invoice.number_invoice }}</td>
                         </tr>
@@ -101,6 +105,11 @@
                 </table>
                 
                 {% include "tax_invoice/_table_nimbi.html"%}
+
+                <div class="row">
+                    {% include 'tax_invoice/_table_uploads.html' %}
+                    {% include 'default/_modal_delete.html' %}
+                </div>
                 
             </div>
         </div>
@@ -112,4 +121,6 @@
 {% block js %}
 <script src="{% static 'tax_invoice/default/js/jquery.mask.min.js'%}"></script>
 <script src="{% static 'tax_invoice/default/js/jquery_mask.js'%}"></script>
+
+<script src="{% static 'company/default/js/checkbox_delete_all.js'%}"></script>
 {% endblock js %}

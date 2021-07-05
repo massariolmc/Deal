@@ -103,7 +103,8 @@ def contracts_list(request):
     context = {
         'contracts': contracts,
         'title': _("Registered Contracts"),
-        'add': _("Add")      
+        'add': _("Add"),
+        'back': _("Back"),    
     }
     return render(request,template_name,context)
 
@@ -113,7 +114,8 @@ def contracts_list_inactives(request):
     context = {
         'contracts': contracts,
         'title': _("Inactives Contracts"),
-        'add': _("Add")      
+        'add': _("Add"),
+        'back': _("Back"),    
     }
     return render(request,template_name,context)
 
@@ -123,13 +125,12 @@ def contract_detail(request, slug):
     upload_contract = upload_contract_create(request,contract)
     pdfs = UploadContract.objects.prefetch_related('contract').filter(contract=contract)
     contract = Contract.objects.prefetch_related('members_contract').get(slug=slug)    
-    companies = contract.members_contract.all()    
-    #pdfs = [(i.pdf_contract.url.split("/")[3],i) for i in pdfs]    
+    companies = contract.members_contract.all()           
     context = {
         'contract': contract,
         'companies': companies,
         'title': _("Detail Info"),
-        'edit': _("Edit"),
+        'edit': _("Edit"),       
         'annotations': _("Annotations"),
         'attachments': _("Attachments"),
         'list_all': _("List All"),
@@ -146,7 +147,7 @@ def contract_delete(request, slug):
            messages.success(request, _('Completed successful.'))
            return redirect('contract:url_contracts_list')
        except IntegrityError:
-           messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
+           messages.warning(request, _('You cannot delete. This contract has an existing tax invoices or files attachments.'))
            return redirect('contract:url_contracts_list')    
 
 def contract_delete_all(request):
@@ -164,7 +165,7 @@ def contract_delete_all(request):
     if marc == 0:
         messages.success(request, _('Completed successful.'))
     else:
-        messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
+        messages.warning(request, _('You cannot delete. This contract has an existing tax invoices or files attachments.'))
     
     return redirect('contract:url_contracts_list')
    

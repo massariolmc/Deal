@@ -17,6 +17,9 @@ urlpatterns = [
     #Providers Choose
     path('providers-choose/', views.providers_choose, name='url_providers_choose'),
 
+    #Upload Delete
+    path('<slug:slug>/pdf/delete', views.upload_delete, name='url_upload_delete'),
+
     # URL PARA TRADUZIR O DATATABLES. USO GERAL
     path('tax_invoice/translate-js/', views.translate_datables_js, name='url_translate_datables_js'),
 

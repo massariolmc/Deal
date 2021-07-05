@@ -27,12 +27,12 @@ class Contract(models.Model):
     dt_end = models.DateField(_('Date End'), max_length=100, blank=True, null=True)
     dt_renovation = models.DateField(_('Date Renovation'), max_length=100, blank=True, null=True)    
     pay_day = models.CharField(_('Payment Day'),max_length=100, choices = days,blank=True, null=True)
-    number_months = models.PositiveIntegerField(_('Number of Months'), default = 0 , blank=True)
-    value_month = models.DecimalField(_('Value Month'), default = 0, decimal_places=2, max_digits=20, blank=True)
+    number_months = models.PositiveIntegerField(_('Number of Months'), blank=True, null=True)
+    value_month = models.DecimalField(_('Value Month'), decimal_places=2, max_digits=20, blank=False)
     number_contract = models.CharField(_('Number Contract'), max_length=100, blank=True)    
     provider = models.ForeignKey(Provider, related_name="contract_provider_created_id", verbose_name=_("Provider"), blank=False, on_delete=models.PROTECT)
     status = models.CharField(_('Status'), max_length=100, choices = select_status, default="Ativo",blank=False)    
-    dt_conclusion =  models.DateField(_('Date End'), max_length=100, blank=True, null=True)    
+    dt_conclusion =  models.DateField(_('Date Conclusion'), max_length=100, blank=True, null=True)    
     value = models.DecimalField(_('Contract Value'), decimal_places=2, max_digits=20, blank=False)    
     description = models.TextField(_('Description'), blank=True)            
     user_created = models.ForeignKey(User, related_name="contract_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
@@ -56,7 +56,7 @@ class Contract(models.Model):
 
 
 class UploadContract(models.Model):
-    contract = models.ForeignKey(Contract, related_name="upload_contract_contract_created_id", verbose_name=_("Contract"), blank=True, on_delete=models.PROTECT)
+    contract = models.ForeignKey(Contract, related_name="upload_contract_contract_created_id", verbose_name=_("Contract"), blank=True, on_delete=models.CASCADE)
     pdf_contract = models.FileField(upload_to = 'upload_contract/', verbose_name =_('File'), blank=True, max_length=200)
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
     user_created = models.ForeignKey(User, related_name="upload_contract_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
@@ -83,7 +83,7 @@ class UploadContract(models.Model):
         return f"{self.contract}"
 
 class ContractCompany(models.Model):
-    company = models.ForeignKey(Company, related_name="cc_company", verbose_name=_("Company"), blank=False, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, related_name="cc_company", verbose_name=_("Company"), blank=False, on_delete=models.PROTECT)
     contract = models.ForeignKey(Contract, related_name="cc_contract", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
     user_created = models.ForeignKey(User, related_name="contract_company_cc_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)

@@ -109,10 +109,14 @@
                         <tr>
                             <th class="text-right">{% trans "Status" %}</th>
                             <td>{{ contract.status }}</td>
-                        </tr> 
+                        </tr>                         
                         <tr>
                             <th class="text-right">{% trans "Date Conclusion" %}</th>
+                            {% ifequal contract.status 'Encerrado' %}
                             <td>{{ contract.dt_conclusion|default_if_none:"" }}</td>
+                            {% else %}
+                            <td>Contrato Ativo</td>
+                            {% endifequal %}
                         </tr>                                             
                         <tr>
                             <th class="text-right">{% trans "Description" %}</th>
