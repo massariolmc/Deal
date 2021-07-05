@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+<div class="topbar-laguage-tab">
+    <div class="language--icon">
+        <img src="{% static 'core/img/brasil.jpg'%}" alt="">
+    </div>
+
+    <!-- Language Data -->
+    <div class="language-data">
+        <!-- Language Data List -->               
+           
+            <form method="POST" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <input name="language" type="hidden" value="pt-br">          
+                <button type="submit" class="language-data--list">  
+                     <!-- Thumb -->
+                    <div class="country--flag-thumb">
+                        <img src="{% static 'core/img/brasil.jpg' %}" alt="">
+                    </div>     
+                     <!-- Message Text -->
+                    <div class="message--list-body-text language">
+                        <h6>Portugês</h6>
+                    </div>                                   
+                </button>
+            </form>                  
+        
+         
+            <form method="POST" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <input name="language" type="hidden" value="en">          
+                <button type="submit" class="language-data--list">  
+                   
+                    <div class="country--flag-thumb">
+                        <img src="{% static 'core/img/eua.jpg' %}" alt="">
+                    </div>                                   
+                    <div class="message--list-body-text language">
+                        <h6>English</h6>
+                    </div>                                   
+                </button>
+            </form>                
+           
+    </div>
+</div> 

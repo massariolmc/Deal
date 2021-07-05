@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+
+<div class="topbar-notifications">
+    <div class="noti--icon">
+        <div class="active-status"></div>                            
+        <img src="{% static 'core/img/core-img/bell.png'%}" alt="">
+    </div>         
+    <!-- Notifications Data -->
+    <div class="notifications-data">
+        <h6>3 New Notifications</h6>
+        <!-- Notifications List Data -->
+        <a class="notification-list--data" href="#">
+            <!-- Notifications icon -->
+            <div class="notification-list-icon">
+                <i class="fa fa-home bg-secondary" aria-hidden="true"></i>
+            </div>
+            <!-- Notifications Text -->
+            <div class="notification--list-body-text">
+                <h6>Login from 195.168.1.1</h6>
+                <p>Aliquam ex eros, imperdiet vulputate hendrerit et.</p>
+            </div>
+        </a>
+        <!-- Notifications List Data -->
+        <a class="notification-list--data" href="#">
+            <!-- Notifications Icon -->
+            <div class="notification-list-icon">
+                <i class="fa fa-user-plus bg-secondary" aria-hidden="true"></i>
+            </div>
+            <!-- Notifications Text -->
+            <div class="notification--list-body-text">
+                <h6>You have new 3 followers </h6>
+                <p>Aliquam ex eros, imperdiet vulputate hendrerit et.</p>
+            </div>
+        </a>
+        <!-- Notifications List Data -->
+        <a class="notification-list--data" href="#">
+            <!-- Notifications Icon -->
+            <div class="notification-list-icon">
+                <i class="fa fa-power-off bg-secondary" aria-hidden="true"></i>
+            </div>
+            <!-- Notifications Text -->
+            <div class="notification--list-body-text">
+                <h6>Server restarted</h6>
+                <p>19h ago</p>
+            </div>
+        </a>
+        <!-- Notifications All -->
+        <div class="notification--all--list">
+            <a href="#">Show all notifications</a>
+        </div>
+    </div>
+</div>

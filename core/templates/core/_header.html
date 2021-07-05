@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 <!-- Page Top Bar Area -->
 <div class="page-top-bar-area top-menu d-flex align-items-center justify-content-between">
     <!-- Logo Trigger Area -->
@@ -16,111 +16,16 @@
     <!-- User Meta -->
     <div class="user-meta-data d-flex align-items-center">
         <!-- Language -->
-        <div class="topbar-laguage-tab">
-            <div class="language--icon">
-                <img src="{% static 'core/img/core-img/flag-1.png'%}" alt="">
-            </div>
-
-            <!-- Language Data -->
-            <div class="language-data">
-                <!-- Language Data List -->
-               
-                   
-                    <form method="POST" action="{% url 'set_language' %}">
-                        {% csrf_token %}
-                        <input name="next" type="hidden" value="{{ redirect_to }}">
-                        <input name="language" type="hidden" value="pt-br">          
-                        <button type="submit" class="language-data--list">  
-                             <!-- Thumb -->
-                            <div class="country--flag-thumb">
-                                <img src="{% static 'core/img/brasil.jpg' %}" alt="">
-                            </div>     
-                             <!-- Message Text -->
-                            <div class="message--list-body-text language">
-                                <h6>Portugês</h6>
-                            </div>                                   
-                        </button>
-                    </form>
-                   
-                
-
-               
-                    
-                    <form method="POST" action="{% url 'set_language' %}">
-                        {% csrf_token %}
-                        <input name="next" type="hidden" value="{{ redirect_to }}">
-                        <input name="language" type="hidden" value="en">          
-                        <button type="submit" class="language-data--list">  
-                            <!-- Thumb -->
-                            <div class="country--flag-thumb">
-                                <img src="{% static 'core/img/eua.jpg' %}" alt="">
-                            </div>      
-                             <!-- Message Text -->
-                            <div class="message--list-body-text language">
-                                <h6>English</h6>
-                            </div>                                   
-                        </button>
-                    </form>                
-            </div>
-        </div>        
+        <!-- {#% include 'core/_language.html' %} -->
 
         <!-- Notifications -->
-        <div class="topbar-notifications">
-            <div class="noti--icon">
-                <div class="active-status"></div>                            
-                <img src="{% static 'core/img/core-img/bell.png'%}" alt="">
-            </div>         
-            <!-- Notifications Data -->
-            <div class="notifications-data">
-                <h6>3 New Notifications</h6>
-                <!-- Notifications List Data -->
-                <a class="notification-list--data" href="#">
-                    <!-- Notifications icon -->
-                    <div class="notification-list-icon">
-                        <i class="fa fa-home bg-secondary" aria-hidden="true"></i>
-                    </div>
-                    <!-- Notifications Text -->
-                    <div class="notification--list-body-text">
-                        <h6>Login from 195.168.1.1</h6>
-                        <p>Aliquam ex eros, imperdiet vulputate hendrerit et.</p>
-                    </div>
-                </a>
-                <!-- Notifications List Data -->
-                <a class="notification-list--data" href="#">
-                    <!-- Notifications Icon -->
-                    <div class="notification-list-icon">
-                        <i class="fa fa-user-plus bg-secondary" aria-hidden="true"></i>
-                    </div>
-                    <!-- Notifications Text -->
-                    <div class="notification--list-body-text">
-                        <h6>You have new 3 followers </h6>
-                        <p>Aliquam ex eros, imperdiet vulputate hendrerit et.</p>
-                    </div>
-                </a>
-                <!-- Notifications List Data -->
-                <a class="notification-list--data" href="#">
-                    <!-- Notifications Icon -->
-                    <div class="notification-list-icon">
-                        <i class="fa fa-power-off bg-secondary" aria-hidden="true"></i>
-                    </div>
-                    <!-- Notifications Text -->
-                    <div class="notification--list-body-text">
-                        <h6>Server restarted</h6>
-                        <p>19h ago</p>
-                    </div>
-                </a>
-                <!-- Notifications All -->
-                <div class="notification--all--list">
-                    <a href="#">Show all notifications</a>
-                </div>
-            </div>
-        </div>                    
+        <!-- {#% include 'core/_notifications.html' %} -->
 
         <!-- Profile -->
         <div class="topbar-profile">
             <!-- Thumb -->
             <div class="user---thumb">                            
-                <p class="text-warning">{{ user.first_name}}</p>
+                <p class="text-warning">{% trans 'User' %}: {{ user.first_name}}</p>
             </div>
             <!-- Profile Data -->
             <div class="profile-data">               

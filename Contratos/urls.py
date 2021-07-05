@@ -22,22 +22,22 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('manager_mlx/', admin.site.urls),
-    path('i18n/', include('django.conf.urls.i18n')),
+    path('i18n/', include('django.conf.urls.i18n')),    
 ]
 urlpatterns += i18n_patterns(
 
 #urlpatterns = [    
-    path('', include('core.urls')),
-    path('companies/',include('company.urls')),
-    path('providers/',include('provider.urls')),
-    path('contact_providers/',include('contact_provider.urls')),
-    path('service_types/',include('service_type.urls')),
-    path('status/',include('status.urls')),
-    path('contracts/',include('contract.urls')),
-    path('tax_invoices/',include('tax_invoice.urls')),
-    path('annotations/',include('annotation.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    prefix_default_language=True
+    path('vetorial/', include('core.urls')),
+    path('vetorial/companies/',include('company.urls')),
+    path('vetorial/providers/',include('provider.urls')),
+    path('vetorial/contact_providers/',include('contact_provider.urls')),
+    path('vetorial/service_types/',include('service_type.urls')),
+    path('vetorial/status/',include('status.urls')),
+    path('vetorial/contracts/',include('contract.urls')),
+    path('vetorial/tax_invoices/',include('tax_invoice.urls')),
+    path('vetorial/annotations/',include('annotation.urls')),
+    path('vetorial/accounts/', include('django.contrib.auth.urls')),
+    prefix_default_language=False
 #]
 )
 if settings.DEBUG:
