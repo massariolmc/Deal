@@ -20,7 +20,7 @@
             <!-- Nav Start -->
             <div class="classynav">
                 <ul id="nav">
-                    <li><a href="#"><i class="icon_drive"></i> {% trans 'Register'%}</a>
+                    <li><a href="#"><i class="icon_drive"></i> {% trans 'Registers'%}</a>
                         <ul class="dropdown home-2">
                             <li><a href="{% url 'company:url_companies_list' %}">- {% trans 'Companies'%}</a></li>
                             <li><a href="{% url 'provider:url_providers_list' %}">- {% trans 'Providers'%}</a></li>
@@ -37,19 +37,9 @@
                     </li>                               
                     <li><a href="#"><i class="icon_piechart"></i> {% trans 'Tax invoices'%}</a>
                         <ul class="dropdown home-2">
-                            <li><a href="{% url 'tax_invoice:url_providers_choose' %}">- {% trans 'Create Tax Invoice'%}</a></li>
-                            <li><a href="">- {% trans 'Search Tax invoices'%}</a></li>                            
+                            <li><a href="{% url 'tax_invoice:url_providers_choose' %}">- {% trans 'Create Tax Invoice'%}</a></li>                                                       
                         </ul>
-                    </li>                                                                
-                    <li><a href="#"><i class="icon_document_alt"></i> Forms</a>
-                        <ul class="dropdown home-2">
-                            <li><a href="basic-form.html">- Basic Form</a></li>
-                            <li><a href="wizard.html">- Wizard</a></li>
-                            <li><a href="file-upload.html">- File Upload</a></li>
-                            <li><a href="selects-and-tags.html">- Selects And Tags</a></li>
-                            <li><a href="controls.html">- Controls</a></li>
-                        </ul>
-                    </li>                                
+                    </li>                                                                                                                   
                 </ul>
 
             </div>
