@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from contract.models import Contract
 from .models import Annotation
 from .form import AnnotationForm
@@ -31,6 +32,7 @@ def annotation_save_form(request,form,template_name, data, user_created=None):
     data['form'] = form
     return render(request,template_name,data)
 
+@login_required
 def annotation_create(request,contract):
     contract = get_object_or_404(Contract, slug=contract)
     template_name = 'annotation/form.html'    
@@ -48,6 +50,7 @@ def annotation_create(request,contract):
     
     return annotation_save_form(request, form, template_name, data)
 
+@login_required
 def annotation_edit(request, slug):    
     annotation = get_object_or_404(Annotation, slug=slug)    
     contract = get_object_or_404(Contract, slug=annotation.contract.slug) 
@@ -65,7 +68,8 @@ def annotation_edit(request, slug):
     else:
         form = AnnotationForm(instance=annotation)       
     return annotation_save_form(request, form, template_name, data, user_created=user_created)
-    
+
+@login_required    
 def annotations_list(request,contract):
     contract = get_object_or_404(Contract, slug=contract) 
     template_name = "annotation/list.html"
@@ -80,6 +84,7 @@ def annotations_list(request,contract):
     }
     return render(request,template_name,context)
 
+@login_required
 def annotation_detail(request, slug):    
     template_name = "annotation/detail.html"
     annotation = get_object_or_404(Annotation,slug=slug)
@@ -94,6 +99,7 @@ def annotation_detail(request, slug):
     }
     return render(request, template_name, context)
 
+@login_required
 def annotation_delete(request, slug):    
     annotation = get_object_or_404(Annotation, slug=slug)    
     slug = annotation.contract.slug  
@@ -106,6 +112,7 @@ def annotation_delete(request, slug):
            messages.warning(request, _('You cannot delete. This annotation has an existing deal.'))
            return redirect('annotation:url_annotations_list', contract=slug)    
 
+@login_required
 def annotation_delete_all(request):
     marc = 0    
     if request.method == "POST":        

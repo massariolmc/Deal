@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Contract, UploadContract, ContractCompany
 from .form import ContractForm,UploadContractForm, validation_files
 from company.models import Company
@@ -66,6 +67,7 @@ def contract_save_form(request,form, template_name, data, user_created=None):
     data['form'] = form    
     return render(request,template_name,data)
 
+@login_required
 def contract_create(request):
     template_name = 'contract/form.html'    
     data = {
@@ -81,6 +83,7 @@ def contract_create(request):
                         
     return contract_save_form(request, form, template_name, data)
 
+@login_required
 def contract_edit(request, slug):    
     template_name='contract/form.html'
     data = {
@@ -96,7 +99,8 @@ def contract_edit(request, slug):
     else:
         form = ContractForm(instance=contract)       
     return contract_save_form(request, form, template_name, data, user_created=user_created)
-    
+
+@login_required    
 def contracts_list(request):
     template_name = "contract/list.html"
     contracts = Contract.objects.prefetch_related('members_contract').filter(status='Ativo')   
@@ -108,6 +112,7 @@ def contracts_list(request):
     }
     return render(request,template_name,context)
 
+@login_required
 def contracts_list_inactives(request):
     template_name = "contract/list.html"
     contracts = Contract.objects.prefetch_related('members_contract').filter(status='Encerrado')    
@@ -119,6 +124,7 @@ def contracts_list_inactives(request):
     }
     return render(request,template_name,context)
 
+@login_required
 def contract_detail(request, slug):    
     template_name = "contract/detail.html"
     contract = get_object_or_404(Contract,slug=slug)
@@ -139,6 +145,7 @@ def contract_detail(request, slug):
     }
     return render(request, template_name, context)
 
+@login_required
 def contract_delete(request, slug):    
     contract = get_object_or_404(Contract, slug=slug)    
     if request.method == 'POST':        
@@ -150,6 +157,7 @@ def contract_delete(request, slug):
            messages.warning(request, _('You cannot delete. This contract has an existing tax invoices or files attachments.'))
            return redirect('contract:url_contracts_list')    
 
+@login_required
 def contract_delete_all(request):
     marc = 0    
     if request.method == "POST":        
@@ -173,6 +181,7 @@ def contract_delete_all(request):
 
 ########### CONTRACT WITH UPLOAD CONTACT ###########
 
+@login_required
 def upload_contract_create(request, contract):      
     if contract.__class__  is int:          
         contract = get_object_or_404(Contract, pk=contract)  
@@ -204,6 +213,7 @@ def upload_contract_create(request, contract):
         form = UploadContractForm()
         return form
 
+@login_required
 def upload_delete(request, slug):    
     upload_contract = get_object_or_404(UploadContract, slug=slug)   
     contract =  upload_contract.contract.slug

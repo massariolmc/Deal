@@ -6,6 +6,7 @@ from .models import Provider
 from .form import ProviderForm
 from django.forms import modelformset_factory, inlineformset_factory
 from account.models import User
+from django.contrib.auth.decorators import login_required
 from contact_provider.models import ContactProvider
 from contact_provider.form import ContactProviderForm
 from django.db import IntegrityError
@@ -34,6 +35,7 @@ def provider_save_form(request,form,template_name, data, user_created=None):
     data['form'] = form
     return render(request,template_name,data)
 
+@login_required
 def provider_create(request):
     template_name = 'provider/form.html'    
     data = {
@@ -49,6 +51,7 @@ def provider_create(request):
     
     return provider_save_form(request, form, template_name, data)
 
+@login_required
 def provider_edit(request, slug):    
     template_name='provider/form.html'
     data = {
@@ -64,7 +67,8 @@ def provider_edit(request, slug):
     else:
         form = ProviderForm(instance=provider)       
     return provider_save_form(request, form, template_name, data, user_created=user_created)
-    
+
+@login_required    
 def providers_list(request):
     template_name = "provider/list.html"
     providers = Provider.objects.all()    
@@ -75,6 +79,7 @@ def providers_list(request):
     }
     return render(request,template_name,context)
 
+@login_required
 def provider_detail(request, slug):    
     template_name = "provider/detail.html"
     provider = get_object_or_404(Provider,slug=slug)    
@@ -89,6 +94,7 @@ def provider_detail(request, slug):
     }
     return render(request, template_name, context)
 
+@login_required
 def provider_delete(request, slug):    
     provider = get_object_or_404(Provider, slug=slug)    
     if request.method == 'POST':        
@@ -100,6 +106,7 @@ def provider_delete(request, slug):
            messages.warning(request, _('You cannot delete. This provider has an existing department.'))
            return redirect('provider:url_providers_list')    
 
+@login_required
 def provider_delete_all(request):
     marc = 0    
     if request.method == "POST":        
@@ -122,7 +129,7 @@ def provider_delete_all(request):
 ########### FIM PROVIDER ############################
 
 ########### PROVIDER WITH CONTACT_PROVIDER ###########
-
+@login_required
 def contact_provider_create(request, provider):     
     if provider.__class__  is int:          
         provider = get_object_or_404(Provider, pk=provider)

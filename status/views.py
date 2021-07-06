@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Status
 from .form import StatusForm
 from account.models import User
@@ -30,6 +31,7 @@ def status_save_form(request,form,template_name, data, user_created=None):
     data['form'] = form
     return render(request,template_name,data)
 
+@login_required
 def status_create(request):
     template_name = 'status/form.html'    
     data = {
@@ -45,6 +47,7 @@ def status_create(request):
     
     return status_save_form(request, form, template_name, data)
 
+@login_required
 def status_edit(request, slug):    
     template_name='status/form.html'
     data = {
@@ -60,7 +63,8 @@ def status_edit(request, slug):
     else:
         form = StatusForm(instance=status)       
     return status_save_form(request, form, template_name, data, user_created=user_created)
-    
+
+@login_required    
 def status_list(request):
     template_name = "status/list.html"
     status = Status.objects.all()    
@@ -71,6 +75,7 @@ def status_list(request):
     }
     return render(request,template_name,context)
 
+@login_required
 def status_detail(request, slug):    
     template_name = "status/detail.html"
     status = get_object_or_404(Status,slug=slug)
@@ -82,6 +87,7 @@ def status_detail(request, slug):
     }
     return render(request, template_name, context)
 
+@login_required
 def status_delete(request, slug):    
     status = get_object_or_404(Status, slug=slug)    
     if request.method == 'POST':        
@@ -93,6 +99,7 @@ def status_delete(request, slug):
            messages.warning(request, _('You cannot delete. This status has an existing deal.'))
            return redirect('status:url_status_list')    
 
+@login_required
 def status_delete_all(request):    
     marc = 0    
     if request.method == "POST":              

@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import ServiceType
 from .form import ServiceTypeForm
 from account.models import User
@@ -30,6 +31,7 @@ def service_type_save_form(request,form,template_name, data, user_created=None):
     data['form'] = form
     return render(request,template_name,data)
 
+@login_required
 def service_type_create(request):
     template_name = 'service_type/form.html'    
     data = {
@@ -45,6 +47,7 @@ def service_type_create(request):
     
     return service_type_save_form(request, form, template_name, data)
 
+@login_required
 def service_type_edit(request, slug):    
     template_name='service_type/form.html'
     data = {
@@ -60,7 +63,8 @@ def service_type_edit(request, slug):
     else:
         form = ServiceTypeForm(instance=service_type)       
     return service_type_save_form(request, form, template_name, data, user_created=user_created)
-    
+
+@login_required    
 def service_types_list(request):
     template_name = "service_type/list.html"
     service_types = ServiceType.objects.all()    
@@ -71,6 +75,7 @@ def service_types_list(request):
     }
     return render(request,template_name,context)
 
+@login_required
 def service_type_detail(request, slug):    
     template_name = "service_type/detail.html"
     service_type = get_object_or_404(ServiceType,slug=slug)
@@ -82,6 +87,7 @@ def service_type_detail(request, slug):
     }
     return render(request, template_name, context)
 
+@login_required
 def service_type_delete(request, slug):    
     service_type = get_object_or_404(ServiceType, slug=slug)    
     if request.method == 'POST':        
@@ -93,6 +99,7 @@ def service_type_delete(request, slug):
            messages.warning(request, _('You cannot delete. This service_type has an existing deal.'))
            return redirect('service_type:url_service_types_list')    
 
+@login_required
 def service_type_delete_all(request):
     marc = 0    
     if request.method == "POST":        

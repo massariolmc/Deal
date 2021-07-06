@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import TaxInvoice, UploadTaxInvoice
 from .form import TaxInvoiceForm
 from contract.models import Contract
@@ -65,6 +66,7 @@ def tax_invoice_save_form(request,form,template_name, data, user_created=None):
     data['form'] = form
     return render(request,template_name,data)
 
+@login_required
 def tax_invoice_create(request, contract):
     contract = get_object_or_404(Contract, slug=contract)
     template_name = 'tax_invoice/form.html'    
@@ -83,6 +85,7 @@ def tax_invoice_create(request, contract):
     
     return tax_invoice_save_form(request, form, template_name, data)
 
+@login_required
 def tax_invoice_edit(request, slug): 
     tax_invoice = get_object_or_404(TaxInvoice, slug=slug)           
     contract = get_object_or_404(Contract, slug=tax_invoice.contract.slug)   
@@ -102,7 +105,8 @@ def tax_invoice_edit(request, slug):
     else:
         form = TaxInvoiceForm(instance=tax_invoice)       
     return tax_invoice_save_form(request, form, template_name, data, user_created=user_created)
-    
+
+@login_required    
 def tax_invoices_list(request,contract):
     contract = get_object_or_404(Contract, slug=contract)  
     template_name = "tax_invoice/list.html"
@@ -117,6 +121,7 @@ def tax_invoices_list(request,contract):
     }    
     return render(request,template_name,context)
 
+@login_required
 def providers_choose(request):
     template_name = "tax_invoice/providers_choose.html"
     contracts = Contract.objects.filter(status='Ativo')        
@@ -127,6 +132,7 @@ def providers_choose(request):
     }
     return render(request,template_name,context)
 
+@login_required
 def tax_invoice_detail(request, slug):    
     template_name = "tax_invoice/detail.html"
     tax_invoice = get_object_or_404(TaxInvoice,slug=slug)
@@ -143,6 +149,7 @@ def tax_invoice_detail(request, slug):
     }
     return render(request, template_name, context)
 
+@login_required
 def tax_invoice_delete(request, slug):    
     tax_invoice = get_object_or_404(TaxInvoice, slug=slug)  
     slug = tax_invoice.contract.slug      
@@ -155,6 +162,7 @@ def tax_invoice_delete(request, slug):
            messages.warning(request, _('You cannot delete. This tax_invoice has an existing department.'))
            return redirect('tax_invoice:url_tax_invoices_list', contract=slug)    
 
+@login_required
 def tax_invoice_delete_all(request):
     marc = 0    
     if request.method == "POST":        
@@ -176,6 +184,7 @@ def tax_invoice_delete_all(request):
     
     return redirect('tax_invoice:url_tax_invoices_list', contract=contract_slug)
 
+@login_required
 def upload_delete(request, slug):    
     upload = get_object_or_404(UploadTaxInvoice, slug=slug)   
     tax_invoice =  upload.tax_invoice.slug

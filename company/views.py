@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, get_list_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Company
 from .form import CompanyForm
 from account.models import User
@@ -30,6 +31,7 @@ def company_save_form(request,form,template_name, data, user_created=None):
     data['form'] = form
     return render(request,template_name,data)
 
+@login_required
 def company_create(request):
     template_name = 'company/form.html'    
     data = {
@@ -45,6 +47,7 @@ def company_create(request):
     
     return company_save_form(request, form, template_name, data)
 
+@login_required
 def company_edit(request, slug):    
     template_name='company/form.html'
     data = {
@@ -60,7 +63,8 @@ def company_edit(request, slug):
     else:
         form = CompanyForm(instance=company)       
     return company_save_form(request, form, template_name, data, user_created=user_created)
-    
+
+@login_required    
 def companies_list(request):
     template_name = "company/list.html"
     companies = Company.objects.all()    
@@ -71,6 +75,7 @@ def companies_list(request):
     }
     return render(request,template_name,context)
 
+@login_required
 def company_detail(request, slug):    
     template_name = "company/detail.html"
     company = get_object_or_404(Company,slug=slug)
@@ -82,6 +87,7 @@ def company_detail(request, slug):
     }
     return render(request, template_name, context)
 
+@login_required
 def company_delete(request, slug):    
     company = get_object_or_404(Company, slug=slug)    
     if request.method == 'POST':        
@@ -93,6 +99,7 @@ def company_delete(request, slug):
            messages.warning(request, _('You cannot delete. This company has an existing dependency.'))
            return redirect('company:url_companies_list')    
 
+@login_required
 def company_delete_all(request):
     marc = 0    
     if request.method == "POST":        

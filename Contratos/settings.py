@@ -35,9 +35,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 # Adicioanais do Settings
 AUTH_USER_MODEL = 'account.User' # PARA TROCAR O USER PRIMÁRIO
 
-LOGIN_REDIRECT_URL = 'core/rel' # REDIRECIONAR APÓS LOGIN
-#LOGIN_REDIRECT_URL = 'rel'
+LOGIN_REDIRECT_URL = 'core:home' # REDIRECIONAR APÓS LOGIN
 LOGOUT_REDIRECT_URL = 'login' # REDIRECIONAR APÓS LOGOUT
+LOGIN_URL = 'login' # REDIRECIONAR SE NÃO ESTIVER LOGADO -> @LOGIN_REQUIRED
 
 #Incluido para teste de envio de email no reset email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
