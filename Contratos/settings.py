@@ -31,7 +31,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv()) 
-
 # Adicioanais do Settings
 AUTH_USER_MODEL = 'account.User' # PARA TROCAR O USER PRIMÁRIO
 
