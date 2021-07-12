@@ -107,7 +107,7 @@ class ContractForm(ModelForm):
                 css_class='form-row'
             ),
             Row(
-                Column('members_contract', css_class='form-group col-md-3 mb-0'),   
+                Column('members_contract', css_class='form-group col-md-6 mb-0'),   
             ),          
             Row(               
                 Column('description', css_class='form-group col-md-12 mb-0'),                
