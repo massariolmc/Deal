@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-02 15:57-0400\n"
+"POT-Creation-Date: 2021-07-12 10:58-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,24 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: form.py:54
-msgid "Maximum size allowed {size(size_max, system=si)}"
-msgstr "Tamanho máximo permitido {size(size_max, system=si)}"
+#: form.py:18
+#, fuzzy
+#| msgid "File"
+msgid "Files"
+msgstr "Arquivo"
 
-#: form.py:55
-#, python-brace-format
-msgid "This format not allowed {formats}"
-msgstr "Este formato não é permitido {formats}"
-
-#: form.py:67
+#: form.py:66
 msgid "This format not allowed."
 msgstr "Este formato não é permitido."
 
-#: form.py:81
+#: form.py:80
 msgid "The field Forfeit is checked like No."
 msgstr "O campo Status está marcado como Não"
 
-#: form.py:82
+#: form.py:81
 msgid "The field Forfeit is checked like Yes."
 msgstr "O campo Status está marcado como Sim"
 
@@ -49,7 +46,7 @@ msgstr "Sim"
 msgid "No"
 msgstr "Não"
 
-#: models.py:22 views.py:83
+#: models.py:22 views.py:120
 msgid "Contract"
 msgstr "Contrato"
 
@@ -57,7 +54,7 @@ msgstr "Contrato"
 msgid "Company"
 msgstr "Empresa"
 
-#: models.py:24
+#: models.py:24 models.py:68
 msgid "Slug"
 msgstr "Slug"
 
@@ -65,7 +62,7 @@ msgstr "Slug"
 msgid "Issue Date"
 msgstr "Data de Emissão"
 
-#: models.py:26 templates/tax_invoice/detail.html:53 views.py:107
+#: models.py:26 templates/tax_invoice/detail.html:53 views.py:147
 msgid "Number Invoice"
 msgstr "Número da nota fiscal"
 
@@ -109,10 +106,6 @@ msgstr "Valor da Multa"
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:36
-msgid "File"
-msgstr "Arquivo"
-
 #: models.py:39 templates/tax_invoice/_table_nimbi.html:8
 msgid "Number Requisition Nimbi"
 msgstr "Número da Req do Nimbi"
@@ -141,29 +134,39 @@ msgstr "Data de criação RC Nimbi"
 msgid "Send Date Fiscal"
 msgstr "Data de envio para o Dep. Fiscal"
 
-#: models.py:47 templates/tax_invoice/detail.html:97
+#: models.py:47 models.py:69 templates/tax_invoice/detail.html:97
 msgid "Created by"
 msgstr "Criado por"
 
-#: models.py:48 templates/tax_invoice/detail.html:101
+#: models.py:48 models.py:70 templates/tax_invoice/detail.html:101
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: models.py:49
+#: models.py:49 models.py:71
 msgid "Created at"
 msgstr "Criado em"
 
-#: models.py:50
+#: models.py:50 models.py:72
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: models.py:53 templates/tax_invoice/detail.html:87
+#: models.py:53 models.py:66 templates/tax_invoice/detail.html:87
 msgid "Tax Invoice"
 msgstr "Nota Fiscal"
 
 #: models.py:54
 msgid "Tax Invoices"
 msgstr "Notas Fiscais"
+
+#: models.py:67
+msgid "File"
+msgstr "Arquivo"
+
+#: models.py:75 models.py:76
+#, fuzzy
+#| msgid "Tax Invoice"
+msgid "Upload Tax Invoice"
+msgstr "Nota Fiscal"
 
 #: templates/default/_messages.html:7 templates/default/_messages_async.html:6
 #: templates/tax_invoice/_form_errors.html:6
@@ -229,6 +232,7 @@ msgstr "Dia do pagamento"
 
 #: templates/tax_invoice/_table.html:20
 #: templates/tax_invoice/_table_providers_choose.html:12
+#: templates/tax_invoice/_table_uploads.html:13
 msgid "Options"
 msgstr "Opções"
 
@@ -241,6 +245,7 @@ msgid "details"
 msgstr "detalhes"
 
 #: templates/tax_invoice/_table.html:38
+#: templates/tax_invoice/_table_uploads.html:23
 msgid "delete"
 msgstr "deletar"
 
@@ -269,6 +274,26 @@ msgstr "cadastrar"
 #: templates/tax_invoice/_table_providers_choose.html:24
 msgid "tax"
 msgstr "notas"
+
+#: templates/tax_invoice/_table_uploads.html:6
+msgid "Attachments"
+msgstr ""
+
+#: templates/tax_invoice/_table_uploads.html:10
+msgid "Name"
+msgstr ""
+
+#: templates/tax_invoice/_table_uploads.html:11
+#, fuzzy
+#| msgid "Created at"
+msgid "Created At"
+msgstr "Criado em"
+
+#: templates/tax_invoice/_table_uploads.html:12
+#, fuzzy
+#| msgid "Updated at"
+msgid "Updated At"
+msgstr "Atualizado em"
 
 #: templates/tax_invoice/detail.html:45
 msgid "Contract Name"
@@ -302,60 +327,82 @@ msgstr "Sem arquivo"
 msgid "Remove"
 msgstr "Remover"
 
-#: views.py:39
+#: views.py:25
+msgid "Maximum size allowed {size(size_max, system=si)}"
+msgstr "Tamanho máximo permitido {size(size_max, system=si)}"
+
+#: views.py:26
+#, python-brace-format
+msgid "This format not allowed {formats}"
+msgstr "Este formato não é permitido {formats}"
+
+#: views.py:60
+#, python-brace-format
+msgid ""
+"Errors in the following files: {arqs}. Maximum size allowed: 3MB. This "
+"format is allowed: PDF"
+msgstr ""
+
+#: views.py:74
 msgid "Create TaxInvoice"
 msgstr "Inserir Nota Fiscal"
 
-#: views.py:40 views.py:59 views.py:82
+#: views.py:75 views.py:95 views.py:119
 msgid "Back"
 msgstr "Voltar"
 
-#: views.py:41 views.py:60
+#: views.py:76 views.py:96
 msgid "Save"
 msgstr "Salvar"
 
-#: views.py:42 views.py:61
+#: views.py:77 views.py:97
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:44 views.py:63 views.py:83 views.py:107
+#: views.py:79 views.py:99 views.py:120 views.py:147
 msgid "Provider"
 msgstr "Fornecedor"
 
-#: views.py:58 views.py:105
+#: views.py:94 views.py:145
 msgid "Edit"
 msgstr "Editar"
 
-#: views.py:80
+#: views.py:117
 msgid "Registered TaxInvoices"
 msgstr "Cadastrar notas fiscais"
 
-#: views.py:81
+#: views.py:118
 msgid "Add"
 msgstr "Adicionar"
 
-#: views.py:92
+#: views.py:130
 msgid "Entry with a tax invoice"
-msgstr "Insera uma nota fiscal"
+msgstr "Insira uma nota fiscal"
 
-#: views.py:93
+#: views.py:131
 msgid "Add Contract"
 msgstr "Adicionar Contrato"
 
-#: views.py:104
+#: views.py:144
 msgid "Detail Info"
 msgstr "Informações detalhadas"
 
-#: views.py:106
+#: views.py:146
 msgid "List All"
 msgstr "Listar todos"
 
-#: views.py:117 views.py:138
+#: views.py:159 views.py:181 views.py:194
 msgid "Completed successful."
 msgstr "Completado com sucesso"
 
-#: views.py:120 views.py:140
+#: views.py:162 views.py:183
 msgid "You cannot delete. This tax_invoice has an existing department."
+msgstr "Você não pode deletar. Esta nota tem contrato existente."
+
+#: views.py:197
+#, fuzzy
+#| msgid "You cannot delete. This tax_invoice has an existing department."
+msgid "You cannot delete. This contract has an existing tax invoices."
 msgstr "Você não pode deletar. Esta nota tem contrato existente."
 
 #~ msgid "Choose Provider"

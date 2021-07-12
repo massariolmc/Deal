@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-02 10:32-0400\n"
+"POT-Creation-Date: 2021-07-12 10:46-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,6 +64,10 @@ msgstr "Data final"
 #: models.py:28 templates/contract/detail.html:90
 msgid "Date Renovation"
 msgstr "Data de renovação"
+
+#: models.py:28
+msgid "Date renovatation or date readjustment yearly"
+msgstr "Data de renovação ou data do reajuste anual"
 
 #: models.py:29
 msgid "Payment Day"
@@ -160,7 +164,7 @@ msgstr "Alerta!"
 msgid "Uploads"
 msgstr "Uploads"
 
-#: templates/contract/_modal_upload_contract.html:23 views.py:74 views.py:89
+#: templates/contract/_modal_upload_contract.html:23 views.py:76 views.py:92
 msgid "Save"
 msgstr "Salvar"
 
@@ -184,7 +188,7 @@ msgstr "detalhes"
 msgid "delete"
 msgstr "deletar"
 
-#: templates/contract/_table_uploads.html:6 views.py:134
+#: templates/contract/_table_uploads.html:6 views.py:141
 msgid "Attachments"
 msgstr "Anexos"
 
@@ -263,51 +267,51 @@ msgstr "Fechar"
 msgid "Are you sure?"
 msgstr "Você tem certeza?"
 
-#: views.py:72
+#: views.py:74
 msgid "Create Contract"
 msgstr "Criar um contrato"
 
-#: views.py:73 views.py:88
+#: views.py:75 views.py:91 views.py:111 views.py:123
 msgid "Back"
 msgstr "Voltar"
 
-#: views.py:75 views.py:90
+#: views.py:77 views.py:93
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:87 views.py:132
+#: views.py:90 views.py:139
 msgid "Edit"
 msgstr "Editar"
 
-#: views.py:105
+#: views.py:109
 msgid "Registered Contracts"
 msgstr "Cadastrar Contratos"
 
-#: views.py:106 views.py:116
+#: views.py:110 views.py:122
 msgid "Add"
 msgstr "Adicionar"
 
-#: views.py:115
+#: views.py:121
 msgid "Inactives Contracts"
 msgstr "Contratos Inativos/Encerrados"
 
-#: views.py:131
+#: views.py:138
 msgid "Detail Info"
 msgstr "Informações detalhadas"
 
-#: views.py:133
+#: views.py:140
 msgid "Annotations"
 msgstr "Anotações"
 
-#: views.py:135
+#: views.py:142
 msgid "List All"
 msgstr "Listar todos"
 
-#: views.py:146 views.py:165 views.py:212
+#: views.py:154 views.py:174 views.py:223
 msgid "Completed successful."
 msgstr "Completado com sucesso"
 
-#: views.py:149 views.py:167
+#: views.py:157 views.py:176
 msgid ""
 "You cannot delete. This contract has an existing tax invoices or files "
 "attachments."
@@ -315,7 +319,7 @@ msgstr ""
 "Você não pode deletar. Este contrato tem uma nota fiscal ou anexos "
 "existentes."
 
-#: views.py:195
+#: views.py:205
 #, python-brace-format
 msgid ""
 "Errors in the following files: {arqs}. Maximum size allowed: 3MB. This "
@@ -324,13 +328,13 @@ msgstr ""
 "Erros nos seguintes arquivos: {arqs}. Tamanho maximo permitido: 3MB. Este "
 "format is permitido: PDF."
 
-#: views.py:200
+#: views.py:210
 msgid "File not added. This name already exists or was entered incorrectly"
 msgstr ""
 "Arquivo não adicionado. Este nome de arquivo já existe ou foi um formato foi "
 "inserido incorretamente."
 
-#: views.py:215
+#: views.py:226
 msgid "You cannot delete. This contract has an existing tax invoices."
 msgstr ""
 "Você não pode deletar. Este contrato tem uma nota fiscal ou anexos "

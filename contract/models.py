@@ -25,7 +25,7 @@ class Contract(models.Model):
     type = models.ForeignKey(ServiceType, related_name="contract_type_created_id", verbose_name=_("Type"), blank=False, on_delete=models.PROTECT)
     dt_start = models.DateField(_('Date Initial'), max_length=100, blank=True, null=True)
     dt_end = models.DateField(_('Date End'), max_length=100, blank=True, null=True)
-    dt_renovation = models.DateField(_('Date Renovation'), max_length=100, blank=True, null=True)    
+    dt_renovation = models.DateField(_('Date Renovation'), max_length=100, blank=True, null=True, help_text=_("Date renovatation or date readjustment yearly"))    
     pay_day = models.CharField(_('Payment Day'),max_length=100, choices = days,blank=True, null=True)
     number_months = models.PositiveIntegerField(_('Number of Months'), blank=True, null=True)
     value_month = models.DecimalField(_('Value Month'), decimal_places=2, max_digits=20, blank=False)

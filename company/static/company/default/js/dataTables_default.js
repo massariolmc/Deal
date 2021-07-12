@@ -24,6 +24,7 @@ $(document).ready(function () {
       }
     ],    
     ordering: true,
+    order: [[5,'asc'],[ 2, 'asc' ]],
     oLanguage: {
         sUrl:          url,
     },

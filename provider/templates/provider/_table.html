@@ -30,7 +30,7 @@
         </div></td>
       <td>{{ provider.name }}</td>
       <td>{{ provider.fantasy_name }}</td>                                
-      <td>{{ provider.cnpj }}</td>                                                                       
+      <td class="cnpj">{{ provider.cnpj }}</td>                                                                       
       <td>{{ provider.email }}</td>                                                                 
       <td class="text-center"> 
         <a href="{% url 'provider:url_provider_edit' provider.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
