@@ -158,7 +158,7 @@ class UploadContractForm(ModelForm):
 ################### VALIDAÇÃO DO PDF DO CONTRACTA. NÃO FAZ PARTE DE NENHUM FORM. ELE É CHAMADO NA VIEW, NA PARTE DO UPLOAD CONTRACT ############################################
 def validation_files(pdf_contract):
         print("validação")                    
-        size_max = 3000000
+        size_max = 5000000
         formats = "PDF"
         msg_size =  _(f"Maximum size allowed {size(size_max, system=si)}")
         msg_format =  _(f"This format not allowed {formats}")
