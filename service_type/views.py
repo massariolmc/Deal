@@ -24,7 +24,7 @@ def service_type_save_form(request,form,template_name, data, user_created=None):
             obj.user_updated = request.user  
             obj.save()         
                 
-            return redirect('service_type:url_service_types_list')
+            return redirect('service_type:url_service_type_detail', obj.slug)
         else:
             print("algo não está valido.")               
     

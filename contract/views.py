@@ -47,11 +47,8 @@ def contract_save_form(request,form, template_name, data, user_created=None):
             ### USADO PARA O MANY TO MANY ###################### 
             for company in companies:           
                 print("company",company.id)
-                company_list.append(company.id)
-                #ContractCompany.objects.create(company=company, contract=obj, user_created = request.user, user_updated = request.user)  
-                #obj.members_contract.add(company, through_defaults={'user_created':request.user, 'user_updated':request.user})
+                company_list.append(company.id)                
                 obj.members_contract.add(company, through_defaults={'slug': unique_uuid(ContractCompany),'user_created':request.user, 'user_updated':request.user})
-                #obj.save()
             compare.update(members_contract_list)
             id_cc = compare.difference(company_list)
             if id_cc:
@@ -60,7 +57,7 @@ def contract_save_form(request,form, template_name, data, user_created=None):
                     obj.members_contract.remove(get_object_or_404(Company, id=i))
              ### FIM USADO PARA O MANY TO MANY #################
                 
-            return redirect('contract:url_contracts_list')
+            return redirect('contract:url_contract_detail', obj.slug)
         else:
             print("algo não está valido.")               
     

@@ -37,8 +37,7 @@
       <td class="text-center"> 
         <a href="{% url 'company:url_company_edit' company.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
         <a href="{% url 'company:url_company_detail' company.slug %}"><span class='badge badge-info'>{% trans "details" %}</span></a>                                                                          
-        <a href="" data-url="{% url 'company:url_company_delete' company.slug %}" id="button_modal_{{ company.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>
-        </form>
+        <a href="" data-url="{% url 'company:url_company_delete' company.slug %}" id="button_modal_{{ company.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>        
       </td>                      
     </tr>                 
     {% endfor %}   

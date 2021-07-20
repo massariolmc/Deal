@@ -16,10 +16,6 @@
     function on(element, event, callback){
         doc.querySelector(element).addEventListener(event,callback,false);
     }
-    on('input[name=cnpj]', 'keypress', somenteNumeros);
-    on('input[name=address_number]', 'keypress', somenteNumeros);
-    on('input[name=zip_code]', 'keypress', somenteNumeros);
-    on('input[name=phone_1]', 'keypress', somenteNumeros);
-    on('input[name=phone_2]', 'keypress', somenteNumeros);
+    on('input[name=number_months]', 'keypress', somenteNumeros);    
     
   })(document,window)

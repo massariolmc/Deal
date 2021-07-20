@@ -25,7 +25,7 @@
         <div class="topbar-profile">
             <!-- Thumb -->
             <div class="user---thumb">                            
-                <p class="text-warning">{% trans 'User' %}: {{ user.first_name}}</p>
+                <p class="text-warning">{% trans 'User' %}: {{ request.user.first_name}}</p>
             </div>
             <!-- Profile Data -->
             <div class="profile-data">               
@@ -37,7 +37,7 @@
                     </div>
                     <!-- Profile Text -->
                     <div class="notification--list-body-text profile">
-                        <h6>Alterar Senha</h6>
+                        <h6>{% trans "Change Password" %}</h6>
                     </div>
                 </a>
                 <!-- Profile List Data -->
@@ -48,7 +48,7 @@
                     </div>
                     <!-- Profile Text -->
                     <div class="notification--list-body-text profile">
-                        <h6>Log out</h6>
+                        <h6>{% trans "Log Out" %}</h6>
                     </div>
                 </a>
             </div>

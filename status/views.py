@@ -24,7 +24,7 @@ def status_save_form(request,form,template_name, data, user_created=None):
             obj.user_updated = request.user  
             obj.save()         
                 
-            return redirect('status:url_status_list')
+            return redirect('status:url_status_detail', obj.slug)
         else:
             print("algo não está valido.")               
     

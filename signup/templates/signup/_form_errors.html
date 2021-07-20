@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if form.errors %}
+    <ol>            
+        <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="fa fa-ban"></i> {% trans "Alert!" %}</h5>
+        {% for error in form.errors %}
+            <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+        </div>    
+    </ol>
+{% endif %}

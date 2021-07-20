@@ -28,7 +28,7 @@ def provider_save_form(request,form,template_name, data, user_created=None):
             obj.user_updated = request.user  
             obj.save()         
                 
-            return redirect('provider:url_providers_list')
+            return redirect('provider:url_provider_detail', obj.slug)
         else:
             print("algo não está valido.")               
     

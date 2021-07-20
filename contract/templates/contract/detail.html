@@ -56,7 +56,7 @@
                             <td>{{ contract.name }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right">{% trans "Object" %}</th>
+                            <th class="text-right"></th>
                             <td>{{ contract.object|safe }}</td>
                         </tr>
                         <tr>
@@ -75,7 +75,7 @@
                             <td>{{ contract.type }}</td>                       
                         </tr>
                         <tr>
-                            <th class="text-right">{% trans "Value" %}</th>
+                            <th class="text-right">{% trans "Total Contract Value" %}</th>
                             <td>{{ contract.value }}</td>
                         </tr> 
                         <tr>
@@ -84,7 +84,7 @@
                         </tr>
                         <tr>
                             <th class="text-right">{% trans "Date End" %}</th>
-                            <td>{{ contract.dt_end }}</td>
+                            <td>{{ contract.dt_end|default_if_none:"" }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">{% trans "Date Renovation" %}</th>

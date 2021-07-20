@@ -14,19 +14,6 @@ def home(request):
     template_name = "core/base.html"    
     return render(request,template_name,{})
 
-def signup(request):
-    template_name = 'registration/signup.html'
-    if request.method == 'POST':
-        form = UserCustomCreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = UserCustomCreateForm()
-       
-    return render(request, template_name ,{'form': form})
-
-
 # Essa parte foi desenvolvida para ler o arquivo xlsx do financeiro. Não deverá mais ser usada.
 def rel(request):
     template_name = 'core/rel.html' 

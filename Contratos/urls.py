@@ -36,6 +36,7 @@ urlpatterns += i18n_patterns(
     path('vetorial/contracts/',include('contract.urls')),
     path('vetorial/tax_invoices/',include('tax_invoice.urls')),
     path('vetorial/annotations/',include('annotation.urls')),
+    path('vetorial/signup/',include('signup.urls')),
     path('vetorial/accounts/', include('django.contrib.auth.urls')),
     prefix_default_language=False
 #]

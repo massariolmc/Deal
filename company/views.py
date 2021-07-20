@@ -24,7 +24,7 @@ def company_save_form(request,form,template_name, data, user_created=None):
             obj.user_updated = request.user  
             obj.save()         
                 
-            return redirect('company:url_companies_list')
+            return redirect('company:url_company_detail', obj.slug)
         else:
             print("algo não está valido.")               
     

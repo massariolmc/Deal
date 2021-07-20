@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'contract',
     'tax_invoice',
     'annotation',
+    'signup',
     'crispy_forms',
     'ckeditor',
 ]
