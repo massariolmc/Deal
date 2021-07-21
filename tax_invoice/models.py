@@ -32,18 +32,7 @@ class TaxInvoice(models.Model):
     time_end = models.DateField(_('Time End'), max_length=100, blank=True, null=True)
     forfeit_status = models.CharField(_('Forfeit Status'), max_length=100, choices = yes_or_no, default="No",blank=False)
     value_forfeit = models.DecimalField(_('Value Forfeit'), decimal_places=2, max_digits=20, default = "0,00", blank=True, null=True)    
-    description = models.TextField(_('Description'), blank=True)        
-    #pdf_invoice = models.FileField(upload_to = 'tax_invoice/', verbose_name =_('File'), blank=True, max_length=200)
-    
-    #Campos para informações de pesquisa no Nimbi
-    number_req_nimbi = models.CharField(_('Number Requisition Nimbi'), max_length=100, blank=True)
-    number_cod_nimbi = models.CharField(_('Number Cod Nimbi'), max_length=100, blank=True)
-    number_pc_nimbi = models.CharField(_('Number PC Nimbi'), max_length=100, blank=True)
-    number_cod_project = models.CharField(_('Number Cod Project'), max_length=100, blank=True)
-    number_cost_center = models.CharField(_('Number Cost  Center'), max_length=100, blank=True)
-    dt_create_rc = models.DateField(_('Create RC Date Nimbi'), max_length=100, blank=True, null=True)
-    dt_send_nf_fiscal = models.DateField(_('Send Date Fiscal'), max_length=100, blank=True, null=True)
-
+    description = models.TextField(_('Description'), blank=True)              
     user_created = models.ForeignKey(User, related_name="tax_invoice_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
     user_updated = models.ForeignKey(User, related_name="tax_invoice_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
     created_at = models.DateTimeField(_('Created at'),auto_now_add=True)

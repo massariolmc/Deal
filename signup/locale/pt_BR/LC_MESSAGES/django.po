@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-20 09:55-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/default/_messages.html:7 templates/default/_messages_async.html:6
+#: templates/signup/_form_errors.html:6
+msgid "Alert!"
+msgstr "Alerta!"
+
+#: templates/default/_messages.html:14
+msgid "Successful action."
+msgstr "Ação completada com sucesso."
+
+#: templates/default/_messages.html:16
+msgid " Alert! Action not performed"
+msgstr "Alerta! Ação não completada."
+
+#: templates/default/_messages.html:18
+msgid "Atention!"
+msgstr "Atenção!"
+
+#: templates/default/_modal_checkbox.html:8
+#: templates/default/_modal_delete.html:8
+msgid "Alert"
+msgstr "Alerta"
+
+#: templates/default/_modal_checkbox.html:14
+msgid "Do you want to inactive?"
+msgstr "Você deseja inativar?"
+
+#: templates/default/_modal_checkbox.html:17
+#: templates/default/_modal_delete.html:17 templates/signup/_table.html:44
+#: templates/signup/detail.html:69
+msgid "No"
+msgstr "Não"
+
+#: templates/default/_modal_checkbox.html:21
+#: templates/default/_modal_delete.html:20 templates/signup/_table.html:42
+#: templates/signup/detail.html:67
+msgid "Yes"
+msgstr "Sim"
+
+#: templates/default/_modal_checkbox.html:38
+msgid "Warning"
+msgstr "Cuidado"
+
+#: templates/default/_modal_checkbox.html:43
+msgid "Choose some"
+msgstr "Escolha algum"
+
+#: templates/default/_modal_checkbox.html:46
+msgid "Close"
+msgstr "Fechar"
+
+#: templates/default/_modal_delete.html:14
+msgid "Are you sure?"
+msgstr "Você tem certeza?"
+
+#: templates/signup/_table.html:6
+msgid "Showing"
+msgstr "Mostrando"
+
+#: templates/signup/_table.html:14
+msgid "Choose"
+msgstr "Escolha"
+
+#: templates/signup/_table.html:18 templates/signup/detail.html:41
+msgid "CPF"
+msgstr "CPF"
+
+#: templates/signup/_table.html:19 templates/signup/detail.html:45
+msgid "Full Name"
+msgstr "Nome completo"
+
+#: templates/signup/_table.html:20 templates/signup/detail.html:53
+msgid "Email"
+msgstr "Email"
+
+#: templates/signup/_table.html:21
+msgid "Data de Criação"
+msgstr "Data de Criação"
+
+#: templates/signup/_table.html:22 templates/signup/detail.html:65
+msgid "Active"
+msgstr "Ativo"
+
+#: templates/signup/_table.html:23
+msgid "Options"
+msgstr "Opções"
+
+#: templates/signup/_table.html:48
+msgid "edit"
+msgstr "editar"
+
+#: templates/signup/_table.html:49
+msgid "detail"
+msgstr "detalhes"
+
+#: templates/signup/_table.html:50
+msgid "delete"
+msgstr "deletar"
+
+#: templates/signup/detail.html:49
+msgid "Username"
+msgstr "Usuário"
+
+#: templates/signup/detail.html:57
+msgid "Admin Access"
+msgstr "Acesso de Admin"
+
+#: templates/signup/detail.html:73
+msgid "Created At"
+msgstr "Criado em"
+
+#: templates/signup/detail.html:77
+msgid "Last Login"
+msgstr "Ultimo login"
+
+#: templates/signup/detail.html:78
+msgid "Login at: "
+msgstr "Login em: "
+
+#: templates/signup/detail.html:78
+msgid "Logout At: "
+msgstr "Logout em: "
+
+#: templates/signup/detail.html:81
+msgid "Created by"
+msgstr "Criado por"
+
+#: templates/signup/detail.html:85
+msgid "Updated by"
+msgstr "Atualizado por"
+
+#: templates/signup/list.html:34
+msgid "Inactive"
+msgstr "INativo"
+
+#: views.py:33
+msgid "Create User"
+msgstr "Criar Usuário"
+
+#: views.py:34 views.py:95
+msgid "Back"
+msgstr "Voltar"
+
+#: views.py:35 views.py:96
+msgid "Save"
+msgstr "Salvar"
+
+#: views.py:36 views.py:97
+msgid "Clear"
+msgstr "Limpar"
+
+#: views.py:86
+msgid "Registered Users"
+msgstr "Cadastrar Usuário"
+
+#: views.py:87
+msgid "Add"
+msgstr "Adicionar"
+
+#: views.py:94 views.py:113
+msgid "Edit"
+msgstr "Editar"
+
+#: views.py:112
+msgid "Detail Info"
+msgstr "Informações Detalhadas"
+
+#: views.py:114
+msgid "List All"
+msgstr "Listar todos"
+
+#: views.py:124 views.py:138
+msgid "Completed successful."
+msgstr "Completado com sucesso."
+
+#: views.py:127
+msgid "You cannot delete. This user has an existing related."
+msgstr "Você não pode deletar. Este usuário possui relacionamento com outras informações do sistema."
+
+#: views.py:130
+msgid ""
+"You cannot delete. This user has already accessed the system. You can "
+"inactivate it. "
+msgstr "VOcê não pode deltar. Este usuário possui acesso ao sistema. Você poderá inativá-lo."

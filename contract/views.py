@@ -3,10 +3,13 @@ from django.http import JsonResponse, HttpResponse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Contract, UploadContract, ContractCompany
-from .form import ContractForm,UploadContractForm, validation_files
+from .models import Contract, UploadContract, ContractCompany, CostCenter, NimbiContract
+from .form import ContractForm,UploadContractForm, validation_files, NimbiContractForm
 from company.models import Company
 from django.forms import modelformset_factory, inlineformset_factory
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 from account.models import User
 from django.db import IntegrityError
 from django.db.models import Q, Sum, Count, Prefetch
@@ -122,11 +125,60 @@ def contracts_list_inactives(request):
     return render(request,template_name,context)
 
 @login_required
+def cost_center_list(request):
+    template_name = 'contract/list_cost_centers.html'
+    cost_centers_find = CostCenter.objects.all()#.order_by('-name')
+    data = dict()      
+
+    def pagination(request,objects,lines=10):
+        page = request.GET.get('page', 1)
+        print("Valor de page: ",page)
+        paginator = Paginator(objects, int(lines))        
+        try:
+            objects = paginator.page(page)
+        except PageNotAnInteger:
+            objects = paginator.page(1)
+        except EmptyPage:
+            objects = paginator.page(paginator.num_pages)
+        
+        return objects
+
+    if request.is_ajax():
+        query = request.GET.get('q')
+        lines = request.GET.get('l')
+        obj_search = ""              
+        if query:
+            obj_search = CostCenter.objects.filter(
+                Q(cod__icontains=query) | Q(name__icontains=query) |
+                Q(branch__icontains=query) | Q(plant__icontains=query) | Q(created_at__icontains=query)
+            ).distinct() 
+        else:
+            print("Não existe") 
+            obj_search = CostCenter.objects.all()#.order_by('-first_name')            
+
+        objs = pagination(request,obj_search,int(lines))                           
+    
+        data['html_signup_list'] = render_to_string('contract/_table_cost_center.html', {'cost_centers': objs})       
+        return JsonResponse(data)
+            
+                 
+    lines = 10
+    cost_centers = pagination(request,cost_centers_find,int(lines))   
+    data = {
+        'cost_centers': cost_centers,
+        'title': _("List Cost Centers"),
+        'add': _("Add"),
+    }    
+    return render(request,template_name,data)
+
+@login_required
 def contract_detail(request, slug):    
     template_name = "contract/detail.html"
     contract = get_object_or_404(Contract,slug=slug)
     upload_contract = upload_contract_create(request,contract)
+    nimbi_contract = nimbi_contract_create(request,contract.slug)
     pdfs = UploadContract.objects.prefetch_related('contract').filter(contract=contract)
+    nimbi = NimbiContract.objects.prefetch_related('contract').filter(contract=contract)
     contract = Contract.objects.prefetch_related('members_contract').get(slug=slug)    
     companies = contract.members_contract.all()           
     context = {
@@ -136,9 +188,12 @@ def contract_detail(request, slug):
         'edit': _("Edit"),       
         'annotations': _("Annotations"),
         'attachments': _("Attachments"),
+        'nimbi_alias': _("Nimbi"),
         'list_all': _("List All"),
         'form': upload_contract,
+        'form_nimbi': nimbi_contract,
         'pdfs': pdfs,
+        'nimbi': nimbi,
     }
     return render(request, template_name, context)
 
@@ -217,6 +272,43 @@ def upload_delete(request, slug):
     if request.method == 'POST':        
        try:
            upload_contract.delete()
+           messages.success(request, _('Completed successful.'))
+           return redirect('contract:url_contract_detail', contract)
+       except IntegrityError:
+           messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
+           return redirect('contract:url_contract_detail', contract)
+
+#NIMBI CONTRACT
+@login_required
+def nimbi_contract_create(request, contract):                       
+    data = {}
+    if request.method == 'POST':
+        contract = get_object_or_404(Contract, slug=contract)            
+        form = NimbiContractForm(request.POST, request.FILES)                                                            
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.contract = contract                                                         
+            obj.user_created = request.user
+            obj.user_updated = request.user  
+            obj.save()         
+                
+            return redirect('contract:url_contract_detail', contract.slug)
+        else:
+            print("algo não está valido.")
+            messages.warning(request, _("Verify informations in the Nimbi fields. Maybe the dates are incorrect."))                
+            return redirect('contract:url_contract_detail', contract.slug)
+                           
+    else:
+        form = NimbiContractForm()
+        return form    
+
+@login_required
+def nimbi_contract_delete(request, slug):    
+    nimbi_contract = get_object_or_404(NimbiContract, slug=slug)   
+    contract =  nimbi_contract.contract.slug
+    if request.method == 'POST':        
+       try:
+           nimbi_contract.delete()
            messages.success(request, _('Completed successful.'))
            return redirect('contract:url_contract_detail', contract)
        except IntegrityError:

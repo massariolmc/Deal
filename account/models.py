@@ -66,7 +66,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name
     
     def email_user(self, subject, message, from_email=None):
-        send_mail(subject, message, from_email, [self.email])
+        send_mail(subject, message, from_email, [self.email]) 
+
+    def __str__(self):
+        return f"{self.get_full_name()} - {self.cpf}"
 
 
 def login_user(sender, request, user, **kwargs):

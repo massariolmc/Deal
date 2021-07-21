@@ -19,6 +19,10 @@ class Contract(models.Model):
         ('Ativo','Ativo'),
         ('Encerrado','Encerrado'),
     )
+    select_annual_budget = (
+        (_("Yes"),_("Yes")),
+        (_("No"),_("No"))
+    )
     name = models.CharField(_('Name'), max_length=100, unique=True, blank=False, null=False)    
     object = RichTextField(_('Object'), blank=False, null=False)
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
@@ -31,7 +35,8 @@ class Contract(models.Model):
     value_month = models.DecimalField(_('Value Month'), decimal_places=2, max_digits=20, blank=False)
     number_contract = models.CharField(_('Number Contract'), max_length=100, blank=True)    
     provider = models.ForeignKey(Provider, related_name="contract_provider_created_id", verbose_name=_("Provider"), blank=False, on_delete=models.PROTECT)
-    status = models.CharField(_('Status'), max_length=100, choices = select_status, default="Ativo",blank=False)    
+    status = models.CharField(_('Status'), max_length=100, choices = select_status, default="Ativo",blank=False)
+    annual_budget = models.CharField(_('Annual Budget'), max_length=100, choices = select_annual_budget, default=_("No"), blank=False)     
     dt_conclusion =  models.DateField(_('Date Conclusion'), max_length=100, blank=True, null=True)    
     value = models.DecimalField(_('Contract Value'), decimal_places=2, max_digits=20, blank=False)    
     description = models.TextField(_('Description'), blank=True)            
@@ -40,7 +45,7 @@ class Contract(models.Model):
     created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
     members_contract = models.ManyToManyField(Company, through='ContractCompany', blank=False, verbose_name=_("Contract Companies"))
-
+    
     class Meta:
         verbose_name = _("Contract")
         verbose_name_plural = _("Contracts")
@@ -103,3 +108,56 @@ class ContractCompany(models.Model):
     
     def __str__(self):
         return f"{self.contract}"
+
+class NimbiContract(models.Model):    
+    contract = models.ForeignKey(Contract, related_name="nimbi_contract", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
+    number_req_nimbi = models.CharField(_('Number Requisition Nimbi'), max_length=100, blank=True)
+    number_cod_nimbi = models.CharField(_('Number Cod Nimbi'), max_length=100, blank=True)
+    number_pc_nimbi = models.CharField(_('Number PC Nimbi'), max_length=100, blank=True)
+    number_cod_project = models.CharField(_('Number Cod Project'), max_length=100, blank=True)
+    number_cost_center = models.CharField(_('Number Cost  Center'), max_length=100, blank=True)
+    dt_create_rc = models.DateField(_('Create RC Date Nimbi'), max_length=100, blank=True, null=True)
+    dt_send_nf_fiscal = models.DateField(_('Send Date Fiscal'), max_length=100, blank=True, null=True)
+    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
+    description = models.TextField(_('Description'), blank=True)            
+    user_created = models.ForeignKey(User, related_name="nimbi_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
+    user_updated = models.ForeignKey(User, related_name="nimbi_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Nimbi")
+        verbose_name_plural = _("Nimbi")
+        ordering = ["number_req_nimbi"]   
+
+    def save(self, *args, **kwargs):                       
+        #Insere um valor para o Slug         
+        self.slug = unique_uuid(self.__class__)                     
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.number_req_nimbi}"
+
+class CostCenter(models.Model):
+    cod = models.CharField(_('Cod'), max_length=100, blank=False, null=False)    
+    name = models.CharField(_('Name'), max_length=100, blank=False, null=False)    
+    branch = models.CharField(_('Branch'), max_length=100, blank=False, null=False)    
+    plant = models.CharField(_('Plant'), max_length=100, blank=False, null=False)    
+    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
+    user_created = models.ForeignKey(User, related_name="cost_center_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
+    user_updated = models.ForeignKey(User, related_name="cost_center_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Cost Center")
+        verbose_name_plural = _("Costs Center")
+        ordering = ["cod"]   
+
+    def save(self, *args, **kwargs):                       
+        #Insere um valor para o Slug         
+        self.slug = unique_uuid(self.__class__)                     
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.cod} - {self.name}"

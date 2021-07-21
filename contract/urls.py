@@ -19,6 +19,13 @@ urlpatterns = [
     path('<int:contract>/upload_contract_create', views.upload_contract_create, name='url_upload_contract_create'),
     path('<slug:slug>/pdf/delete', views.upload_delete, name='url_upload_delete'),
 
+    #Nimbi
+    path('<slug:contract>/nimbi_create', views.nimbi_contract_create, name='url_nimbi_contract_create'),
+    path('<slug:slug>/nimbi/delete', views.nimbi_contract_delete, name='url_nimbi_contract_delete'),
+
+    #Cost Center
+    path('cost-centers', views.cost_center_list, name='url_cost_centers_list'),
+
     # URL PARA TRADUZIR O DATATABLES. USO GERAL
     path('contract/translate-js/', views.translate_datables_js, name='url_translate_datables_js'),
 

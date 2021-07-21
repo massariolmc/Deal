@@ -22,17 +22,19 @@
                 <ul id="nav">
                     <li><a href="#"><i class="icon_drive"></i> {% trans 'Registers'%}</a>
                         <ul class="dropdown home-2">
+                            <li><a href="{% url 'signup:url_signup_list' %}">- {% trans 'Users'%}</a></li>
                             <li><a href="{% url 'company:url_companies_list' %}">- {% trans 'Companies'%}</a></li>
                             <li><a href="{% url 'provider:url_providers_list' %}">- {% trans 'Providers'%}</a></li>
                             <li><a href="{% url 'service_type:url_service_types_list' %}">- {% trans 'Service Types'%}</a></li>
-                            <li><a href="{% url 'status:url_status_list' %}">- {% trans 'Status'%}</a></li>
+                            <!-- <li><a href="{% url 'status:url_status_list' %}">- {% trans 'Status'%}</a></li> -->
                         </ul>
                     </li>
                     <li><a href="#"><i class="icon_mail_alt"></i> {% trans 'Contracts'%}</a>
                         <ul class="dropdown home-2">
                             <li><a href="{% url 'contract:url_contracts_list' %}">- {% trans 'List Contracts'%}</a></li>
                             <li><a href="{% url 'contract:url_contract_create' %}">- {% trans 'Create Contracts'%}</a></li>
-                            <li><a href="{% url 'contract:url_contracts_list_inactives' %}">- {% trans 'Contracts Inactives'%}</a></li>                            
+                            <li><a href="{% url 'contract:url_contracts_list_inactives' %}">- {% trans 'Contracts Inactives'%}</a></li>
+                            <li><a href="{% url 'contract:url_cost_centers_list' %}">- {% trans 'Cost Centers'%}</a></li>                
                         </ul>
                     </li>                               
                     <li><a href="#"><i class="icon_piechart"></i> {% trans 'Tax invoices'%}</a>

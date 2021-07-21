@@ -18,11 +18,6 @@
     }
     on('input[name=value_forfeit]', 'keypress', somenteNumeros);
     on('input[name=value]', 'keypress', somenteNumeros);   
-    on('input[name=ref_month]', 'keypress', somenteNumeros);
-    on('input[name=number_req_nimbi]', 'keypress', somenteNumeros);
-    on('input[name=number_cod_nimbi]', 'keypress', somenteNumeros);    
-    on('input[name=number_pc_nimbi]', 'keypress', somenteNumeros);
-    on('input[name=number_cod_project]', 'keypress', somenteNumeros);
-    on('input[name=number_cost_center]', 'keypress', somenteNumeros);
+    on('input[name=ref_month]', 'keypress', somenteNumeros);    
     
   })(document,window)

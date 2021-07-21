@@ -1,0 +1,37 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+<!-- MODAL DELETE -->
+<div class="modal fade" id="modal-nimbi-contract" >
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{% trans "Fields Nimbi"%}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">    
+                {% include 'contract/_form_errors.html' %}               
+                <form method="post" enctype="multipart/form-data" action="{% url 'contract:url_nimbi_contract_create' contract.slug %}" >
+                    {% crispy form_nimbi %}
+    
+                    <div class="row mt-5">    
+                        <div class="col-sm-6">
+                            <span class="float-left">
+                                <button type="submit" class="btn btn-primary">{% trans "Save"%}</button>  	          
+                            </span>
+                        </div>
+                        
+                    </div>
+                </form>                                     
+            </div>            
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+

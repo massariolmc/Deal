@@ -12,7 +12,7 @@
 /media
 *.pyc
 /core/static/themeforest-ndVhIZu8-appwork-admin-template-ui-kit
-
+*.csv
 
 
 # Compiled source #

@@ -2,6 +2,11 @@
 {% load static %}
 {% load i18n %}
 
+{% block css %}
+  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.min.css'%}" rel="stylesheet">
+  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.structure.min.css'%}" rel="stylesheet">  
+  <link href="{% static 'contract/js/plugins-js/datepicker/css/jquery-ui.theme.min.css'%}" rel="stylesheet">    
+{% endblock css %}
 
 {% block content %}
 <div class="col-lg-12 mt-5">
@@ -26,19 +31,13 @@
                 {% else %}    <h3><strong>{{ contract.name }}</strong></h3>
                 {% endif %}
                 </div>
-                <div class="col-sm-4">                    
-                    <span class="float-right">
-                        <a href="#">
-                            <button type="button" data-toggle="modal" data-target="#modal-upload-contract" class="btn btn-warning">{{ attachments }}
-                            </button>
-                        </a>
-                    </span>
+                <div class="col-sm-4">                                        
                     <span class="mr-1 float-right">
                         <a href="{% url 'annotation:url_annotations_list' contract.slug %}">
                             <button type="button" class="btn btn-secondary">{{ annotations }}
                             </button>
                         </a>
-                    </span>
+                    </span>                    
                     <span class="mr-1 float-right">
                         <a href="{% url 'contract:url_contract_edit' contract.slug %}">
                             <button type="button" class="btn btn-success">{{ edit }}
@@ -75,12 +74,16 @@
                             <td>{{ contract.type }}</td>                       
                         </tr>
                         <tr>
+                            <th class="text-right">{% trans "Annual Budget" %}</th>                       
+                            <td>{{ contract.annual_budget }}</td>                       
+                        </tr>
+                        <tr>
                             <th class="text-right">{% trans "Total Contract Value" %}</th>
                             <td>{{ contract.value }}</td>
                         </tr> 
                         <tr>
                             <th class="text-right">{% trans "Date Start" %}</th>
-                            <td>{{ contract.dt_start}}</td>
+                            <td>{{ contract.dt_start|default_if_none:""}}</td>
                         </tr>
                         <tr>
                             <th class="text-right">{% trans "Date End" %}</th>
@@ -88,11 +91,11 @@
                         </tr>
                         <tr>
                             <th class="text-right">{% trans "Date Renovation" %}</th>
-                            <td>{{ contract.dt_renovation }}</td>
+                            <td>{{ contract.dt_renovation|default_if_none:"" }}</td>
                         </tr>                                                                    
                         <tr>
                             <th class="text-right">{% trans "Pay Day" %}</th>
-                            <td>{{ contract.pay_day }}</td>
+                            <td>{{ contract.pay_day|default_if_none:"" }}</td>
                         </tr>  
                         <tr>
                             <th class="text-right">{% trans "Number of Month" %}</th>
@@ -132,14 +135,44 @@
                         </tr>   
                                                             
                     </tbody>
-                </table>
-                {% include 'contract/_modal_upload_contract.html' %}
-                <div class="row">
-                    {% include 'contract/_table_uploads.html' %}
-                    {% include 'default/_modal_delete.html' %}
+                </table>                        
+            </div> 
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5><strong>{% trans 'Attachments'%}</strong></h5>
                 </div>
-                
-            </div>
+                  
+                <div class="col-sm-6">
+                    <span class="float-right">
+                      <a href="#">
+                          <button type="button" data-toggle="modal" data-target="#modal-upload-contract" class="btn btn-warning">{{ attachments }}
+                          </button>
+                      </a>
+                    </span>
+                </div> 
+                {% include 'contract/_table_uploads.html' %}
+                {% include 'contract/_modal_upload_contract.html' %}                   
+            </div>  
+
+            <br/>   
+            <div class="row">                
+                <div class="col-sm-6">
+                    <h5><strong>{% trans 'Nimbi'%}</strong></h5>
+                </div>                  
+                <div class="col-sm-6">
+                    <span class="mr-1 float-right">
+                        <a href="#">
+                            <button type="button" data-toggle="modal" data-target="#modal-nimbi-contract" class="btn btn-primary">{{ nimbi_alias }}
+                            </button>
+                        </a>
+                    </span>
+                </div>                
+                {% include "contract/_table_nimbi.html"%}                    
+                {% include 'contract/_modal_nimbi_contract.html' %} 
+            </div> 
+
+            {% include 'default/_modal_delete.html' %}
         </div>
     </div>
 </div>
@@ -147,9 +180,17 @@
 {% endblock content %}
 
 {% block js %}
+<script src="{% static 'contract/default/js/checkbox_delete_all.js'%}"></script>
+<script src="{% static 'contract/js/only_number_input.js'%}"></script>
+
 <script src="{% static 'contract/default/js/jquery.mask.min.js'%}"></script>
 <script src="{% static 'contract/default/js/jquery_mask.js'%}"></script>
 
-<script src="{% static 'company/default/js/checkbox_delete_all.js'%}"></script>
+
+<!-- Dateepicker js -->
+<script src="{% static 'contract/js/plugins-js/datepicker/js/jquery-ui.min.js'%}"></script>
+<script src="{% static 'contract/js/datepicker.js'%}"></script>
+
+
 
 {% endblock js %}

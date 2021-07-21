@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-17 16:18-0400\n"
+"POT-Creation-Date: 2021-07-21 11:28-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,49 +20,65 @@ msgstr ""
 
 #: templates/core/_header.html:28
 msgid "User"
-msgstr ""
+msgstr "Usuário"
+
+#: templates/core/_header.html:40
+msgid "Change Password"
+msgstr "Alterar senha"
+
+#: templates/core/_header.html:51
+msgid "Log Out"
+msgstr "Sair"
 
 #: templates/core/_navbar.html:23
 msgid "Registers"
 msgstr "Cadastros"
 
 #: templates/core/_navbar.html:25
+msgid "Users"
+msgstr "Usuários"
+
+#: templates/core/_navbar.html:26
 msgid "Companies"
 msgstr "Empresas"
 
-#: templates/core/_navbar.html:26
+#: templates/core/_navbar.html:27
 msgid "Providers"
 msgstr "Fornecedores"
 
-#: templates/core/_navbar.html:27
+#: templates/core/_navbar.html:28
 msgid "Service Types"
 msgstr "Tipos de Serviços"
 
-#: templates/core/_navbar.html:28
+#: templates/core/_navbar.html:29
 msgid "Status"
 msgstr "Status"
 
-#: templates/core/_navbar.html:31
+#: templates/core/_navbar.html:32
 msgid "Contracts"
 msgstr "Contratos"
 
-#: templates/core/_navbar.html:33
+#: templates/core/_navbar.html:34
 msgid "List Contracts"
 msgstr "Lista de Contratos"
 
-#: templates/core/_navbar.html:34
+#: templates/core/_navbar.html:35
 msgid "Create Contracts"
 msgstr "Criar Contratos"
 
-#: templates/core/_navbar.html:35
+#: templates/core/_navbar.html:36
 msgid "Contracts Inactives"
 msgstr "Contratos Inativos"
 
-#: templates/core/_navbar.html:38
+#: templates/core/_navbar.html:37
+msgid "Cost Centers"
+msgstr "Centros de Custo"
+
+#: templates/core/_navbar.html:40
 msgid "Tax invoices"
 msgstr "Notas Fiscais"
 
-#: templates/core/_navbar.html:40
+#: templates/core/_navbar.html:42
 msgid "List Providers"
 msgstr "Lançar Notas"
 

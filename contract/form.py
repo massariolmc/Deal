@@ -1,8 +1,8 @@
-from django.forms import ModelForm, TextInput, Textarea, NumberInput, DateInput, Select, SelectDateWidget, HiddenInput, DateTimeInput, EmailInput, FileInput, ClearableFileInput, CheckboxInput
+from django.forms import ModelForm, TextInput, Textarea, NumberInput, DateInput, RadioSelect, Select, SelectDateWidget, HiddenInput, DateTimeInput, EmailInput, FileInput, ClearableFileInput, CheckboxInput
 from django.forms import BaseModelFormSet, ModelChoiceField, MultipleChoiceField, SelectMultiple,CheckboxSelectMultiple
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Contract, UploadContract
+from .models import Contract, UploadContract, NimbiContract
 from company.models import Company
 from account.models import User
 from crispy_forms.helper import FormHelper
@@ -12,13 +12,14 @@ from django.utils.translation import ugettext_lazy as _
 from hurry.filesize import size, iec, si # converter GB,MB para template
 import magic # Mesma coisa que o file no linux, verificar o formato do arquivo
 import sys
+from datetime import datetime
 
 
 class ContractForm(ModelForm):   
 
     class Meta:        
         model = Contract
-        fields = ['name','object','type','dt_start','dt_end','dt_renovation', 'pay_day', 'number_months', 'value_month', 'number_contract', 'provider','status', 'dt_conclusion', 'value','description', 'members_contract']
+        fields = ['name','object','type','dt_start','dt_end','dt_renovation', 'pay_day', 'number_months', 'value_month', 'annual_budget' ,'number_contract', 'provider','status', 'dt_conclusion', 'value','description', 'members_contract']
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'object': Textarea(attrs={'class': 'form-control'}),
@@ -32,12 +33,11 @@ class ContractForm(ModelForm):
             'number_contract': TextInput(attrs={'class': 'form-control'}),
             'provider': Select(attrs={'class': 'form-control'}),
             'status': Select(attrs={'class': 'form-control'}),
+            'annual_budget': Select(attrs={'class': 'form-control'}),
             'dt_conclusion': DateInput(attrs={'class': 'form-control calendario'}),            
-            'value': TextInput(attrs={'class': 'form-control money'}),
-            #'company': Select(attrs={'class': 'form-control'}),
-            'description': Textarea(attrs={'class': 'form-control'}),                                   
-            #'members_contract': SelectMultiple(attrs={'class': 'form-control'}), 
-            'members_contract': CheckboxSelectMultiple(attrs={'class': 'form-control'}), 
+            'value': TextInput(attrs={'class': 'form-control money'}),            
+            'description': Textarea(attrs={'class': 'form-control'}),                                  
+            'members_contract': CheckboxSelectMultiple(attrs={'class': 'form-control'}),             
         }              
         
     #VALIDAÇÃO     
@@ -82,9 +82,10 @@ class ContractForm(ModelForm):
             ),
             Row(
                 Column('provider', css_class='form-group col-md-3 mb-0'),               
-                Column('type', css_class='form-group col-md-3 mb-0'),  
-                Column('value', css_class='form-group col-md-3 mb-0'),
-                Column('number_contract', css_class='form-group col-md-3 mb-0'),                                
+                Column('type', css_class='form-group col-md-2 mb-0'),  
+                Column('value', css_class='form-group col-md-2 mb-0'),
+                Column('number_contract', css_class='form-group col-md-3 mb-0'),
+                Column('annual_budget', css_class='form-group col-md-2 mb-0'),                                
                 css_class='form-row'
             ),        
             Row(               
@@ -108,7 +109,7 @@ class ContractForm(ModelForm):
             ),
             Row(
                 Column('members_contract', css_class='form-group col-md-6 mb-0'),   
-            ),          
+            ),        
             Row(               
                 Column('description', css_class='form-group col-md-12 mb-0'),                
                 css_class='form-row'
@@ -139,7 +140,7 @@ class UploadContractForm(ModelForm):
         model = UploadContract
         fields = ['pdf_contract']
         widgets = {           
-            'pdf_contract': ClearableFileInput(attrs={'multiple': True}),                        
+            'pdf_contract': ClearableFileInput(attrs={'multiple': True}),                     
         }              
       
 
@@ -154,7 +155,7 @@ class UploadContractForm(ModelForm):
                 css_class='form-row'
             ),
         )
-
+    
 ################### VALIDAÇÃO DO PDF DO CONTRACTA. NÃO FAZ PARTE DE NENHUM FORM. ELE É CHAMADO NA VIEW, NA PARTE DO UPLOAD CONTRACT ############################################
 def validation_files(pdf_contract):
         print("validação")                    
@@ -174,10 +175,36 @@ def validation_files(pdf_contract):
         return False
 ################### FIM VALIDATION UPLOAD ###########################################
 
-# class ContractCompanyForm(ModelForm):
-#     class Meta:        
-#         model = UploadContract
-#         fields = ['pdf_contract']
-#         widgets = {           
-#             'pdf_contract': ClearableFileInput(attrs={'multiple': True}),                        
-#         }
+################# CAMPOS DO NIMBI ########################################
+class NimbiContractForm(ModelForm):       
+    
+    class Meta:        
+        model = NimbiContract
+        fields = ['number_req_nimbi', 'number_cod_nimbi', 'number_pc_nimbi', 'number_cod_project', 'number_cost_center', 'dt_create_rc', 'dt_send_nf_fiscal','description']
+        widgets = {                       
+            # Fields Nimbi
+            'number_req_nimbi': TextInput(attrs={'class': 'form-control'}),
+            'number_cod_nimbi': TextInput(attrs={'class': 'form-control'}),
+            'number_pc_nimbi': TextInput(attrs={'class': 'form-control'}),
+            'number_cod_project': TextInput(attrs={'class': 'form-control'}),
+            'number_cost_center': TextInput(attrs={'class': 'form-control'}),   
+            'dt_create_rc': TextInput(attrs={'class': 'form-control calendario'}),
+            'dt_send_nf_fiscal': TextInput(attrs={'class': 'form-control calendario'}),  
+            'description': TextInput(attrs={'class': 'form-control'}),                       
+        }          
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)             
+        self.helper = FormHelper()
+        self.enctype = "multipart/form-data"
+        self.helper.form_tag = False            
+        self.helper.layout = Layout(
+            'number_req_nimbi',
+            'number_cod_nimbi',
+            'number_pc_nimbi',
+            'number_cod_project',
+            'number_cost_center',
+            'dt_create_rc',      
+            'dt_send_nf_fiscal',  
+            'description',                                                             
+        )

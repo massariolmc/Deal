@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-12 10:58-0400\n"
+"POT-Creation-Date: 2021-07-21 11:21-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,15 +24,15 @@ msgstr ""
 msgid "Files"
 msgstr "Arquivo"
 
-#: form.py:66
+#: form.py:59
 msgid "This format not allowed."
 msgstr "Este formato não é permitido."
 
-#: form.py:80
+#: form.py:73
 msgid "The field Forfeit is checked like No."
 msgstr "O campo Status está marcado como Não"
 
-#: form.py:81
+#: form.py:74
 msgid "The field Forfeit is checked like Yes."
 msgstr "O campo Status está marcado como Sim"
 
@@ -54,7 +54,7 @@ msgstr "Contrato"
 msgid "Company"
 msgstr "Empresa"
 
-#: models.py:24 models.py:68
+#: models.py:24 models.py:57
 msgid "Slug"
 msgstr "Slug"
 
@@ -106,63 +106,35 @@ msgstr "Valor da Multa"
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:39 templates/tax_invoice/_table_nimbi.html:8
-msgid "Number Requisition Nimbi"
-msgstr "Número da Req do Nimbi"
-
-#: models.py:40 templates/tax_invoice/_table_nimbi.html:9
-msgid "Number Cod Nimbi"
-msgstr "Número Cod Nimbi"
-
-#: models.py:41 templates/tax_invoice/_table_nimbi.html:10
-msgid "Number PC Nimbi"
-msgstr "Número PC Nimbi"
-
-#: models.py:42 templates/tax_invoice/_table_nimbi.html:11
-msgid "Number Cod Project"
-msgstr "Número Cod Projeto"
-
-#: models.py:43 templates/tax_invoice/_table_nimbi.html:12
-msgid "Number Cost  Center"
-msgstr "Número Centro de Custo"
-
-#: models.py:44 templates/tax_invoice/_table_nimbi.html:13
-msgid "Create RC Date Nimbi"
-msgstr "Data de criação RC Nimbi"
-
-#: models.py:45 templates/tax_invoice/_table_nimbi.html:14
-msgid "Send Date Fiscal"
-msgstr "Data de envio para o Dep. Fiscal"
-
-#: models.py:47 models.py:69 templates/tax_invoice/detail.html:97
+#: models.py:36 models.py:58 templates/tax_invoice/detail.html:97
 msgid "Created by"
 msgstr "Criado por"
 
-#: models.py:48 models.py:70 templates/tax_invoice/detail.html:101
+#: models.py:37 models.py:59 templates/tax_invoice/detail.html:101
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: models.py:49 models.py:71
+#: models.py:38 models.py:60
 msgid "Created at"
 msgstr "Criado em"
 
-#: models.py:50 models.py:72
+#: models.py:39 models.py:61
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: models.py:53 models.py:66 templates/tax_invoice/detail.html:87
+#: models.py:42 models.py:55 templates/tax_invoice/detail.html:87
 msgid "Tax Invoice"
 msgstr "Nota Fiscal"
 
-#: models.py:54
+#: models.py:43
 msgid "Tax Invoices"
 msgstr "Notas Fiscais"
 
-#: models.py:67
+#: models.py:56
 msgid "File"
 msgstr "Arquivo"
 
-#: models.py:75 models.py:76
+#: models.py:64 models.py:65
 #, fuzzy
 #| msgid "Tax Invoice"
 msgid "Upload Tax Invoice"
@@ -277,11 +249,11 @@ msgstr "notas"
 
 #: templates/tax_invoice/_table_uploads.html:6
 msgid "Attachments"
-msgstr ""
+msgstr "Anexos"
 
 #: templates/tax_invoice/_table_uploads.html:10
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: templates/tax_invoice/_table_uploads.html:11
 #, fuzzy
@@ -404,6 +376,27 @@ msgstr "Você não pode deletar. Esta nota tem contrato existente."
 #| msgid "You cannot delete. This tax_invoice has an existing department."
 msgid "You cannot delete. This contract has an existing tax invoices."
 msgstr "Você não pode deletar. Esta nota tem contrato existente."
+
+#~ msgid "Number Requisition Nimbi"
+#~ msgstr "Número da Req do Nimbi"
+
+#~ msgid "Number Cod Nimbi"
+#~ msgstr "Número Cod Nimbi"
+
+#~ msgid "Number PC Nimbi"
+#~ msgstr "Número PC Nimbi"
+
+#~ msgid "Number Cod Project"
+#~ msgstr "Número Cod Projeto"
+
+#~ msgid "Number Cost  Center"
+#~ msgstr "Número Centro de Custo"
+
+#~ msgid "Create RC Date Nimbi"
+#~ msgstr "Data de criação RC Nimbi"
+
+#~ msgid "Send Date Fiscal"
+#~ msgstr "Data de envio para o Dep. Fiscal"
 
 #~ msgid "Choose Provider"
 #~ msgstr "Escolha o fornecedor"

@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+
+<div class="col-lg-12 mt-5">
+    {% include 'default/_messages.html' %}
+      <!-- Ibox -->
+    <div class="ibox bg-boxshadow"> 
+      <div class="ibox-title mb-30">
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+          </div>
+          <div class="col-sm-6">
+            
+          </div>
+        </div>
+        {% include 'contract/_search.html' %}              
+      </div>                            
+
+
+      <!-- Ibox Content -->
+      <div class="ibox-content">
+        <div class="table-responsive" id="table_list" data-url="{% url 'contract:url_cost_centers_list' %}">
+          {% include 'contract/_table_cost_center.html' %}                    
+        </div>
+        
+      </div>
+    </div><!--ibox bg-boxshadow-->
+  </div><!--col-lg-12 -->
+
+{% endblock content %}
+
+{% block js %}   
+<script src="{% static 'contract/default/js/checkbox_delete_all.js'%}"></script> 
+<script type="text/javascript" src="{% static 'contract/js/js_dev/data_table_dev.js' %}"></script>    
+{% endblock js %}

@@ -18,7 +18,7 @@ class TaxInvoiceForm(ModelForm):
     pdf_invoice = forms.FileField(label=_("Files"), required=True, widget = forms.FileInput(attrs={'multiple': True}))
     class Meta:        
         model = TaxInvoice
-        fields = ['contract','company','dt_issue','number_invoice','ref_month','value','pay_day', 'telecom_data', 'time_start', 'time_end', 'forfeit_status', 'value_forfeit','description', 'number_req_nimbi', 'number_cod_nimbi', 'number_pc_nimbi', 'number_cod_project', 'number_cost_center', 'dt_create_rc', 'dt_send_nf_fiscal']
+        fields = ['contract','company','dt_issue','number_invoice','ref_month','value','pay_day', 'telecom_data', 'time_start', 'time_end', 'forfeit_status', 'value_forfeit','description']
         widgets = {
             'contract': Select(attrs={'class': 'form-control'}),
             'company': Select(attrs={'class': 'form-control'}),
@@ -32,15 +32,8 @@ class TaxInvoiceForm(ModelForm):
             'time_end': TextInput(attrs={'class': 'form-control calendario'}),
             'forfeit_status': Select(attrs={'class': 'form-control'}),
             'value_forfeit': TextInput(attrs={'class': 'form-control money'}),
-            'description': Textarea(attrs={'class': 'form-control'}),             
-            # Fields Nimbi
-            'number_req_nimbi': TextInput(attrs={'class': 'form-control'}),
-            'number_cod_nimbi': TextInput(attrs={'class': 'form-control'}),
-            'number_pc_nimbi': TextInput(attrs={'class': 'form-control'}),
-            'number_cod_project': TextInput(attrs={'class': 'form-control'}),
-            'number_cost_center': TextInput(attrs={'class': 'form-control'}),   
-            'dt_create_rc': TextInput(attrs={'class': 'form-control calendario'}),
-            'dt_send_nf_fiscal': TextInput(attrs={'class': 'form-control calendario'}),                                                   
+            'description': Textarea(attrs={'class': 'form-control'}),          
+                                                               
         }              
         
     #VALIDAÇÃO 
@@ -123,17 +116,7 @@ class TaxInvoiceForm(ModelForm):
                 Column('value_forfeit', css_class='form-group col-md-2 mb-0'), 
                 Column('pdf_invoice', css_class='form-group col-md-4 mb-0'),         
                 css_class='form-row'
-            ),  
-             Row(                               
-                Column('number_req_nimbi', css_class='form-group col-md-2 mb-0'),
-                Column('number_cod_nimbi', css_class='form-group col-md-1 mb-0'),   
-                Column('number_pc_nimbi', css_class='form-group col-md-1 mb-0'),  
-                Column('number_cod_project', css_class='form-group col-md-2 mb-0'),           
-                Column('number_cost_center', css_class='form-group col-md-2 mb-0'),             
-                Column('dt_create_rc', css_class='form-group col-md-2 mb-0'),             
-                Column('dt_send_nf_fiscal', css_class='form-group col-md-2 mb-0'),             
-                css_class='form-row'
-            ),          
+            ),                        
             Row(
                 Column('telecom_data', css_class='form-group col-md-3 mb-0'),                               
                 css_class='form-row'
