@@ -13,7 +13,8 @@ class CostCenterClass:
     def inserir():        
         aux = []
         aux2 = []
-        arq = open('/home/massariol/Documentos/HD_EXT/APPS/Apps_Python/DJANGO/VetorialContratos/cost_center.csv','r')
+        #arq = open('/home/massariol/Documentos/HD_EXT/APPS/Apps_Python/DJANGO/VetorialContratos/cost_center.csv','r')
+        arq = open('/home/mlx/Projects/Contracts/cost_center.csv','r')
         for read in arq.readlines():            
             aux = read.strip("\n").split("\t")             
             if aux:# Se a lista for verdadeira, ou seja, tenha valores na lista           
