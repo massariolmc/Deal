@@ -1,0 +1,33 @@
+{% load static %}
+{% load i18n %}
+
+
+<table data-js="dataTables" class="table table-striped table-bordered table-hover" data-lang="{% url 'contract:url_translate_datables_js' %}">    
+  <thead>
+    <tr class="text-sm-center">                
+      <th>{% trans "Provider" %}</th>                     
+      <th>{% trans "Name" %}</th>
+      <th>{% trans "Pay Day" %}</th> 
+      <th>{% trans "Status" %}</th>                                                   
+    </tr>
+  </thead>                  
+  <tbody>
+    {% for contract in contracts %}
+    <tr class="text-sm-center">       
+      <td>{{ contract.provider }}</td>                                
+      <td>{{ contract.name }}</td>                                                                       
+      <td>{{ contract.pay_day }}</td>
+      {% if contract.marc >= 0 %}                                                                 
+        <td>          
+          {{ contract.left }} {% trans 'days left'%}
+        </td>
+     {% else %}
+        <td>
+          <span class="label label-danger">{% trans 'overdue'%}</span>
+          {{ contract.left }} {% trans 'days ago'%}
+        </td>
+     {% endif %}
+    </tr>                 
+    {% endfor %}   
+  </tbody>                 
+</table>                

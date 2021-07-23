@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block css %}  
+  <!-- DATA TABLES -->
+  <link rel="stylesheet" href="{% static 'contract/css/plugins/data-table-css/datatables.min.css' %}">    
+{% endblock css %}
+
+{% block content %}
+
+<div class="col-lg-12 mt-5">
+    {% include 'default/_messages.html' %}
+      <!-- Ibox -->
+    <div class="ibox bg-boxshadow"> 
+      <div class="ibox-title mb-30">
+        <div class="row">
+          <div class="col-sm-6">
+            <h6 class="m-0 font-weight-bold text-primary">{{ title }}</h6>
+          </div>
+          <div class="col-sm-6">
+            
+          </div>
+        </div>
+        <br/>  
+        {% trans "Choose Month" %}  
+          <form method="post" enctype="multipart/form-data" action="{% url 'contract:url_contract_invoice_date' %}" > 
+            {% csrf_token %}
+            <div class="row "> 
+              <div class="col-sm-1">         
+                <div style="width: 150px;">
+                    <select class="form-control" name="sel">                                            
+                        <option value='01/{% now "Y"  %}'>01/{% now "Y"  %}</option>
+                        <option value='02/{% now "Y"  %}'>02/{% now "Y"  %}</option>
+                        <option value='03/{% now "Y"  %}'>03/{% now "Y"  %}</option>
+                        <option value='04/{% now "Y"  %}'>04/{% now "Y"  %}</option>
+                        <option value='05/{% now "Y"  %}'>05/{% now "Y"  %}</option>
+                        <option value='06/{% now "Y"  %}'>06/{% now "Y"  %}</option>
+                        <option value='07/{% now "Y"  %}'>07/{% now "Y"  %}</option>
+                        <option value='08/{% now "Y"  %}'>08/{% now "Y"  %}</option>
+                        <option value='09/{% now "Y"  %}'>09/{% now "Y"  %}</option>
+                        <option value='10/{% now "Y"  %}'>10/{% now "Y"  %}</option>
+                        <option value='11/{% now "Y"  %}'>11/{% now "Y"  %}</option>                      
+                        <option value='12/{% now "Y"  %}'>12/{% now "Y"  %}</option>                      
+                    </select>                                               
+                </div>
+              </div>
+              <div class="col-sm-2">         
+                <button type="submit" class="btn btn-primary">{% trans "Go"%}</button>
+                {{ date }} 
+              </div>              
+            </div>              
+          </form>                      
+      </div>                                                                    
+                               
+
+
+      <!-- Ibox Content -->
+      <div class="ibox-content">        
+        <div class="table-responsive" id="table_list" data-url="{% url 'contract:url_contract_invoice_date' %}">
+          {% include 'contract/_table_contract_invoice_date.html' %}                    
+        </div>
+        
+      </div>
+    </div><!--ibox bg-boxshadow-->
+  </div><!--col-lg-12 -->
+
+{% endblock content %}
+
+{% block js %}
+<!-- Data Table js -->
+<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.bootstrap.min.js'%}"></script>
+<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.min.js'%}"></script>
+<script src="{% static 'contract/default/js/dataTables_default.js'%}"></script>
+{% endblock js %}

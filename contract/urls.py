@@ -14,7 +14,8 @@ urlpatterns = [
     path('<slug:slug>/edit', views.contract_edit, name='url_contract_edit'),
     path('<slug:slug>/delete', views.contract_delete, name='url_contract_delete'),
     path('delete_all/', views.contract_delete_all, name='url_contract_delete_all'),
-
+    path('contract-due-date/', views.contract_due_date, name='url_contract_due_date'),
+    path('contract-invoice-date/', views.contract_invoice_date, name='url_contract_invoice_date'),
     #Upload Contract
     path('<int:contract>/upload_contract_create', views.upload_contract_create, name='url_upload_contract_create'),
     path('<slug:slug>/pdf/delete', views.upload_delete, name='url_upload_delete'),

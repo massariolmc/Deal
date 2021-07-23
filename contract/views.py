@@ -17,6 +17,7 @@ from .slug_file import unique_uuid
 import os
 import sys
 import json
+from datetime import date, datetime, timedelta
 
 ####### CONTRACT  ################
 
@@ -229,6 +230,101 @@ def contract_delete_all(request):
     
     return redirect('contract:url_contracts_list')
    
+@login_required
+def contract_invoice_date(request):# Controla Data de vencimento do boleto ou fatura
+    template_name = 'contract/list_contract_invoice_date.html'
+    contracts = Contract.objects.filter(status='Ativo').order_by("-pay_day")    
+    data = []  
+    def cal_time(month,year,contracts): 
+        today = date.today()  
+        marc = 0
+        data = []    
+        fields = {}
+        for i in contracts:    
+            print("i", i.pay_day)
+            if i.pay_day:        
+                date_contract = date(int(year),int(month),int(i.pay_day))
+                if date_contract > today:
+                    r_days = date_contract - today
+                    marc = 0
+                elif date_contract <= today:
+                    r_days = today - date_contract
+                    marc = -1                               
+                fields = {
+                    'id': i.id,
+                    'name': i.name,
+                    'provider': i.provider,
+                    'pay_day': i.pay_day,
+                    'marc': marc,
+                    'left': r_days.days
+                }
+                data.append(fields)   
+        return data
+
+    if request.method == "POST":        
+        month,year = request.POST["sel"].split("/")        
+        data = cal_time(month,year,contracts)
+         
+    else:
+        month = date.today().month
+        year = date.today().year
+        data = cal_time(month,year,contracts)
+
+    context = {        
+        'contracts': data,
+        'title': _("Invoice Dates"),
+        'date': f"Mês da pesquisa: {month}/{year}",
+        'back': _("Back"),    
+    }  
+    return render(request,template_name,context)
+
+@login_required
+def contract_due_date(request):# Controla as datas de renovação do contrato
+    template_name = 'contract/list_contract_due_date.html'
+    contracts = Contract.objects.filter(status='Ativo').order_by("dt_renovation")    
+    data = []  
+    def cal_time(month,year,contracts): 
+        today = date.today()  
+        marc = 0
+        data = []    
+        fields = {}
+        for i in contracts:    
+            print("i", i.dt_renovation)
+            if i.dt_renovation:        
+                date_contract = i.dt_renovation
+                if date_contract > today:
+                    r_days = date_contract - today
+                    marc = 0
+                elif date_contract <= today:
+                    r_days = today - date_contract
+                    marc = -1                               
+                fields = {
+                    'id': i.id,
+                    'name': i.name,
+                    'provider': i.provider,
+                    'dt_renovation': i.dt_renovation,
+                    'marc': marc,
+                    'left': r_days.days
+                }
+                data.append(fields)   
+        return data
+
+    if request.method == "POST":        
+        month,year = request.POST["sel"].split("/")        
+        data = cal_time(month,year,contracts)
+         
+    else:
+        month = date.today().month
+        year = date.today().year
+        data = cal_time(month,year,contracts)
+
+    context = {        
+        'contracts': data,
+        'title': _("Due Date"),
+        'date': f"Mês da pesquisa: {month}/{year}",
+        'back': _("Back"),    
+    }  
+    return render(request,template_name,context)
 ########### FIM CONTRACT ############################
 
 ########### CONTRACT WITH UPLOAD CONTACT ###########
