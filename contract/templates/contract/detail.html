@@ -12,169 +12,100 @@
 <div class="col-lg-12 mt-5">
     {% include 'default/_messages.html' %}
     {% include 'contract/_form_errors.html' %}  
-    <div class="ibox bg-boxshadow"> 
-        <div class="ibox-title mb-30">
-            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
-        </div>
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-sm-4">
-                    <a href="{% url 'contract:url_contracts_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+    
+            
+            
+        <div class="col-sm-12">
+            <div class="product--item-arae bg-boxshadow">
+                <div class="ibox-title mb-30">
+                    <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
                 </div>
-                <div class="col-sm-4">      
-                {% if contract.image %}
-                 <!-- Thumb Title -->
-                 <div class="contact-thumb-title">
-                    <img src="{{ contract.image.url }}" alt="" style="width:100px">                    
-                </div>                
-                
-                {% else %}    <h3><strong>{{ contract.name }}</strong></h3>
-                {% endif %}
+                <!-- Media -->
+                <div class="media align-items-center py-3 mb-4">
+                    {% if contract.image %}
+                    <!-- Thumb Title -->
+                        <div class="contact-thumb-title">
+                        <img src="{{ contract.image.url }}" alt="" style="width:100px">                    
+                        </div>
+                    {% else %}    
+                        <img src="#" alt="" style="width:100px">                           
+                    {% endif %}
+                    <!-- Media Body -->
+                    <div class="media-body ml-4">
+                        <h4 class="mb-15">{{ contract.name }}</h4>                                                                                
+                        <a href="{% url 'contract:url_contract_edit' contract.slug %}"><button type="button" class="btn btn-success btn-sm mb-15">{{ edit }}</button></a>
+                        <a href="#"><button type="button" data-toggle="modal" data-target="#modal-upload-contract" class="btn btn-warning btn-sm mb-15">{{ attachments }}</button></a>
+                        <a href="#"><button type="button" data-toggle="modal" data-target="#modal-nimbi-contract" class="btn btn-primary btn-sm mb-15">{{ nimbi_alias }}</button></a>
+                        <a href="#"><button type="button" data-toggle="modal" data-target="#modal-contact-provider" class="btn btn-default btn-sm mb-15">{{ contact_alias }}</button></a>
+                        <!-- <a href="{% url 'annotation:url_annotations_list' contract.slug %}"><button type="button" class="btn btn-secondary btn-sm mb-15">{{ annotations }}</button></a> -->
+                        {% if contract.status == 'Ativo' %}
+                            <a href="{% url 'contract:url_contracts_list'%}" class="btn btn-info btn-sm mb-15">{{ list_contracts_actives }}</a>
+                        {% else %}
+                            <a href="{% url 'contract:url_contracts_list_inactives'%}" class="btn btn-info btn-sm mb-15">{{ list_contracts_inactives }}</a>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col-sm-4">                                        
-                    <span class="mr-1 float-right">
-                        <a href="{% url 'annotation:url_annotations_list' contract.slug %}">
-                            <button type="button" class="btn btn-secondary">{{ annotations }}
-                            </button>
-                        </a>
-                    </span>                    
-                    <span class="mr-1 float-right">
-                        <a href="{% url 'contract:url_contract_edit' contract.slug %}">
-                            <button type="button" class="btn btn-success">{{ edit }}
-                            </button>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            </br>
-            <div class="col-sm-12">
-                <table class="table table-user-information">
-                    <tbody>
-                        <tr>
-                            <th class="text-right">{% trans "Name" %}</th>
-                            <td>{{ contract.name }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right"></th>
-                            <td>{{ contract.object|safe }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Provider" %}</th>
-                            <td>{{ contract.provider }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Company" %}</th>
-                            <td > {% for cc in companies %}
-                                    {{ cc.name }} - <span class="cnpj">{{ cc.cnpj }}</span> <br/>
-                                    {% endfor %}
-                            </td>
-                        </tr> 
-                        <tr>
-                            <th class="text-right">{% trans "Type" %}</th>                       
-                            <td>{{ contract.type }}</td>                       
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Annual Budget" %}</th>                       
-                            <td>{{ contract.annual_budget }}</td>                       
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Total Contract Value" %}</th>
-                            <td>{{ contract.value }}</td>
-                        </tr> 
-                        <tr>
-                            <th class="text-right">{% trans "Date Start" %}</th>
-                            <td>{{ contract.dt_start|default_if_none:""}}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Date End" %}</th>
-                            <td>{{ contract.dt_end|default_if_none:"" }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Date Renovation" %}</th>
-                            <td>{{ contract.dt_renovation|default_if_none:"" }}</td>
-                        </tr>                                                                    
-                        <tr>
-                            <th class="text-right">{% trans "Pay Day" %}</th>
-                            <td>{{ contract.pay_day|default_if_none:"" }}</td>
-                        </tr>  
-                        <tr>
-                            <th class="text-right">{% trans "Number of Month" %}</th>
-                            <td>{{ contract.number_months }}</td>
-                        </tr>  
-                        <tr>
-                            <th class="text-right">{% trans "Value Month" %}</th>
-                            <td>{{ contract.value_month }}</td>
-                        </tr> 
-                        <tr>
-                            <th class="text-right">{% trans "Number Contract" %}</th>
-                            <td>{{ contract.number_contract }}</td>
-                        </tr>  
-                        <tr>
-                            <th class="text-right">{% trans "Status" %}</th>
-                            <td>{{ contract.status }}</td>
-                        </tr>                         
-                        <tr>
-                            <th class="text-right">{% trans "Date Conclusion" %}</th>
-                            {% ifequal contract.status 'Encerrado' %}
-                            <td>{{ contract.dt_conclusion|default_if_none:"" }}</td>
-                            {% else %}
-                            <td>Contrato Ativo</td>
-                            {% endifequal %}
-                        </tr>                                             
-                        <tr>
-                            <th class="text-right">{% trans "Description" %}</th>
-                            <td>{{ contract.description|safe }}</td>
-                        </tr> 
-                        <tr>
-                            <th class="text-right">{% trans "Created by" %}:</th>
-                            <td>{{ contract.user_created.get_full_name }} - {{ contract.created_at }}</td>
-                        </tr>                    
-                        <tr>
-                            <th class="text-right">{% trans "Updated by" %}</th>
-                            <td>{{ contract.user_updated.get_full_name }} - {{ contract.updated_at }}</td>
-                        </tr>   
-                                                            
-                    </tbody>
-                </table>                        
-            </div> 
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <h5><strong>{% trans 'Attachments'%}</strong></h5>
-                </div>
-                  
-                <div class="col-sm-6">
-                    <span class="float-right">
-                      <a href="#">
-                          <button type="button" data-toggle="modal" data-target="#modal-upload-contract" class="btn btn-warning">{{ attachments }}
-                          </button>
-                      </a>
-                    </span>
+                <!-- Nav Tabs -->
+                <div class="nav-tabs-top">
+                    <ul class="nav nav-tabs">                        
+                        <!-- Nav Item -->
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#item-description">{% trans "Details" %}</a>
+                        </li>
+                        <!-- Nav Item -->
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#item-discounts">{% trans "Attachments" %}</a>
+                        </li>
+                        <!-- Nav Item -->
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#item-images">{% trans "Nimbi" %}</a>
+                        </li>
+                        <!-- Nav Item -->
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#item-contacts">{% trans "Contacts" %}</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content">                       
+
+                        <!-- Item Description -->
+                        <div class="tab-pane fade show active" id="item-description">
+                            {% include 'contract/_table_details.html' %}
+                        </div>
+
+                        <!-- Item Discounts -->
+                        <div class="tab-pane fade" id="item-discounts">
+                            {% include 'contract/_table_uploads.html' %}
+                            
+                        </div>
+                        <!-- / Discounts -->
+
+                        <!-- Images -->
+                        <div class="tab-pane fade" id="item-images">
+                            {% include "contract/_table_nimbi.html"%}                    
+                            
+                        </div>
+                        <!-- / Images -->
+
+                        <!-- Contacts -->
+                        <div class="tab-pane fade" id="item-contacts">
+                            {% include "contract/_table_contact.html"%}                    
+                            
+                        </div>
+                        <!-- / Contacts -->
+
+                    </div>
                 </div> 
-                {% include 'contract/_table_uploads.html' %}
-                {% include 'contract/_modal_upload_contract.html' %}                   
-            </div>  
 
-            <br/>   
-            <div class="row">                
-                <div class="col-sm-6">
-                    <h5><strong>{% trans 'Nimbi'%}</strong></h5>
-                </div>                  
-                <div class="col-sm-6">
-                    <span class="mr-1 float-right">
-                        <a href="#">
-                            <button type="button" data-toggle="modal" data-target="#modal-nimbi-contract" class="btn btn-primary">{{ nimbi_alias }}
-                            </button>
-                        </a>
-                    </span>
-                </div>                
-                {% include "contract/_table_nimbi.html"%}                    
+                {% include 'contract/_modal_upload_contract.html' %}
                 {% include 'contract/_modal_nimbi_contract.html' %} 
-            </div> 
-
-            {% include 'default/_modal_delete.html' %}
+                {% include 'default/_modal_delete.html' %}
+                {% include 'contract/_modal_contact_provider.html' %}
+            </div>
         </div>
-    </div>
+    
 </div>
 
 {% endblock content %}
@@ -190,7 +121,5 @@
 <!-- Dateepicker js -->
 <script src="{% static 'contract/js/plugins-js/datepicker/js/jquery-ui.min.js'%}"></script>
 <script src="{% static 'contract/js/datepicker.js'%}"></script>
-
-
 
 {% endblock js %}

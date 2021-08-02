@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Contract, UploadContract, ContractCompany, CostCenter, NimbiContract
 from .form import ContractForm,UploadContractForm, validation_files, NimbiContractForm
 from company.models import Company
+from contact_provider.models import ContactProvider
+from contact_provider.form import ContactProviderForm
 from django.forms import modelformset_factory, inlineformset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
@@ -107,7 +109,7 @@ def contracts_list(request):
     contracts = Contract.objects.prefetch_related('members_contract').filter(status='Ativo')   
     context = {
         'contracts': contracts,
-        'title': _("Registered Contracts"),
+        'title': _("Actives Contracts"),
         'add': _("Add"),
         'back': _("Back"),    
     }
@@ -178,8 +180,10 @@ def contract_detail(request, slug):
     contract = get_object_or_404(Contract,slug=slug)
     upload_contract = upload_contract_create(request,contract)
     nimbi_contract = nimbi_contract_create(request,contract.slug)
+    form_contact = contact_provider_create(request,contract.slug)
     pdfs = UploadContract.objects.prefetch_related('contract').filter(contract=contract)
     nimbi = NimbiContract.objects.prefetch_related('contract').filter(contract=contract)
+    contacts = ContactProvider.objects.prefetch_related('contract').filter(contract=contract)    
     contract = Contract.objects.prefetch_related('members_contract').get(slug=slug)    
     companies = contract.members_contract.all()           
     context = {
@@ -190,11 +194,15 @@ def contract_detail(request, slug):
         'annotations': _("Annotations"),
         'attachments': _("Attachments"),
         'nimbi_alias': _("Nimbi"),
-        'list_all': _("List All"),
+        'contact_alias': _("Contacts"),
+        'list_contracts_inactives': _("Inactives Contracts"),
+        'list_contracts_actives': _("Actives Contracts"),
         'form': upload_contract,
         'form_nimbi': nimbi_contract,
+        'form_contact': form_contact,
         'pdfs': pdfs,
         'nimbi': nimbi,
+        'contacts': contacts,
     }
     return render(request, template_name, context)
 
@@ -410,6 +418,43 @@ def nimbi_contract_delete(request, slug):
        except IntegrityError:
            messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
            return redirect('contract:url_contract_detail', contract)
+
+########### PROVIDER WITH CONTACT_PROVIDER ###########
+@login_required
+def contact_provider_create(request, contract):     
+    data = {}
+    contract = get_object_or_404(Contract, slug=contract)    
+    if request.method == 'POST':
+        form = ContactProviderForm(request.POST)        
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.contract = contract                                                         
+            obj.user_created = request.user
+            obj.user_updated = request.user  
+            obj.save()                      
+                   
+            return redirect('contract:url_contract_detail', contract.slug)
+        else:            
+            messages.warning(request, _("Contact not added. This name already exists or was entered incorrectly"))    
+            return redirect('contract:url_contract_detail', contract.slug)             
+    else:
+        form = ContactProviderForm()
+        return form
+
+@login_required
+def contact_provider_delete(request, slug):    
+    contact_provider = get_object_or_404(ContactProvider, slug=slug)   
+    contract =  contact_provider.contract.slug
+    if request.method == 'POST':        
+       try:
+           contact_provider.delete()
+           messages.success(request, _('Completed successful.'))
+           return redirect('contract:url_contract_detail', contract)
+       except IntegrityError:
+           messages.warning(request, _('You cannot delete. This contract has an existing tax invoices.'))
+           return redirect('contract:url_contract_detail', contract)
+
+########### PROVIDER WITH CONTACT_PROVIDER ###########
 
 # VIEW PARA TRADUZIR O DATATABLES. USO GERAL
 def translate_datables_js(request):    

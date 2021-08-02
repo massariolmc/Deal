@@ -24,7 +24,7 @@ $(document).ready(function () {
       }
     ],    
     //ordering: true,
-    order: [ 2, 'asc' ],
+    order: [ 1, 'asc' ],
     oLanguage: {
         sUrl:          url,
     },

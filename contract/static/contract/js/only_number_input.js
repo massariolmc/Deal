@@ -28,7 +28,8 @@
     if ( $( "#id_number_months" ).length ) { 
         on('input[name=number_months]', 'keypress', somenteNumeros);
     }
-
+    on('input[name=phone_1]', 'keypress', somenteNumeros);
+    on('input[name=phone_2]', 'keypress', somenteNumeros);
     
     
   })(document,window)

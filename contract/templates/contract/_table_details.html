@@ -1,0 +1,93 @@
+{% load static %}
+{% load i18n %}
+
+<div class="card-body mt-5">
+<table class="table product-item-table">
+        <tbody>
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <td>{{ contract.name }}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>{{ contract.object|safe }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Provider" %}</th>
+                <td>{{ contract.provider }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Company" %}</th>
+                <td > {% for cc in companies %}
+                        {{ cc.name }} - <span class="cnpj">{{ cc.cnpj }}</span> <br/>
+                        {% endfor %}
+                </td>
+            </tr> 
+            <tr>
+                <th>{% trans "Type" %}</th>                       
+                <td>{{ contract.type }}</td>                       
+            </tr>
+            <tr>
+                <th>{% trans "Annual Budget" %}</th>                       
+                <td>{{ contract.annual_budget }}</td>                       
+            </tr>
+            <tr>
+                <th>{% trans "Total Contract Value" %}</th>
+                <td>{{ contract.value }}</td>
+            </tr> 
+            <tr>
+                <th>{% trans "Date Start" %}</th>
+                <td>{{ contract.dt_start|default_if_none:""}}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Date End" %}</th>
+                <td>{{ contract.dt_end|default_if_none:"" }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Date Renovation" %}</th>
+                <td>{{ contract.dt_renovation|default_if_none:"" }}</td>
+            </tr>                                                                    
+            <tr>
+                <th>{% trans "Invoice Due Date" %}</th>
+                <td>{{ contract.pay_day|default_if_none:"" }}</td>
+            </tr>  
+            <tr>
+                <th>{% trans "Number of Month" %}</th>
+                <td>{{ contract.number_months }}</td>
+            </tr>  
+            <tr>
+                <th>{% trans "Value Month" %}</th>
+                <td>{{ contract.value_month }}</td>
+            </tr> 
+            <tr>
+                <th>{% trans "Number Contract" %}</th>
+                <td>{{ contract.number_contract }}</td>
+            </tr>  
+            <tr>
+                <th>{% trans "Status" %}</th>
+                <td>{{ contract.status }}</td>
+            </tr>                         
+            <tr>
+                <th>{% trans "Date Conclusion" %}</th>
+                {% ifequal contract.status 'Encerrado' %}
+                <td>{{ contract.dt_conclusion|default_if_none:"" }}</td>
+                {% else %}
+                <td>Contrato Ativo</td>
+                {% endifequal %}
+            </tr>                                             
+            <tr>
+                <th>{% trans "Description" %}</th>
+                <td>{{ contract.description|safe }}</td>
+            </tr> 
+            <tr>
+                <th>{% trans "Created by" %}:</th>
+                <td>{{ contract.user_created.get_full_name }} - {{ contract.created_at }}</td>
+            </tr>                    
+            <tr>
+                <th>{% trans "Updated by" %}</th>
+                <td>{{ contract.user_updated.get_full_name }} - {{ contract.updated_at }}</td>
+            </tr>   
+                                                
+        </tbody>
+</table>     
+</div>

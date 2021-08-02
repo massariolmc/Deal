@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 10:21-0400\n"
+"POT-Creation-Date: 2021-08-02 16:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,36 +59,36 @@ msgid "Contracts"
 msgstr "Contratos"
 
 #: templates/core/_navbar.html:34
-msgid "List Contracts"
-msgstr "Lista de Contratos"
+msgid "Create Contracts"
+msgstr "Criar"
 
 #: templates/core/_navbar.html:35
-msgid "Create Contracts"
-msgstr "Criar Contratos"
+msgid "Actives Contracts"
+msgstr "Ativos"
 
 #: templates/core/_navbar.html:36
 msgid "Contracts Inactives"
-msgstr "Contratos Inativos"
+msgstr "Inativos"
 
 #: templates/core/_navbar.html:37
 msgid "Finish Contracts"
-msgstr "Data Terminos"
+msgstr "Renovações"
 
 #: templates/core/_navbar.html:38
-msgid "Finish invoices"
-msgstr "Data Vencimentos"
-
-#: templates/core/_navbar.html:39
 msgid "Cost Centers"
 msgstr "Centros de Custo"
 
-#: templates/core/_navbar.html:42
+#: templates/core/_navbar.html:41
 msgid "Tax invoices"
 msgstr "Notas Fiscais"
 
-#: templates/core/_navbar.html:44
+#: templates/core/_navbar.html:43
 msgid "List Providers"
 msgstr "Lançar Notas"
+
+#: templates/core/_navbar.html:44
+msgid "Finish invoices"
+msgstr "Vencimentos"
 
 #~ msgid "Due Date"
 #~ msgstr "Lista - Término dos Contratos"

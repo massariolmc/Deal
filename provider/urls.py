@@ -12,10 +12,8 @@ urlpatterns = [
     path('<slug:slug>/detail', views.provider_detail, name='url_provider_detail'),
     path('<slug:slug>/edit', views.provider_edit, name='url_provider_edit'),
     path('<slug:slug>/delete', views.provider_delete, name='url_provider_delete'),
-    path('delete_all/', views.provider_delete_all, name='url_provider_delete_all'),   
+    path('delete_all/', views.provider_delete_all, name='url_provider_delete_all'),     
     
-    path('<int:provider>/contact_provider_create', views.contact_provider_create, name='url_contact_provider_create'),
-
     # URL PARA TRADUZIR O DATATABLES. USO GERAL
     path('provider/translate-js/', views.translate_datables_js, name='url_translate_datables_js'),
 

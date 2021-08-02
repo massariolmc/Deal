@@ -26,6 +26,10 @@ urlpatterns = [
 
     #Cost Center
     path('cost-centers', views.cost_center_list, name='url_cost_centers_list'),
+    
+    #Contact Provider
+    path('<slug:contract>/contact_provider_create', views.contact_provider_create, name='url_contact_provider_create'),
+    path('<slug:slug>/contacts/delete', views.contact_provider_delete, name='url_contact_provider_delete'),
 
     # URL PARA TRADUZIR O DATATABLES. USO GERAL
     path('contract/translate-js/', views.translate_datables_js, name='url_translate_datables_js'),

@@ -15,11 +15,13 @@ class ContactProviderForm(ModelForm):
 
     class Meta:
         model = ContactProvider
-        fields = ['name','phone_1']
+        fields = ['name','phone_1','phone_2','email_1','email_2','description']
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),     
             'phone_1': TextInput(attrs={'class': 'form-control'}),            
-            'phone_2': TextInput(attrs={'class': 'form-control'}),     
+            'phone_2': TextInput(attrs={'class': 'form-control'}),
+            'email_1': EmailInput(attrs={'class': 'form-control'}),
+            'email_2': EmailInput(attrs={'class': 'form-control'}),     
             'description': TextInput(attrs={'class': 'form-control'}),            
         }                    
     
@@ -29,16 +31,11 @@ class ContactProviderForm(ModelForm):
         self.enctype = "multipart/form-data"
         self.helper.form_tag = False
         self.helper.layout = Layout(                                                           
-            Row(
-                Column('DELETE', css_class='form-group col-md-4 mb-0'),
-                Column('name', css_class='form-group col-md-4 mb-0'),
-                Column('phone_1', css_class='form-group col-md-4 mb-0'),                                                                    
-                css_class='form-row'
-            ),                   
-            HTML('''
-                <hr class="divider" />
-                '''
-            ),       
-            
+          'name',
+          'phone_1',
+          'phone_2',
+          'email_1',
+          'email_2',
+          'description',           
             
         )

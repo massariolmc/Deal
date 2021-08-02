@@ -12,8 +12,8 @@
                 </button>
             </div>
             <div class="modal-body">                 
-                <form method="post" action="{% url 'provider:url_contact_provider_create' provider.id %}" >
-                    {% crispy formset formset.form.helper %}       
+                <form method="post" action="{% url 'contract:url_contact_provider_create' contract.slug %}" >
+                    {% crispy form_contact %}       
     
                     <div class="row">    
                         <div class="col-sm-6">
