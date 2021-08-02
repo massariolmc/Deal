@@ -41,8 +41,7 @@
       <td class="text-center"> 
         <a href="{% url 'contract:url_contract_edit' contract.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
         <a href="{% url 'contract:url_contract_detail' contract.slug %}"><span class='badge badge-info'>{% trans "details" %}</span></a>                                                                          
-        <a href="" data-url="{% url 'contract:url_contract_delete' contract.slug %}" id="button_modal_{{ contract.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>
-        </form>
+        <a href="" data-url="{% url 'contract:url_contract_delete' contract.slug %}" id="button_modal_{{ contract.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>        
       </td>                      
     </tr>                 
     {% endfor %}   

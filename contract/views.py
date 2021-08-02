@@ -109,7 +109,7 @@ def contracts_list(request):
     contracts = Contract.objects.prefetch_related('members_contract').filter(status='Ativo')   
     context = {
         'contracts': contracts,
-        'title': _("Actives Contracts"),
+        'title': _("List Actives Contracts"),
         'add': _("Add"),
         'back': _("Back"),    
     }
@@ -196,7 +196,7 @@ def contract_detail(request, slug):
         'nimbi_alias': _("Nimbi"),
         'contact_alias': _("Contacts"),
         'list_contracts_inactives': _("Inactives Contracts"),
-        'list_contracts_actives': _("Actives Contracts"),
+        'list_contracts_actives': _("List Actives Contracts"),
         'form': upload_contract,
         'form_nimbi': nimbi_contract,
         'form_contact': form_contact,
