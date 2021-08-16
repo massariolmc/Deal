@@ -2,7 +2,10 @@
 {% load i18n %}
 
 
-<table data-js="dataTables" class="table table-striped table-bordered table-hover" data-lang="{% url 'provider:url_translate_datables_js' %}">
+<table class="table table-striped table-bordered table-hover">  
+  <div class="float-right">
+    {% trans 'Showing' %} {{ providers.start_index }}-{{ providers.end_index }} of {{ providers.paginator.count }} 
+  </div>
   <thead>
     <tr class="text-sm-center">
       <th>
@@ -38,7 +41,44 @@
         <a href="" data-url="{% url 'provider:url_provider_delete' provider.slug %}" id="button_modal_{{ provider.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>
         </form>
       </td>                      
-    </tr>                 
+    </tr>   
+    {% empty %}
+      <tr>
+        <td colspan="6" class="text-center bg-warning">{% trans 'No results' %}</td>
+      </tr>                                                     
     {% endfor %}   
-  </tbody>                  
+  </tbody>
+  <tfoot>
+    <tr>
+        <td colspan="7">
+            <ul class="pagination float-right mt-30">
+                <div class="click_page">
+                    {% if providers.has_other_pages %}
+                        <ul class="pagination float-right mt-30" >            
+                            {% if providers.has_previous %}
+                                <li class="page-item"><a class="page-link page_number" href="?page={{ providers.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="page-item">&laquo;</li>
+                            {% endif %}
+                            
+                            {% for i in providers.paginator.page_range %}
+                                {% if providers.number == i %}
+                                    <li class="active page-item">{{ i }}</li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link page_number" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if providers.has_next %}
+                                <li class="page-item"><a class="page-link page_number" href="?page={{ providers.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="page-item">&raquo;</span></li>
+                            {% endif %}
+                        </ul>            
+                    {% endif %}                                
+                </div>
+            </ul>
+        </td>
+    </tr>                
+  </tfoot>                    
 </table>                

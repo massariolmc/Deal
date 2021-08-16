@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-02 17:39-0400\n"
+"POT-Creation-Date: 2021-08-10 17:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,41 +18,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: form.py:46
+#: form.py:47
 msgid "There is a alias for this Contract. Choose other name. "
 msgstr "Já existe um alias para este Contrato. Escolha outro nome."
 
-#: form.py:60
+#: form.py:61
 msgid "Input the date conclusion."
 msgstr "Insera a data de conslusão/cancelamento do contrato"
 
-#: form.py:164
+#: form.py:165
 msgid "Maximum size allowed {size(size_max, system=si)}"
 msgstr "Tamanho maximo permitido {size(size_max, system=si)}"
 
-#: form.py:165
+#: form.py:166
 #, python-brace-format
 msgid "This format not allowed {formats}"
 msgstr "Este formato {formats} não é permitido."
 
+#: form.py:251
+msgid "Choose any contract."
+msgstr "Escolha qualquer contrato"
+
 #: models.py:23 templates/default/_modal_checkbox.html:21
 #: templates/default/_modal_delete.html:20
+#: templates/user_contract/_table_user_contract.html:18
 msgid "Yes"
 msgstr "Sim"
 
 #: models.py:24 models.py:39 templates/default/_modal_checkbox.html:17
 #: templates/default/_modal_delete.html:17
+#: templates/user_contract/_table_user_contract.html:20
 msgid "No"
 msgstr "Não"
 
-#: models.py:26 models.py:143 templates/contract/_table.html:18
-#: templates/contract/_table_contact.html:8
+#: models.py:26 models.py:189 templates/contract/_table.html:18
+#: templates/contract/_table_contact.html:11
 #: templates/contract/_table_contract_due_date.html:9
 #: templates/contract/_table_contract_invoice_date.html:9
 #: templates/contract/_table_cost_center.html:11
 #: templates/contract/_table_details.html:8
-#: templates/contract/_table_uploads.html:8
+#: templates/contract/_table_uploads.html:11
 #: templates/contract/detail_bkp.html:54
+#: templates/department_contract/_table_department_contract.html:14
 msgid "Name"
 msgstr "Nome"
 
@@ -60,7 +67,8 @@ msgstr "Nome"
 msgid "Object"
 msgstr "Objeto"
 
-#: models.py:28 models.py:66 models.py:93 models.py:121 models.py:146
+#: models.py:28 models.py:68 models.py:95 models.py:122 models.py:146
+#: models.py:168 models.py:192
 msgid "Slug"
 msgstr "Slug"
 
@@ -119,6 +127,7 @@ msgstr "Fornecedor"
 #: templates/contract/_table_contract_invoice_date.html:11
 #: templates/contract/_table_details.html:67
 #: templates/contract/detail_bkp.html:113
+#: templates/department_contract/_table_department_contract.html:16
 msgid "Status"
 msgstr "Status"
 
@@ -137,117 +146,139 @@ msgstr "Data de conclusão"
 msgid "Contract Value"
 msgstr "Valor do contrato"
 
-#: models.py:42 models.py:122 templates/contract/_table_contact.html:13
+#: models.py:42 models.py:123 templates/contract/_table_contact.html:16
 #: templates/contract/_table_details.html:79
-#: templates/contract/_table_nimbi.html:15
+#: templates/contract/_table_nimbi.html:17
 #: templates/contract/detail_bkp.html:125
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:43 models.py:67 models.py:94 models.py:123 models.py:147
-#: templates/contract/_table_details.html:83
+#: models.py:43 models.py:69 models.py:96 models.py:124 models.py:147
+#: models.py:169 models.py:193 templates/contract/_table_details.html:83
 #: templates/contract/detail_bkp.html:129
 msgid "Created by"
 msgstr "Criado por"
 
-#: models.py:44 models.py:68 models.py:95 models.py:124 models.py:148
-#: templates/contract/_table_details.html:87
+#: models.py:44 models.py:70 models.py:97 models.py:125 models.py:148
+#: models.py:170 models.py:194 templates/contract/_table_details.html:87
 #: templates/contract/detail_bkp.html:133
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: models.py:45 models.py:69 models.py:96 models.py:125 models.py:149
+#: models.py:45 models.py:71 models.py:98 models.py:126 models.py:149
+#: models.py:171 models.py:195
 msgid "Created at"
 msgstr "Criado em"
 
-#: models.py:46 models.py:70 models.py:97 models.py:126 models.py:150
+#: models.py:46 models.py:72 models.py:99 models.py:127 models.py:150
+#: models.py:172 models.py:196
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: models.py:47 models.py:101
+#: models.py:47 models.py:103
 msgid "Contract Companies"
 msgstr "Contrato das Empresas"
 
-#: models.py:50 models.py:64 models.py:92 models.py:113
-msgid "Contract"
-msgstr "Contrato"
-
-#: models.py:51
-msgid "Contracts"
-msgstr "Contratos"
-
-#: models.py:65
-msgid "File"
-msgstr "Arquivo"
-
-#: models.py:73
-msgid "Upload Contract"
-msgstr "Upload dos Contratos"
-
-#: models.py:74
-msgid "Upload Contracts"
-msgstr "Upload dos Contratos"
-
-#: models.py:91 templates/contract/_table.html:17
-#: templates/contract/_table_details.html:20
-#: templates/contract/detail_bkp.html:66
-msgid "Company"
-msgstr "Empresa"
-
-#: models.py:100
-msgid "Contract Company"
-msgstr "Contrato das Empresas"
-
-#: models.py:114 templates/contract/_table_nimbi.html:8
-msgid "Number Requisition Nimbi"
-msgstr "Número da Requisição Nimbi"
-
-#: models.py:115 templates/contract/_table_nimbi.html:10
-msgid "Number PC Nimbi"
-msgstr "Numero PC Nimbi"
-
-#: models.py:116
-msgid "Number PC SAP"
-msgstr "Numero PC SAP"
-
-#: models.py:117 templates/contract/_table_nimbi.html:11
-msgid "Number Cod Project"
-msgstr "Código do Projeto"
-
-#: models.py:118 templates/contract/_table_nimbi.html:12
-msgid "Number Cost  Center"
-msgstr "Numero do Centro de Custo"
-
-#: models.py:119 templates/contract/_table_nimbi.html:13
-msgid "Create RC Date Nimbi"
-msgstr "Data de Criação da RC"
-
-#: models.py:120 templates/contract/_table_nimbi.html:14
-msgid "Send Date Fiscal"
-msgstr "Data de envio para o Dep. Fiscal"
-
-#: models.py:129 models.py:130 templates/contract/detail.html:62
-#: templates/contract/detail_bkp.html:161 views.py:196
-msgid "Nimbi"
-msgstr "Nimbi"
-
-#: models.py:142 templates/contract/_table_cost_center.html:10
-msgid "Cod"
-msgstr "Cod"
-
-#: models.py:144 templates/contract/_table_cost_center.html:12
-msgid "Branch"
-msgstr "Seguimento"
-
-#: models.py:145 templates/contract/_table_cost_center.html:13
-msgid "Plant"
-msgstr "Planta"
-
-#: models.py:153
+#: models.py:48 models.py:144 models.py:199 templates/contract/detail.html:67
+#: templates/department_contract/_modal_department_contract.html:11
 msgid "Cost Center"
 msgstr "Centro de Custo"
 
+#: models.py:49 models.py:175
+msgid "User Contract"
+msgstr "Contratos do usuário"
+
+#: models.py:52 models.py:66 models.py:94 models.py:115 models.py:145
+#: models.py:167
+msgid "Contract"
+msgstr "Contrato"
+
+#: models.py:53
+msgid "Contracts"
+msgstr "Contratos"
+
+#: models.py:67
+msgid "File"
+msgstr "Arquivo"
+
+#: models.py:75
+msgid "Upload Contract"
+msgstr "Upload dos Contratos"
+
+#: models.py:76
+msgid "Upload Contracts"
+msgstr "Upload dos Contratos"
+
+#: models.py:93 templates/contract/_table.html:17
+#: templates/contract/_table_details.html:20
+#: templates/contract/detail_bkp.html:66
+#: templates/department_contract/_table_department_contract.html:12
+msgid "Company"
+msgstr "Empresa"
+
+#: models.py:102
+msgid "Contract Company"
+msgstr "Contrato das Empresas"
+
+#: models.py:116 templates/contract/_table_nimbi.html:11
+msgid "Number Requisition Nimbi"
+msgstr "Número da Requisição Nimbi"
+
+#: models.py:117 templates/contract/_table_nimbi.html:12
+msgid "Number PC Nimbi"
+msgstr "Numero PC Nimbi"
+
+#: models.py:118 templates/contract/_table_nimbi.html:13
+msgid "Number PC SAP"
+msgstr "Numero PC SAP"
+
+#: models.py:119 templates/contract/_table_nimbi.html:14
+msgid "Number Cod Project"
+msgstr "Código do Projeto"
+
+#: models.py:120 templates/contract/_table_nimbi.html:15
+msgid "Create RC Date Nimbi"
+msgstr "Data de Criação da RC"
+
+#: models.py:121 templates/contract/_table_nimbi.html:16
+msgid "Send Date Fiscal"
+msgstr "Data de envio para o Dep. Fiscal"
+
+#: models.py:130 models.py:131 templates/contract/detail.html:59
+#: templates/contract/detail_bkp.html:161
+msgid "Nimbi"
+msgstr "Nimbi"
+
+#: models.py:153
+msgid "Department Contract"
+msgstr "Contrato do departamento"
+
 #: models.py:154
+msgid "Department Contracts"
+msgstr "Contratos dos departamentos"
+
+#: models.py:166
+msgid "User"
+msgstr "Usuário"
+
+#: models.py:176
+msgid "User Contracts"
+msgstr "Contratos dos Usuários"
+
+#: models.py:188 templates/contract/_table_cost_center.html:10
+msgid "Cod"
+msgstr "Cod"
+
+#: models.py:190 templates/contract/_table_cost_center.html:12
+msgid "Branch"
+msgstr "Seguimento"
+
+#: models.py:191 templates/contract/_table_cost_center.html:13
+#: templates/department_contract/_table_department_contract.html:15
+msgid "Plant"
+msgstr "Planta"
+
+#: models.py:200
 msgid "Costs Center"
 msgstr "Centro de Custos"
 
@@ -257,13 +288,14 @@ msgid "Alert!"
 msgstr "Alerta!"
 
 #: templates/contract/_modal_contact_provider.html:9
-#: templates/contract/detail.html:66 views.py:197
 msgid "Contacts"
 msgstr "Contatos"
 
 #: templates/contract/_modal_contact_provider.html:21
 #: templates/contract/_modal_nimbi_contract.html:24
-#: templates/contract/_modal_upload_contract.html:23 views.py:79 views.py:95
+#: templates/contract/_modal_upload_contract.html:23
+#: templates/department_contract/_modal_department_contract.html:24 views.py:82
+#: views.py:100
 msgid "Save"
 msgstr "Salvar"
 
@@ -279,9 +311,10 @@ msgstr "Uploads"
 msgid "Choose"
 msgstr "Escolha"
 
-#: templates/contract/_table.html:21 templates/contract/_table_contact.html:14
-#: templates/contract/_table_nimbi.html:16
-#: templates/contract/_table_uploads.html:11
+#: templates/contract/_table.html:21 templates/contract/_table_contact.html:17
+#: templates/contract/_table_nimbi.html:18
+#: templates/contract/_table_uploads.html:14
+#: templates/department_contract/_table_department_contract.html:17
 msgid "Options"
 msgstr "Opções"
 
@@ -293,25 +326,26 @@ msgstr "editar"
 msgid "details"
 msgstr "detalhes"
 
-#: templates/contract/_table.html:44 templates/contract/_table_contact.html:27
-#: templates/contract/_table_nimbi.html:31
-#: templates/contract/_table_uploads.html:21
+#: templates/contract/_table.html:44 templates/contract/_table_contact.html:30
+#: templates/contract/_table_nimbi.html:32
+#: templates/contract/_table_uploads.html:24
+#: templates/department_contract/_table_department_contract.html:29
 msgid "delete"
 msgstr "deletar"
 
-#: templates/contract/_table_contact.html:9
+#: templates/contract/_table_contact.html:12
 msgid "Main Phone"
 msgstr "Telefone Principal"
 
-#: templates/contract/_table_contact.html:10
+#: templates/contract/_table_contact.html:13
 msgid "Secundary Phone"
 msgstr "Telefone Auxiliar"
 
-#: templates/contract/_table_contact.html:11
+#: templates/contract/_table_contact.html:14
 msgid "Main Email"
 msgstr "Email Principal"
 
-#: templates/contract/_table_contact.html:12
+#: templates/contract/_table_contact.html:15
 msgid "Secundary Email"
 msgstr "Email Auxiliar"
 
@@ -358,26 +392,29 @@ msgstr "Dia do vencimento da fatura/boleto."
 msgid "Number of Month"
 msgstr "Número de meses"
 
-#: templates/contract/_table_nimbi.html:9
-msgid "Number Cod Nimbi"
-msgstr "Numero Codigo Nimbi"
-
-#: templates/contract/_table_uploads.html:9
+#: templates/contract/_table_uploads.html:12
 msgid "Created At"
 msgstr "Criado em"
 
-#: templates/contract/_table_uploads.html:10
+#: templates/contract/_table_uploads.html:13
 msgid "Updated At"
 msgstr "Atualizado em"
 
-#: templates/contract/detail.html:54
+#: templates/contract/detail.html:51
 msgid "Details"
-msgstr "detalhes"
+msgstr "Detalhes"
 
-#: templates/contract/detail.html:58 templates/contract/detail_bkp.html:143
-#: views.py:195
+#: templates/contract/detail.html:55 templates/contract/detail_bkp.html:143
 msgid "Attachments"
 msgstr "Anexos"
+
+#: templates/contract/detail.html:63
+msgid "Provider Contacts"
+msgstr "Contatos do fornecedor"
+
+#: templates/contract/detail.html:71 views.py:165
+msgid "Users"
+msgstr "Usuários"
 
 #: templates/contract/list.html:45
 msgid "Remove"
@@ -428,51 +465,65 @@ msgstr "Fechar"
 msgid "Are you sure?"
 msgstr "Você tem certeza?"
 
-#: views.py:77
+#: templates/department_contract/_table_department_contract.html:13
+msgid "Code"
+msgstr ""
+
+#: templates/user_contract/_table_user_contract.html:7
+msgid "Full Name"
+msgstr "Nome Completo"
+
+#: templates/user_contract/_table_user_contract.html:8
+msgid "Email"
+msgstr "Email Principal"
+
+#: templates/user_contract/_table_user_contract.html:9
+msgid "Active"
+msgstr "Ativo"
+
+#: views.py:80
 msgid "Create Contract"
 msgstr "Criar um contrato"
 
-#: views.py:78 views.py:94 views.py:114 views.py:126 views.py:285 views.py:333
+#: views.py:81 views.py:99 views.py:121 views.py:136 views.py:261 views.py:309
 msgid "Back"
 msgstr "Voltar"
 
-#: views.py:80 views.py:96
+#: views.py:83 views.py:101
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:93 views.py:193
+#: views.py:98 views.py:160
 msgid "Edit"
 msgstr "Editar"
 
-#: views.py:112 views.py:199
+#: views.py:119 views.py:168
 msgid "List Actives Contracts"
 msgstr "Contratos Ativos"
 
-#: views.py:113 views.py:125 views.py:173
+#: views.py:120 views.py:135 views.py:162 views.py:163 views.py:164
+#: views.py:166 views.py:525
 msgid "Add"
 msgstr "Adicionar"
 
-#: views.py:124 views.py:198
+#: views.py:134 views.py:167
 msgid "Inactives Contracts"
 msgstr "Contratos Inativos/Encerrados"
 
-#: views.py:172
-msgid "List Cost Centers"
-msgstr "Lista do Centros de Custo"
-
-#: views.py:192
+#: views.py:159
 msgid "Detail Info"
 msgstr "Informações detalhadas"
 
-#: views.py:194
+#: views.py:161
 msgid "Annotations"
 msgstr "Anotações"
 
-#: views.py:215 views.py:235 views.py:379 views.py:416 views.py:451
+#: views.py:189 views.py:211 views.py:354 views.py:391 views.py:426
+#: views.py:445 views.py:461
 msgid "Completed successful."
 msgstr "Completado com sucesso"
 
-#: views.py:218 views.py:237
+#: views.py:192 views.py:213
 msgid ""
 "You cannot delete. This contract has an existing tax invoices or files "
 "attachments."
@@ -480,16 +531,15 @@ msgstr ""
 "Você não pode deletar. Este contrato tem uma nota fiscal ou anexos "
 "existentes."
 
-#: views.py:283
+#: views.py:259
 msgid "Invoice Dates"
 msgstr "Informações sobre os vencimentos dos boletos/faturas."
 
-#: views.py:331
+#: views.py:307
 msgid "Due Date"
 msgstr "Contratos - Status de previsão de término/renovação."
 
-#: views.py:361
-#, python-brace-format
+#: views.py:336
 msgid ""
 "Errors in the following files: {arqs}. Maximum size allowed: 3MB. This "
 "format is allowed: PDF"
@@ -497,42 +547,45 @@ msgstr ""
 "Erros nos seguintes arquivos: {arqs}. Tamanho maximo permitido: 3MB. Este "
 "format is permitido: PDF."
 
-#: views.py:366
+#: views.py:341
 msgid "File not added. This name already exists or was entered incorrectly"
 msgstr ""
 "Arquivo não adicionado. Este nome de arquivo já existe ou foi um formato foi "
 "inserido incorretamente."
 
-#: views.py:382 views.py:419 views.py:454
+#: views.py:357 views.py:394 views.py:429 views.py:464
 msgid "You cannot delete. This contract has an existing tax invoices."
 msgstr ""
 "Você não pode deletar. Este contrato tem uma nota fiscal ou anexos "
 "existentes."
 
-#: views.py:402
+#: views.py:377
 msgid "Verify informations in the Nimbi fields. Maybe the dates are incorrect."
 msgstr ""
 "Verifique as informações inseridas nos campos do NIMBI. Talvez as datas "
 "estejam inseridas no formato incorreto."
 
-#: views.py:438
-#, fuzzy
-#| msgid "File not added. This name already exists or was entered incorrectly"
+#: views.py:413 views.py:448
 msgid "Contact not added. This name already exists or was entered incorrectly"
 msgstr ""
 "Arquivo não adicionado. Este nome de arquivo já existe ou foi um formato foi "
 "inserido incorretamente."
+
+#: views.py:524
+msgid "List Cost Centers"
+msgstr "Lista do Centros de Custo"
+
+#~ msgid "Number Cost  Center"
+#~ msgstr "Numero do Centro de Custo"
+
+#~ msgid "Number Cod Nimbi"
+#~ msgstr "Numero Codigo Nimbi"
 
 #~ msgid "Actives Contracts"
 #~ msgstr "Contratos Ativos"
 
 #~ msgid "Registered Contracts"
 #~ msgstr "Cadastrar Contratos"
-
-#, fuzzy
-#~| msgid "Contracts"
-#~ msgid "List Contracts"
-#~ msgstr "Contratos"
 
 #~ msgid "List All"
 #~ msgstr "Listar todos"

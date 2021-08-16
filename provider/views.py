@@ -6,7 +6,11 @@ from .models import Provider
 from .form import ProviderForm
 from django.forms import modelformset_factory, inlineformset_factory
 from account.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
+from .decorators import verify_superuser
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 from django.db import IntegrityError
 from django.db.models import Q, Sum, Count, Prefetch
 from django.template.loader import render_to_string
@@ -33,7 +37,8 @@ def provider_save_form(request,form,template_name, data, user_created=None):
     data['form'] = form
     return render(request,template_name,data)
 
-@login_required
+@login_required(login_url='login')
+@verify_superuser
 def provider_create(request):
     template_name = 'provider/form.html'    
     data = {
@@ -49,7 +54,8 @@ def provider_create(request):
     
     return provider_save_form(request, form, template_name, data)
 
-@login_required
+@login_required(login_url='login')
+@verify_superuser
 def provider_edit(request, slug):    
     template_name='provider/form.html'
     data = {
@@ -66,10 +72,53 @@ def provider_edit(request, slug):
         form = ProviderForm(instance=provider)       
     return provider_save_form(request, form, template_name, data, user_created=user_created)
 
-@login_required    
+@login_required(login_url='login')
+@verify_superuser
 def providers_list(request):
     template_name = "provider/list.html"
     providers = Provider.objects.all()    
+    data = {}    
+    
+    def pagination(request,objects,lines=10):
+        page = request.GET.get('page', 1)
+        print("Valor de page: ",page)
+        paginator = Paginator(objects, int(lines))        
+        try:
+            objects = paginator.page(page)
+        except PageNotAnInteger:
+            objects = paginator.page(1)
+        except EmptyPage:
+            objects = paginator.page(paginator.num_pages)
+        
+        return objects
+    
+    def search(request, query,lines, model):
+        obj_search = ""              
+        print("model",model)
+        if query:            
+            obj_search = model.filter(
+                Q(name__icontains=query) | Q(fantasy_name__icontains=query) | Q(cnpj__icontains=query) | Q(email__icontains=query)                
+                
+            ).distinct()   
+            print("obj_search",obj_search)          
+        else:
+            print("Não existe") 
+            obj_search = model
+
+        objs = pagination(request,obj_search,int(lines))                           
+        return objs
+
+    if request.is_ajax():
+        query = request.GET.get('q')
+        lines = request.GET.get('l')        
+        objs = search(request, query,lines,providers)
+        data['html_signup_list'] = render_to_string('provider/_table.html', {'providers': objs})       
+        return JsonResponse(data)
+            
+                 
+    lines = 10
+    providers = pagination(request,providers,int(lines))
+
     context = {
         'providers': providers,
         'title': _("Registered Providers"),
@@ -77,7 +126,8 @@ def providers_list(request):
     }
     return render(request,template_name,context)
 
-@login_required
+@login_required(login_url='login')
+@verify_superuser
 def provider_detail(request, slug):    
     template_name = "provider/detail.html"
     provider = get_object_or_404(Provider,slug=slug)   
@@ -90,7 +140,8 @@ def provider_detail(request, slug):
     }
     return render(request, template_name, context)
 
-@login_required
+@login_required(login_url='login')
+@verify_superuser
 def provider_delete(request, slug):    
     provider = get_object_or_404(Provider, slug=slug)    
     if request.method == 'POST':        
@@ -102,7 +153,8 @@ def provider_delete(request, slug):
            messages.warning(request, _('You cannot delete. This provider has an existing department.'))
            return redirect('provider:url_providers_list')    
 
-@login_required
+@login_required(login_url='login')
+@verify_superuser
 def provider_delete_all(request):
     marc = 0    
     if request.method == "POST":        

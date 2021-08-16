@@ -1,16 +1,18 @@
 {% load static %}
 {% load i18n %}
 
+<div class="mt-5">
+  <a href="#"><button type="button" data-toggle="modal" data-target="#modal-nimbi-contract" class="btn btn-warning btn-sm mb-15">{{ nimbi_alias }}</button></a>
+</div>
 
-<table class="table table-striped table-bordered table-hover mt-5" >
+<table class="table table-striped table-bordered table-hover mt-2" >
   <thead>
     <tr class="text-sm-center">      
+      <th>{% trans "Create RC Date Nimbi" %}</th>
       <th>{% trans "Number Requisition Nimbi" %}</th>       
-      <th>{% trans "Number Cod Nimbi" %}</th>
-      <th>{% trans "Number PC Nimbi" %}</th>                    
-      <th>{% trans "Number Cod Project" %}</th>       
-      <th>{% trans "Number Cost  Center" %}</th>     
-      <th>{% trans "Create RC Date Nimbi" %}</th>       
+      <th>{% trans "Number PC Nimbi" %}</th>
+      <th>{% trans "Number PC SAP" %}</th>                    
+      <th>{% trans "Number Cod Project" %}</th>                              
       <th>{% trans "Send Date Fiscal" %}</th>    
       <th>{% trans "Description" %}</th>    
       <th>{% trans "Options" %}</th>                                 
@@ -19,12 +21,11 @@
   <tbody>
     {% for n in nimbi %}    
     <tr class="text-sm-center">      
+      <td>{{ n.dt_create_rc|default_if_none:"" }}</td>  
       <td>{{ n.number_req_nimbi }}</td>
       <td>{{ n.number_cod_nimbi }}</td>                                
       <td>{{ n.number_pc_nimbi }}</td>                                                                       
-      <td>{{ n.number_cod_project }}</td>     
-      <td>{{ n.number_cost_center }}</td>                                
-      <td>{{ n.dt_create_rc|default_if_none:"" }}</td>                                                                       
+      <td>{{ n.number_cod_project }}</td>                                                                                                                   
       <td>{{ n.dt_send_nf_fiscal|default_if_none:"" }}</td>
       <td>{{ n.description }}</td>  
       <td class="text-center">         

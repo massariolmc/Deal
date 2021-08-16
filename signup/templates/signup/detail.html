@@ -5,92 +5,81 @@
 
 {% block content %}
 <div class="col-lg-12 mt-5">
-    <div class="ibox bg-boxshadow"> 
-        <div class="ibox-title mb-30">
-            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
-        </div>
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-sm-4">
-                    <a href="{% url 'signup:url_signup_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+    {% include 'default/_messages.html' %}  
+            
+        <div class="col-sm-12">
+            <div class="product--item-arae bg-boxshadow">
+                <div class="ibox-title mb-30">
+                    <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
                 </div>
-                <div class="col-sm-4">      
-                {% if user.image %}
-                 <!-- Thumb Title -->
-                 <div class="contact-thumb-title">
-                    <img src="{{ user.image.url }}" alt="" style="width:100px">                    
-                </div>                
+                <!-- Media -->
+                <div class="media align-items-center py-3 mb-4">
+                    {% if user.image %}
+                    <!-- Thumb Title -->
+                        <div class="contact-thumb-title">
+                        <img src="{{ user.image.url }}" alt="" style="width:100px">                    
+                        </div>
+                    {% else %}    
+                        <img src="#" alt="" style="width:100px">                           
+                    {% endif %}
+                    <!-- Media Body -->
+                    <div class="media-body ml-4">
+                        <h4 class="mb-15">{{ user.get_full_name }}</h4>                                                                                
+                        <a href="{% url 'signup:url_signup_edit' user.id %}"><button type="button" class="btn btn-success btn-sm mb-15">{{ edit }}</button></a>                                                
+                        <a href="{% url 'signup:url_signup_list' %}"><button type="button" class="btn btn-info btn-sm mb-15">{{ list_users }}</button></a>                                                
+                    </div>
+                </div>
+
+                <!-- Nav Tabs -->
+                <div class="nav-tabs-top">
+                    <ul class="nav nav-tabs">                        
+                        <!-- Details -->
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#item-description">{% trans "Details" %}</a>
+                        </li>
+                        <!-- Password -->
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#item-password">{% trans "Password Change" %}</a>
+                        </li>
+                        <!-- Contracts -->
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#item-discounts">{% trans "Contracts" %}</a>
+                        </li>                       
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content">                       
+
+                        <!-- Details -->
+                        <div class="tab-pane fade show active" id="item-description">
+                            {% include 'signup/_table_details.html' %}
+                        </div>
+
+                         <!-- Password -->
+                         <div class="tab-pane fade" id="item-password">
+                            {% include 'signup/_password_change.html' %}
+                        </div>
+
+                        <!-- Item Discounts -->
+                        <div class="tab-pane fade" id="item-discounts">                            
+                            {% include "signup_user_contract/_table_contract.html"%} 
+                            
+                        </div>
+                        <!-- / Discounts -->
+
+                    </div>
+                </div> 
+                {% include 'signup_user_contract/_modal_user_contract.html' %}
+
+                {% include 'default/_modal_delete.html' %}
+              
                 
-                {% else %}    <h3><strong>{{ user.first_name }} {{user.last_name}}</strong></h3>
-                {% endif %}
-                </div>
-                <div class="col-sm-4">
-                    <span class="float-right">
-                        <a href="{% url 'signup:url_signup_edit' user.id %}">
-                            <button type="button" class="btn btn-success">{{ edit }}
-                            </button>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            </br>
-            <div class="col-sm-12">
-                <table class="table table-user-information">
-                    <tbody>    
-                        <tr>
-                            <th class="text-right">{% trans "CPF" %}</th>
-                            <td>{{ user.cpf }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Full Name" %}</th>
-                            <td>{{ user.first_name }} {{user.last_name}}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Username" %}</th>
-                            <td>{{ user.username }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Email" %}</th>
-                            <td>{{ user.email }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Admin Access" %}</th>
-                            {% if user.is_staff %}
-                                <td>Sim</td>
-                            {% else %}
-                                <td>Não</td>
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Active" %}</th>
-                            {% if user.is_active %}
-                                <td>{% trans "Yes" %}</td>
-                            {% else %}
-                                <td>{% trans "No" %}</td>
-                            {% endif %}
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Created At" %}</th>
-                            <td>{{ user.date_joined }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Last Login" %}</th>
-                            <td>{% trans "Login at: " %} {{ user.date_login|default_if_none:"" }} / {% trans "Logout At: " %} {{ user.date_logout|default_if_none:"" }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Created by" %}:</th>
-                            <td>{{ user.user_created.get_full_name }} - {{ user.created_at }}</td>
-                        </tr>                    
-                        <tr>
-                            <th class="text-right">{% trans "Updated by" %}</th>
-                            <td>{{ user.user_updated.get_full_name }} - {{ user.updated_at }}</td>
-                        </tr>                     
-                    </tbody>
-                </table>
             </div>
         </div>
-    </div>
+    
 </div>
-                    
-                   
 {% endblock content %}
+
+{% block js %}
+<script src="{% static 'signup/default/js/checkbox_delete_all.js'%}"></script>
+{% endblock js %}

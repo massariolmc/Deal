@@ -1,13 +1,14 @@
-from django.forms import ModelForm, TextInput, Textarea, NumberInput, DateInput, RadioSelect, Select, SelectDateWidget, HiddenInput, DateTimeInput, EmailInput, FileInput, ClearableFileInput, CheckboxInput
-from django.forms import BaseModelFormSet, ModelChoiceField, MultipleChoiceField, SelectMultiple,CheckboxSelectMultiple
+from django.forms import ModelForm, TextInput, Textarea, NumberInput, DateInput, RadioSelect, Select, SelectMultiple, SelectDateWidget, HiddenInput, DateTimeInput, EmailInput, FileInput, ClearableFileInput, CheckboxInput
+from django.forms import BaseModelFormSet, ModelChoiceField, MultipleChoiceField, SelectMultiple,CheckboxSelectMultiple, ModelMultipleChoiceField
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Contract, UploadContract, NimbiContract
-from company.models import Company
+from .models import Contract, UploadContract, NimbiContract, DepartmentContract, UserContract
+from company.models import Company, Department
 from account.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Div, Row, Column, Button, ButtonHolder, HTML, Hidden, Button
 from django.core.exceptions import ValidationError
+from django.db.models.functions import Lower
 from django.utils.translation import ugettext_lazy as _
 from hurry.filesize import size, iec, si # converter GB,MB para template
 import magic # Mesma coisa que o file no linux, verificar o formato do arquivo
@@ -180,14 +181,13 @@ class NimbiContractForm(ModelForm):
     
     class Meta:        
         model = NimbiContract
-        fields = ['number_req_nimbi', 'number_cod_nimbi', 'number_pc_nimbi', 'number_cod_project', 'number_cost_center', 'dt_create_rc', 'dt_send_nf_fiscal','description']
+        fields = ['number_req_nimbi', 'number_pc_nimbi', 'number_pc_sap', 'number_cod_project', 'dt_create_rc', 'dt_send_nf_fiscal','description']
         widgets = {                       
             # Fields Nimbi
             'number_req_nimbi': TextInput(attrs={'class': 'form-control'}),
-            'number_cod_nimbi': TextInput(attrs={'class': 'form-control'}),
             'number_pc_nimbi': TextInput(attrs={'class': 'form-control'}),
-            'number_cod_project': TextInput(attrs={'class': 'form-control'}),
-            'number_cost_center': TextInput(attrs={'class': 'form-control'}),   
+            'number_pc_sap': TextInput(attrs={'class': 'form-control'}),
+            'number_cod_project': TextInput(attrs={'class': 'form-control'}),            
             'dt_create_rc': TextInput(attrs={'class': 'form-control calendario'}),
             'dt_send_nf_fiscal': TextInput(attrs={'class': 'form-control calendario'}),  
             'description': TextInput(attrs={'class': 'form-control'}),                       
@@ -199,12 +199,55 @@ class NimbiContractForm(ModelForm):
         self.enctype = "multipart/form-data"
         self.helper.form_tag = False            
         self.helper.layout = Layout(
+            'dt_create_rc', 
             'number_req_nimbi',
-            'number_cod_nimbi',
             'number_pc_nimbi',
-            'number_cod_project',
-            'number_cost_center',
-            'dt_create_rc',      
+            'number_pc_sap',
+            'number_cod_project',                             
             'dt_send_nf_fiscal',  
             'description',                                                             
         )
+
+class DepartmentContractForm(ModelForm):       
+    
+    class Meta:        
+        model = DepartmentContract
+        fields = ['number_cost_center']
+        widgets = {                                   
+            'number_cost_center': Select(attrs={'class': 'form-control'}),                                   
+        }          
+
+    def __init__(self, *args, **kwargs):
+        self.contract = kwargs.get('contract',None)                    
+        del(kwargs['contract'])   
+        super().__init__(*args, **kwargs) 
+        #self.fields['number_cost_center'].queryset = self.contract.members_contract.all()                    
+        self.fields['number_cost_center'].queryset = Department.objects.prefetch_related('company').filter(company__in=self.contract.members_contract.all())      
+        self.helper = FormHelper()
+        self.enctype = "multipart/form-data"
+        self.helper.form_tag = False            
+        self.helper.layout = Layout(
+            'number_cost_center',                                                                      
+        )
+
+class UserContractForm(forms.Form):  
+
+    contract = forms.ModelMultipleChoiceField(queryset = Contract.objects.order_by(Lower('provider__name').asc()),required = True, widget=forms.SelectMultiple(attrs={'class': 'form-control'}))         
+    
+    def __init__(self, *args, **kwargs):
+        self.contract = kwargs.get('user',None)                    
+        del(kwargs['user'])   
+        super().__init__(*args, **kwargs) 
+        self.helper = FormHelper()
+        self.enctype = "multipart/form-data"
+        self.helper.form_tag = False            
+        self.helper.layout = Layout(
+            'contract',                                                                      
+        )
+    
+    def clean_contract(self): # No caso aqui clean_nome_do_campo        
+        contract = self.cleaned_data['contract']        
+        if not contract:            
+            raise ValidationError(_("Choose any contract."))
+        return contract
+

@@ -2,7 +2,7 @@ from django.db import models
 from account.models import User
 from service_type.models import ServiceType
 from provider.models import Provider
-from company.models import Company
+from company.models import Company, Department
 from status.models import Status
 from django.utils.translation import ugettext_lazy as _
 from .compress_image import compress, delete_old_image, delete_old_file
@@ -45,6 +45,8 @@ class Contract(models.Model):
     created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
     updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
     members_contract = models.ManyToManyField(Company, through='ContractCompany', blank=False, verbose_name=_("Contract Companies"))
+    members_cost_center = models.ManyToManyField(Department, through='DepartmentContract', blank=True, verbose_name=_("Cost Center"))
+    members_user = models.ManyToManyField(User, related_name="members_user_contract", through='UserContract', through_fields=('contract', 'user'), blank=True, verbose_name=_("User Contract"))
     
     class Meta:
         verbose_name = _("Contract")
@@ -112,10 +114,11 @@ class ContractCompany(models.Model):
 class NimbiContract(models.Model):    
     contract = models.ForeignKey(Contract, related_name="nimbi_contract", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
     number_req_nimbi = models.CharField(_('Number Requisition Nimbi'), max_length=100, blank=False)
-    number_cod_nimbi = models.CharField(_('Number PC Nimbi'), max_length=100, blank=True)
-    number_pc_nimbi = models.CharField(_('Number PC SAP'), max_length=100, blank=True)
-    number_cod_project = models.CharField(_('Number Cod Project'), max_length=100, blank=True)
-    number_cost_center = models.CharField(_('Number Cost  Center'), max_length=100, blank=True)
+    #number_cod_nimbi = models.CharField(_('Number PC Nimbi'), max_length=100, blank=True)
+    #number_pc_nimbi = models.CharField(_('Number PC SAP'), max_length=100, blank=True)
+    number_pc_nimbi = models.CharField(_('Number PC Nimbi'), max_length=100, blank=True)
+    number_pc_sap = models.CharField(_('Number PC SAP'), max_length=100, blank=True)
+    number_cod_project = models.CharField(_('Number Cod Project'), max_length=100, blank=True)        
     dt_create_rc = models.DateField(_('Create RC Date Nimbi'), max_length=100, blank=True, null=True)
     dt_send_nf_fiscal = models.DateField(_('Send Date Fiscal'), max_length=100, blank=True, null=True)
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
@@ -137,6 +140,51 @@ class NimbiContract(models.Model):
     
     def __str__(self):
         return f"{self.number_req_nimbi}"
+
+
+class DepartmentContract(models.Model):
+    number_cost_center = models.ForeignKey(Department, related_name="department_cost_center", verbose_name=_("Cost Center"), blank=False, on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract, related_name="department_contract", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
+    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
+    user_created = models.ForeignKey(User, related_name="department_contract_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
+    user_updated = models.ForeignKey(User, related_name="department_contract_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _("Department Contract")
+        verbose_name_plural = _("Department Contracts")
+        ordering = ["contract"]   
+
+    def save(self, *args, **kwargs):                       
+        #Insere um valor para o Slug         
+        self.slug = unique_uuid(self.__class__)                     
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.contract}"
+
+class UserContract(models.Model):
+    user = models.ForeignKey(User, related_name="user_contract_user", verbose_name=_("User"), blank=True, on_delete=models.CASCADE)
+    contract = models.ForeignKey(Contract, related_name="user_contract_contract", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
+    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
+    user_created = models.ForeignKey(User, related_name="user_contract_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
+    user_updated = models.ForeignKey(User, related_name="user_contract_user_updated_id", verbose_name=_("Updated by"), blank=True, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _("User Contract")
+        verbose_name_plural = _("User Contracts")
+        ordering = ["contract"]   
+
+    def save(self, *args, **kwargs):                       
+        #Insere um valor para o Slug         
+        self.slug = unique_uuid(self.__class__)                     
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.contract}"
 
 class CostCenter(models.Model):
     cod = models.CharField(_('Cod'), max_length=100, blank=False, null=False)    

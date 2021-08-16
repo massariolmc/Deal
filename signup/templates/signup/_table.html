@@ -17,9 +17,9 @@
                     </th>
                     <th>{% trans "CPF" %}</th>
                     <th>{% trans "Full Name" %}</th>
-                    <th>{% trans "Email" %}</th>                                          
-                    <th>{% trans "Data de Criação" %}</th> 
-                    <th>{% trans "Active" %}</th>       
+                    <th>{% trans "Email" %}</th>                                                              
+                    <th>{% trans "Perfil" %}</th>  
+                    <th>{% trans "Status" %}</th>       
                     <th>{% trans "Options" %}</th>                                         
                   </tr>
             </thead>
@@ -36,12 +36,18 @@
                         <td>{{ user.cpf }}</td>
                         <td>{{ user.first_name }} {{ user.last_name}}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.date_joined }}</td>
+                        <td>
+                            {% if user.is_superuser %}
+                                {% trans "Admin" %}
+                            {% else %}
+                                {% trans "---" %}
+                            {% endif %}
+                        </td>
                         <td>
                             {% if user.is_active %}
-                                {% trans "Yes" %}
+                                {% trans "Active" %}
                             {% else %}
-                                {% trans "No" %}
+                                {% trans "Not Active" %}
                             {% endif %}
                         </td>
                         <td class="text-center"> 

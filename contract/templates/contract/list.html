@@ -2,13 +2,6 @@
 {% load static %}
 {% load i18n %}
 
-{% block css %}
-  
-  <!-- DATA TABLES -->
-  <link rel="stylesheet" href="{% static 'contract/css/plugins/data-table-css/datatables.min.css' %}">
-    
-{% endblock css %}
-
 {% block content %}
 
 {% block title %}
@@ -34,18 +27,19 @@
                         </span>
                       </div>
                     </div>
-                  </div>                            
-          
+                  </div>
+                  {% include 'contract/_search.html' %}           
 
                   <!-- Ibox Content -->
                   <div class="ibox-content">
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="table_list" data-url="{% url 'contract:url_contracts_list' %}">
                       {% include 'contract/_table.html' %}
                     </div>
                     <button data-url="{% url 'contract:url_contract_delete_all' %}" data-js="click_checkbox" class="btn btn-danger" ><i class="fa fa-trash"></i>{% trans "Remove" %}</button>
                   </div>
                 </div><!--ibox bg-boxshadow-->
               </div><!--col-lg-12 -->
+              
              
              
 {% include 'default/_modal_delete.html' %}
@@ -55,11 +49,6 @@
 {% endblock content %}
 
 {% block js %}
-
-<!-- Data Table js -->
-<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.bootstrap.min.js'%}"></script>
-<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.min.js'%}"></script>
-
-<script src="{% static 'contract/default/js/checkbox_delete_all.js'%}"></script>
-<script src="{% static 'contract/default/js/dataTables_default.js'%}"></script>
+<script type="text/javascript" src="{% static 'contract/default/js/checkbox_delete_all.js'%}"></script> 
+<script type="text/javascript" src="{% static 'contract/js/js_dev/data_table_dev.js' %}"></script>    
 {% endblock js %}

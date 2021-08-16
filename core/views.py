@@ -9,9 +9,14 @@ import sys
 from datetime import datetime, timedelta
 import locale
 
-@login_required
+@login_required(login_url='login')
 def home(request):
     template_name = "core/base.html"    
+    return render(request,template_name,{})
+
+@login_required(login_url='login')
+def not_authorized(request):
+    template_name = "core/not_authorized.html"    
     return render(request,template_name,{})
 
 # Essa parte foi desenvolvida para ler o arquivo xlsx do financeiro. Não deverá mais ser usada.

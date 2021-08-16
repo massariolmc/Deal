@@ -87,5 +87,42 @@ class Company(models.Model):
         self.image.delete(save=False)# Se deixar save=True ele deleta o arquivo e chama o metodo save automaticamente e ai isso gerar erro.
         super().delete(*args, **kwargs)
     
+    def custom_name(self):
+        return f"{self.name}"
+
     def __str__(self):
         return f"{self.name} - {self.cnpj}"
+
+class Department(models.Model):
+    select_status = (
+        (_('Active'),_('Active')),
+        (_('Inactive'),_('Inactive')),
+    )
+    cod = models.CharField(_('Cod'), max_length=100, unique=True, blank=False, null=False) 
+    name = models.CharField(_("Name"), max_length=100, blank=False, null= False)
+    abbreviation = models.CharField(_("Abbreviation"), max_length=100, blank=True)    
+    company = models.ForeignKey(Company, verbose_name=_("Company"), on_delete=models.PROTECT, blank=False, null= False)
+    branch = models.CharField(_('Branch'), max_length=100, blank=False, null=False)    
+    plant = models.CharField(_('Plant'), max_length=100, blank=False, null=False)
+    slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
+    status = models.CharField(_('Status'), max_length=100, choices = select_status, default=_('Active'),blank=False)
+    description = models.TextField(_('Description'), blank=True)      
+    user_created = models.ForeignKey(User, related_name="department_user_created_id", verbose_name=_("Created by"), blank=True, on_delete=models.PROTECT)
+    user_updated = models.ForeignKey(User, related_name="department_user_updated_id", verbose_name=_("Updated By"), blank=True, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(_('Created at'),auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+    class Meta:
+        verbose_name = _("Department")
+        verbose_name_plural = _("Departments")
+        ordering = ["name"]
+    
+    def save(self, *args, **kwargs):        
+                    
+        if not self.id:
+            #Insere um valor para o Slug            
+            self.slug = unique_uuid(self.__class__)               
+        # save
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.company.custom_name()} - {self.cod} - {self.name}"

@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+ <!-- Wrapper -->
+ <div class="col-lg-12 mt-2">
+    <div class="middle-box text-center">
+        <i class="fa fa-warning fa-4x mb-10"></i>
+        <h3>{% trans "Not authorized"%}</h3>
+        <!-- Erroe Descrption -->
+        <div class="error-descrption">
+            <p>{% trans "Contact the administratior of system."%} </p>            
+        </div>
+    </div>
+</div>
+{% endblock content %}
+<i class="fa fa-warning fa-4x mb-10"></i>

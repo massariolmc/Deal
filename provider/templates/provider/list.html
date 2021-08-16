@@ -2,12 +2,6 @@
 {% load static %}
 {% load i18n %}
 
-{% block css %}
-  
-  <!-- DATA TABLES -->
-  <link rel="stylesheet" href="{% static 'provider/css/plugins/data-table-css/datatables.min.css' %}">
-    
-{% endblock css %}
 
 {% block content %}
 
@@ -35,11 +29,11 @@
                       </div>
                     </div>
                   </div>                            
-          
+                  {% include 'provider/_search.html' %}    
 
                   <!-- Ibox Content -->
                   <div class="ibox-content">
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="table_list" data-url="{% url 'provider:url_providers_list' %}">
                       {% include 'provider/_table.html' %}
                     </div>
                     <button data-url="{% url 'provider:url_provider_delete_all' %}" data-js="click_checkbox" class="btn btn-danger" ><i class="fa fa-trash"></i>{% trans "Remove" %}</button>
@@ -57,14 +51,6 @@
 {% block js %}
 
 <!-- Data Table js -->
-<script src="{% static 'provider/js/plugins-js/data-table-js/data-table.bootstrap.min.js'%}"></script>
-<script src="{% static 'provider/js/plugins-js/data-table-js/data-table.min.js'%}"></script>
-
-<script src="{% static 'provider/default/js/checkbox_delete_all.js'%}"></script>
-<script src="{% static 'provider/default/js/dataTables_default.js'%}"></script>
-
-
-<script src="{% static 'provider/default/js/jquery.mask.min.js'%}"></script>
-<script src="{% static 'provider/default/js/jquery_mask.js'%}"></script>
-
+<script type="text/javascript" src="{% static 'provider/default/js/checkbox_delete_all.js'%}"></script> 
+<script type="text/javascript" src="{% static 'provider/js/js_dev/data_table_dev.js' %}"></script>  
 {% endblock js %}

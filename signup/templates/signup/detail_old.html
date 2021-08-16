@@ -1,0 +1,96 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="col-lg-12 mt-5">
+    <div class="ibox bg-boxshadow"> 
+        <div class="ibox-title mb-30">
+            <h6 class="font-weight-bold text-primary"> {{ title }}</h6>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="{% url 'signup:url_signup_list'%}" class="btn btn-info float-left">{{ list_all }}</a>
+                </div>
+                <div class="col-sm-4">      
+                {% if user.image %}
+                 <!-- Thumb Title -->
+                 <div class="contact-thumb-title">
+                    <img src="{{ user.image.url }}" alt="" style="width:100px">                    
+                </div>                
+                
+                {% else %}    <h3><strong>{{ user.first_name }} {{user.last_name}}</strong></h3>
+                {% endif %}
+                </div>
+                <div class="col-sm-4">
+                    <span class="float-right">
+                        <a href="{% url 'signup:url_signup_edit' user.id %}">
+                            <button type="button" class="btn btn-success">{{ edit }}
+                            </button>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            </br>
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                    <tbody>    
+                        <tr>
+                            <th class="text-right">{% trans "CPF" %}</th>
+                            <td>{{ user.cpf }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Full Name" %}</th>
+                            <td>{{ user.first_name }} {{user.last_name}}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Username" %}</th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Email" %}</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Admin Access" %}</th>
+                            {% if user.is_staff %}
+                                <td>Sim</td>
+                            {% else %}
+                                <td>Não</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Active" %}</th>
+                            {% if user.is_active %}
+                                <td>{% trans "Yes" %}</td>
+                            {% else %}
+                                <td>{% trans "No" %}</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Created At" %}</th>
+                            <td>{{ user.date_joined }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Last Login" %}</th>
+                            <td>{% trans "Login at: " %} {{ user.date_login|default_if_none:"" }} / {% trans "Logout At: " %} {{ user.date_logout|default_if_none:"" }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">{% trans "Created by" %}:</th>
+                            <td>{{ user.user_created.get_full_name }} - {{ user.created_at }}</td>
+                        </tr>                    
+                        <tr>
+                            <th class="text-right">{% trans "Updated by" %}</th>
+                            <td>{{ user.user_updated.get_full_name }} - {{ user.updated_at }}</td>
+                        </tr>                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+                    
+                   
+{% endblock content %}

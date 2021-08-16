@@ -2,7 +2,10 @@
 {% load i18n %}
 
 
-<table data-js="dataTables" class="table table-striped table-bordered table-hover" data-lang="{% url 'service_type:url_translate_datables_js' %}">
+<table class="table table-striped table-bordered table-hover">  
+  <div class="float-right">
+    {% trans 'Showing' %} {{ service_types.start_index }}-{{ service_types.end_index }} of {{ service_types.paginator.count }} 
+  </div>
   <thead>
     <tr class="text-sm-center">
       <th>
@@ -35,7 +38,44 @@
         <a href="" data-url="{% url 'service_type:url_service_type_delete' service_type.slug %}" id="button_modal_{{ service_type.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>
         </form>
       </td>                      
-    </tr>                 
+    </tr>  
+    {% empty %}
+        <tr>
+          <td colspan="4" class="text-center bg-warning">{% trans 'No results' %}</td>
+        </tr>                                       
     {% endfor %}   
-  </tbody>                  
+  </tbody>    
+  <tfoot>
+    <tr>
+        <td colspan="7">
+            <ul class="pagination float-right mt-30">
+                <div class="click_page">
+                    {% if service_types.has_other_pages %}
+                        <ul class="pagination float-right mt-30" >            
+                            {% if service_types.has_previous %}
+                                <li class="page-item"><a class="page-link page_number" href="?page={{ service_types.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="page-item">&laquo;</li>
+                            {% endif %}
+                            
+                            {% for i in service_types.paginator.page_range %}
+                                {% if service_types.number == i %}
+                                    <li class="active page-item">{{ i }}</li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link page_number" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if service_types.has_next %}
+                                <li class="page-item"><a class="page-link page_number" href="?page={{ service_types.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="page-item">&raquo;</span></li>
+                            {% endif %}
+                        </ul>            
+                    {% endif %}                                
+                </div>
+            </ul>
+        </td>
+    </tr>                
+  </tfoot>              
 </table>                

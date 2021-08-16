@@ -34,25 +34,7 @@ class TaxInvoiceForm(ModelForm):
             'value_forfeit': TextInput(attrs={'class': 'form-control money'}),
             'description': Textarea(attrs={'class': 'form-control'}),          
                                                                
-        }              
-        
-    #VALIDAÇÃO 
-   
-    
-    # def clean_pdf_invoice(self):        
-    #     pdf_contract = self.cleaned_data['pdf_invoice']
-    #     size_max = 3000000
-    #     formats = "PDF"
-    #     msg_size =  _(f"Maximum size allowed {size(size_max, system=si)}")
-    #     msg_format =  _(f"This format not allowed {formats}")
-    #     if pdf_contract:   
-    #         file = magic.from_buffer(pdf_contract.read()) 
-    #         print("valor do file",file)  
-    #         if pdf_contract.size > size_max:
-    #             raise ValidationError(msg_size)
-    #         elif not formats in file: 
-    #             raise ValidationError(msg_format)
-    #     return pdf_contract
+        }                     
     
     def clean_ref_month(self):
         ref_month = self.cleaned_data['ref_month']
@@ -93,6 +75,7 @@ class TaxInvoiceForm(ModelForm):
         if self.instance.id:  
             self.fields['contract'].queryset = Contract.objects.filter(pk=self.instance.contract.id)          
             self.fields['company'].queryset = self.instance.contract.members_contract.all()
+            self.fields['pdf_invoice'].required = False
         else:
             self.fields['contract'].queryset = Contract.objects.filter(pk=self.contract.id)          
             self.fields['company'].queryset = self.contract.members_contract.all()

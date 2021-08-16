@@ -1,0 +1,87 @@
+{% load static %}
+{% load i18n %}
+
+
+<table class="table table-striped table-bordered table-hover">  
+  <div class="float-right">
+    {% trans 'Showing' %} {{ departments.start_index }}-{{ departments.end_index }} of {{ departments.paginator.count }} 
+  </div>
+  <thead>
+    <tr class="text-sm-center">
+      <th>
+        <div class="form-check-arae-controls">
+            <!-- Form Check -->
+            <label for="checkbox_main" class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" data-js="check_all" id="checkbox_main"><span class="form-check-label">{% trans "Choose" %}</span>
+            </label>
+        </div>            
+      </th>
+      <th>{% trans "Company" %}</th>
+      <th>{% trans "Code" %}</th>
+      <th>{% trans "Name" %}</th>  
+      <th>{% trans "Plant" %}</th>                             
+      <th>{% trans "Status" %}</th>              
+      <th>{% trans "Options" %}</th>                                         
+    </tr>
+  </thead>                  
+  <tbody>
+    {% for department in departments %}
+    <tr class="text-sm-center">
+      <td><div class="form-check-arae-controls">
+        <label for="checkbox_{{ department.slug }}" class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="check_id" value="{{ department.slug }}" id="checkbox_{{ department.slug }}">        
+        </label>
+        </div></td>
+      <td>{{ department.company.name }}</td>
+      <td>{{ department.cod }}</td>                                                                                                        
+      <td>{{ department.name }}</td>  
+      <td>{{ department.plant }}</td>   
+      <td>{{ department.status }}</td>                                                                 
+      <td class="text-center"> 
+        <a href="{% url 'company:url_department_edit' department.slug %}"><span class='badge badge-warning'>{% trans "edit" %}</span></a>
+        <a href="{% url 'company:url_department_detail' department.slug %}"><span class='badge badge-info'>{% trans "details" %}</span></a>                                                                          
+        <a href="" data-url="{% url 'company:url_department_delete' department.slug %}" id="button_modal_{{ department.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>        
+      </td>                      
+    </tr>  
+    {% empty %}
+      <tr>
+        <td colspan="7" class="text-center bg-warning">{% trans 'No results' %}</td>
+      </tr>               
+    {% endfor %}   
+  </tbody> 
+  <tfoot>
+    <tr>
+        <td colspan="7">
+            <ul class="pagination float-right mt-30">
+                <div class="click_page">
+                    {% if departments.has_other_pages %}
+                        <ul class="pagination float-right mt-30" >            
+                            {% if departments.has_previous %}
+                                <li class="page-item"><a class="page-link page_number" href="?page={{ departments.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="page-item">&laquo;</li>
+                            {% endif %}
+                            
+                            {% for i in departments.paginator.page_range %}
+                                {% if departments.number == i %}
+                                    <li class="active page-item">{{ i }}</li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link page_number" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if departments.has_next %}
+                                <li class="page-item"><a class="page-link page_number" href="?page={{ departments.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="page-item">&raquo;</span></li>
+                            {% endif %}
+                        </ul>            
+                    {% endif %}                                
+                </div>
+            </ul>
+        </td>
+    </tr>                
+  </tfoot>                    
+</table> 
+
+

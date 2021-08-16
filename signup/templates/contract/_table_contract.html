@@ -1,0 +1,29 @@
+{% load static %}
+{% load i18n %}
+
+
+<table class="table table-striped table-bordered table-hover mt-5" >
+  <thead>
+    <tr class="text-sm-center">      
+      <th>{% trans "Provider" %}</th>
+      <th>{% trans "Company" %}</th>                           
+      <th>{% trans "Name" %}</th>
+      <th>{% trans "Type" %}</th> 
+      <th>{% trans "Annual Budget" %}</th>                              
+    </tr>
+  </thead>                  
+  <tbody>
+    {% for contract in contracts %}    
+    <tr class="text-sm-center">      
+      <td>{{ contract.provider }}</td>
+      <td>{% for i in contract.members_contract.all %}
+            {{i}}<br/>
+          {% endfor %}
+      </td>                                      
+      <td>{{ contract.name }}</td>                                                                       
+      <td>{{ contract.type }}</td>                                                                 
+      <td>{{ contract.annual_budget }}</td>                                                                               
+    </tr>  
+    {% endfor %}                 
+  </tbody>                  
+</table>                

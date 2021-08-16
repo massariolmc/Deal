@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-02 16:49-0400\n"
+"POT-Creation-Date: 2021-08-04 20:52-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,50 +43,54 @@ msgid "Companies"
 msgstr "Empresas"
 
 #: templates/core/_navbar.html:27
+msgid "Departments"
+msgstr "Departamentos"
+
+#: templates/core/_navbar.html:28
 msgid "Providers"
 msgstr "Fornecedores"
 
-#: templates/core/_navbar.html:28
+#: templates/core/_navbar.html:29
 msgid "Service Types"
 msgstr "Tipos de Serviços"
 
-#: templates/core/_navbar.html:29
+#: templates/core/_navbar.html:30
 msgid "Status"
 msgstr "Status"
 
-#: templates/core/_navbar.html:32
+#: templates/core/_navbar.html:33
 msgid "Contracts"
 msgstr "Contratos"
 
-#: templates/core/_navbar.html:34
+#: templates/core/_navbar.html:35
 msgid "Create Contracts"
 msgstr "Criar"
 
-#: templates/core/_navbar.html:35
+#: templates/core/_navbar.html:36
 msgid "Actives Contracts"
 msgstr "Ativos"
 
-#: templates/core/_navbar.html:36
-msgid "Contracts Inactives"
-msgstr "Inativos"
-
 #: templates/core/_navbar.html:37
+msgid "Contracts Inactives"
+msgstr "Encerrados"
+
+#: templates/core/_navbar.html:38
 msgid "Finish Contracts"
 msgstr "Renovações"
 
-#: templates/core/_navbar.html:38
+#: templates/core/_navbar.html:39
 msgid "Cost Centers"
 msgstr "Centros de Custo"
 
-#: templates/core/_navbar.html:41
+#: templates/core/_navbar.html:42
 msgid "Tax invoices"
 msgstr "Notas Fiscais"
 
-#: templates/core/_navbar.html:43
+#: templates/core/_navbar.html:44
 msgid "List Providers"
 msgstr "Lançar Notas"
 
-#: templates/core/_navbar.html:44
+#: templates/core/_navbar.html:45
 msgid "Finish invoices"
 msgstr "Vencimentos"
 

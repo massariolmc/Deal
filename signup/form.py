@@ -4,6 +4,7 @@ from django import forms
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from account.models import User
+from django.core.exceptions import ValidationError
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Div, Row, Column, Button, ButtonHolder, HTML, Hidden, Button
 
@@ -58,7 +59,7 @@ class UserCreationForm(UserCreationForm):
 class UserChangeForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ("cpf", "first_name", "last_name", "username", "email", "is_active")
+        fields = ("cpf", "first_name", "last_name", "is_superuser","username", "email", "is_active")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)        
@@ -68,6 +69,7 @@ class UserChangeForm(UserChangeForm):
             'cpf',
             'first_name',
             'last_name',
+            "is_superuser",
             'username',
             'email',            
             'is_active',
@@ -92,9 +94,25 @@ class UserChangeForm(UserChangeForm):
             
         )    
 
-    # def save(self, commit=True):
-    #     user = super(UserCreationForm, self).save(commit=False)
-    #     user.email = self.cleaned_data["email"]
-    #     if commit:
-    #         user.save()
-    #     return user
+class UserChangePasswordForm(forms.Form):
+    
+    password_1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'})) 
+    password_2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'})) 
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)        
+        self.helper = FormHelper()
+        self.enctype = "multipart/form-data"
+        self.helper.layout = Layout(
+            'password_1',
+            'password_2',  
+        )
+    
+    def clean_password_2(self):
+        password_1 = self.cleaned_data.get("password_1")
+        password_2 = self.cleaned_data.get("password_2")
+        if password_1 and password_2 and password_1 != password_2:
+            raise ValidationError(
+                _("Mismatch Password.")
+            )
+        return password_2

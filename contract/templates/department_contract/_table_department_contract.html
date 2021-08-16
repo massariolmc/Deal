@@ -1,0 +1,34 @@
+{% load static %}
+{% load i18n %}
+
+<div class="mt-5">
+  <a href="#"><button type="button" data-toggle="modal" data-target="#modal-cost-center" class="btn btn-warning btn-sm mb-15">{{ cost_center_alias }}</button></a>
+</div>
+
+
+<table class="table table-striped table-bordered table-hover mt-2" >
+  <thead>
+    <tr class="text-sm-center">      
+      <th>{% trans "Company" %}</th>
+      <th>{% trans "Code" %}</th>
+      <th>{% trans "Name" %}</th>  
+      <th>{% trans "Plant" %}</th>                             
+      <th>{% trans "Status" %}</th>              
+      <th>{% trans "Options" %}</th>                              
+    </tr>
+  </thead>                  
+  <tbody>
+    {% for department in departments_contract %}    
+    <tr class="text-sm-center">      
+      <td>{{ department.company.name }}</td>
+      <td>{{ department.cod }}</td>                                                                                                        
+      <td>{{ department.name }}</td>  
+      <td>{{ department.plant }}</td>   
+      <td>{{ department.status }}</td>                                                                                           
+      <td class="text-center">         
+        <a href="" data-url="{% url 'contract:url_department_contract_delete' department.slug contract.slug %}" id="button_modal_{{ department.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>        
+      </td>                                                                                       
+    </tr>  
+    {% endfor %}                 
+  </tbody>                  
+</table>                

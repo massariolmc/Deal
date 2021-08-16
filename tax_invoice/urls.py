@@ -7,8 +7,8 @@ app_name = 'tax_invoice'
 
 urlpatterns = [
     #Company    
-    path('<slug:contract>/create', views.tax_invoice_create, name = 'url_tax_invoice_create'),
-    path('<slug:contract>/list', views.tax_invoices_list, name='url_tax_invoices_list'),
+    path('<slug:slug>/create', views.tax_invoice_create, name = 'url_tax_invoice_create'),
+    path('<slug:slug>/list', views.tax_invoices_list, name='url_tax_invoices_list'),
     path('<slug:slug>/detail', views.tax_invoice_detail, name='url_tax_invoice_detail'),
     path('<slug:slug>/edit', views.tax_invoice_edit, name='url_tax_invoice_edit'),
     path('<slug:slug>/delete', views.tax_invoice_delete, name='url_tax_invoice_delete'),

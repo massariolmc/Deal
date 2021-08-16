@@ -14,6 +14,14 @@ urlpatterns = [
     path('company/<slug:slug>/delete', views.company_delete, name='url_company_delete'),
     path('company/delete_all/', views.company_delete_all, name='url_company_delete_all'),
 
+    #Department    
+    path('department-create/', views.department_create, name = 'url_department_create'),
+    path('department-list/', views.departments_list, name='url_departments_list'),
+    path('department/<slug:slug>/detail', views.department_detail, name='url_department_detail'),
+    path('department/<slug:slug>/edit', views.department_edit, name='url_department_edit'),
+    path('department/<slug:slug>/delete', views.department_delete, name='url_department_delete'),
+    path('department/delete_all/', views.department_delete_all, name='url_department_delete_all'),
+
     # URL PARA TRADUZIR O DATATABLES. USO GERAL
     path('company/translate-js/', views.translate_datables_js, name='url_translate_datables_js'),
 

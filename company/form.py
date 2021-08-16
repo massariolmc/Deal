@@ -2,7 +2,7 @@ from django.forms import ModelForm, TextInput, Textarea, NumberInput, DateInput,
 from django.forms import BaseModelFormSet, ModelChoiceField, MultipleChoiceField, SelectMultiple
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Company
+from .models import Company, Department
 from account.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Div, Row, Column, Button, ButtonHolder, HTML, Hidden, Button
@@ -108,4 +108,77 @@ class CompanyForm(ModelForm):
             ),       
             
             
+        )
+
+class DepartmentForm(ModelForm):
+
+    class Meta:
+        model = Department        
+        fields = ['cod','name','branch','plant','status','company','abbreviation', 'description']
+        widgets = {
+            'cod': TextInput(attrs={'class': 'form-control'}),
+            'name': TextInput(attrs={'class': 'form-control'}),
+            'branch': TextInput(attrs={'class': 'form-control'}),
+            'plant': TextInput(attrs={'class': 'form-control'}),
+            'status': Select(attrs={'class': 'form-control'}),
+            'company': Select(attrs={'class': 'form-control'}),
+            'abbreviation': TextInput(attrs={'class': 'form-control'}),                    
+            'description': Textarea(attrs={'class': 'form-control'}),                    
+        }            
+        
+    # #VALIDAÇÃO    
+    def clean_name(self):        
+        name = self.cleaned_data['name']           
+        msg = _("There is a name for this Company. Choose other name. ")
+        n = False
+        if self.instance.id:
+            n = Department.objects.filter(name__iexact=name, company__slug=self.instance.company.slug).exclude(id=self.instance.id).exists()#Verifica se o nome já existe                                  
+        
+        if n:
+            raise ValidationError(msg)
+
+        return name
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)        
+        self.helper = FormHelper()
+        self.enctype = "multipart/form-data"
+        self.helper.layout = Layout( 
+            Row(
+                Column('company', css_class='form-group col-md-12 mb-0'),
+            ),
+            Row(
+                Column('cod', css_class='form-group col-md-6 mb-0'),
+                Column('name', css_class='form-group col-md-6 mb-0'),                              
+                css_class='form-row'
+            ),   
+            Row(
+                Column('plant', css_class='form-group col-md-6 mb-0'),
+                Column('branch', css_class='form-group col-md-6 mb-0'),                              
+                css_class='form-row'
+            ),  
+            Row(
+                Column('status', css_class='form-group col-md-6 mb-0'),
+                Column('abbreviation', css_class='form-group col-md-6 mb-0'),                              
+                css_class='form-row'
+            ),
+            Row(
+                Column('description', css_class='form-group col-md-12 mb-0'),
+            ),                                                       
+            HTML('''
+                <hr class="divider" />
+                    <div class="row">    
+                    <div class="col-sm-6">
+                        <span class="float-left">
+                            <button type="submit" class="btn btn-primary">{{ save }}</button>  	  
+                            <button type="reset" class="btn btn-secondary">{{ clear }}</button>
+                        </span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="float-right">
+                            <a href="{% url 'company:url_departments_list'%}" class="btn btn-warning">{{ back }}</a>
+                        </span>  
+                    </div>
+                </div>'''
+            ),
         )

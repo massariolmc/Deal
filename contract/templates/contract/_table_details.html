@@ -53,7 +53,7 @@
             </tr>  
             <tr>
                 <th>{% trans "Number of Month" %}</th>
-                <td>{{ contract.number_months }}</td>
+                <td>{{ contract.number_months|default_if_none:"" }}</td>
             </tr>  
             <tr>
                 <th>{% trans "Value Month" %}</th>

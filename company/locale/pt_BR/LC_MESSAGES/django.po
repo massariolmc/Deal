@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-26 17:05-0400\n"
+"POT-Creation-Date: 2021-08-04 20:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,189 +17,209 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:31
+#: form.py:40
 msgid "This field CNPJ exactly needs 14 digits. "
 msgstr "Este campo deve possiur exatamente 14 digitos."
 
-#: forms.py:32
+#: form.py:48
 msgid "Maximum size allowed"
 msgstr "Tamanho maximo permitido"
 
-#: models.py:9 models.py:62 models.py:80 models.py:97
-#: templates/company/_table.html:13 templates/company/detail.html:36
+#: form.py:132
+msgid "There is a name for this Company. Choose other name. "
+msgstr ""
+
+#: models.py:42 models.py:99 templates/company/_table.html:16
+#: templates/company/detail.html:41 templates/department/_table.html:18
+#: templates/department/detail.html:49
 msgid "Name"
 msgstr "Nome"
 
-#: models.py:10
+#: models.py:43
 msgid "Fantasy Name"
 msgstr "Nome Fantasia"
 
-#: models.py:11 templates/company/_table.html:15
-#: templates/company/detail.html:44
+#: models.py:44 templates/company/_table.html:18
+#: templates/company/detail.html:49
 msgid "CNPJ"
 msgstr "CNPJ"
 
-#: models.py:12
+#: models.py:45
 msgid "Number State"
 msgstr "Insrição Estadual"
 
-#: models.py:13 templates/company/_table.html:16
-#: templates/company/detail.html:52
+#: models.py:46 templates/company/_table.html:19
+#: templates/company/detail.html:57
 msgid "Email"
 msgstr "Email"
 
-#: models.py:14 models.py:65 models.py:83 models.py:100
+#: models.py:47 models.py:105 templates/company/_table.html:20
+#: templates/company/detail.html:61 templates/department/_table.html:20
+#: templates/department/detail.html:53
+msgid "Status"
+msgstr "Status"
+
+#: models.py:48 models.py:104
 msgid "Slug"
 msgstr "Slug"
 
-#: models.py:16
+#: models.py:49
 msgid "Image"
 msgstr "Imagem"
 
-#: models.py:17 models.py:64 models.py:82 models.py:98
+#: models.py:50 models.py:106 templates/department/detail.html:69
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:18 templates/company/detail.html:56
+#: models.py:51 templates/company/detail.html:65
 msgid "Address"
 msgstr "Endereço"
 
-#: models.py:19
+#: models.py:52
 msgid "Address Number"
 msgstr "Numero"
 
-#: models.py:20
+#: models.py:53
 msgid "Neighborhood"
 msgstr "Bairro"
 
-#: models.py:21
+#: models.py:54
 msgid "City"
 msgstr "Cidade"
 
-#: models.py:22
+#: models.py:55
 msgid "State"
 msgstr "Estado"
 
-#: models.py:23 templates/company/detail.html:57
+#: models.py:56 templates/company/detail.html:66
 msgid "Zip Code"
 msgstr "CEP"
 
-#: models.py:24
+#: models.py:57
 msgid "Main Phone"
 msgstr "Telefone Principal"
 
-#: models.py:25
+#: models.py:58
 msgid "Secundary Phone"
 msgstr "Telefone Secundario"
 
-#: models.py:26 models.py:67 models.py:84 models.py:101
-#: templates/company/detail.html:64
+#: models.py:59 models.py:107 templates/company/detail.html:73
+#: templates/department/detail.html:73
 msgid "Created by"
 msgstr "Criado por"
 
-#: models.py:27 models.py:85 models.py:102 templates/company/detail.html:68
+#: models.py:60 templates/company/detail.html:77
+#: templates/department/detail.html:77
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: models.py:28 models.py:69 models.py:86 models.py:103
+#: models.py:61 models.py:109
 msgid "Created at"
 msgstr "Criado em"
 
-#: models.py:29 models.py:70 models.py:87 models.py:104
+#: models.py:62 models.py:110
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: models.py:32 models.py:66
+#: models.py:65 models.py:101 templates/department/_table.html:16
+#: templates/department/detail.html:41
 msgid "Company"
 msgstr "Empresa"
 
-#: models.py:33
+#: models.py:66
 msgid "Companies"
 msgstr "Empresas"
 
-#: models.py:63
+#: models.py:95 models.py:105
+msgid "Active"
+msgstr ""
+
+#: models.py:96
+msgid "Inactive"
+msgstr "Inativo"
+
+#: models.py:98
+msgid "Cod"
+msgstr "Código"
+
+#: models.py:100 templates/department/detail.html:65
 msgid "Abbreviation"
 msgstr "Abreviação"
 
-#: models.py:68
+#: models.py:102 templates/department/detail.html:57
+msgid "Branch"
+msgstr ""
+
+#: models.py:103 templates/department/_table.html:19
+#: templates/department/detail.html:61
+msgid "Plant"
+msgstr "Planta"
+
+#: models.py:108
 msgid "Updated By"
 msgstr "Atualizado por"
 
-#: models.py:72
+#: models.py:112
 msgid "Department"
 msgstr "Departamento"
 
-#: models.py:73
+#: models.py:113
 msgid "Departments"
 msgstr "Departamentos"
 
-#: models.py:81
-msgid "Discount"
-msgstr "Desconto"
-
-#: models.py:89
-msgid "MaxDiscount"
-msgstr "DescontoMAx"
-
-#: models.py:90
-msgid "MaxDiscounts"
-msgstr "DescontosMax"
-
-#: models.py:99
-msgid "Max Discount"
-msgstr "Desconto maximo"
-
-#: models.py:106
-msgid "PersonType"
-msgstr "Tipos de Pessoa"
-
-#: models.py:107
-msgid "PersonTypes"
-msgstr "Tipos de pessoas"
-
 #: templates/company/_form_errors.html:6 templates/default/_messages.html:7
+#: templates/default/_messages_async.html:6
+#: templates/department/_form_errors.html:6
 msgid "Alert!"
 msgstr "Alerta!"
 
-#: templates/company/_table.html:10
+#: templates/company/_table.html:12 templates/department/_table.html:12
 msgid "Choose"
 msgstr "Escolha"
 
-#: templates/company/_table.html:14 templates/company/detail.html:40
+#: templates/company/_table.html:17 templates/company/detail.html:45
 msgid "Fantasy name"
 msgstr "Nome Fantasia"
 
-#: templates/company/_table.html:17
+#: templates/company/_table.html:21 templates/department/_table.html:21
 msgid "Options"
 msgstr "Opções"
 
-#: templates/company/_table.html:33
+#: templates/company/_table.html:38 templates/department/_table.html:38
 msgid "edit"
 msgstr "editar"
 
-#: templates/company/_table.html:34
+#: templates/company/_table.html:39 templates/department/_table.html:39
 msgid "details"
 msgstr "detalhes"
 
-#: templates/company/_table.html:35
+#: templates/company/_table.html:40 templates/department/_table.html:40
 msgid "delete"
 msgstr "deletar"
 
-#: templates/company/detail.html:48
+#: templates/company/detail.html:53
 msgid "Number state"
 msgstr "Inscrição Estadual"
 
-#: templates/company/detail.html:60
+#: templates/company/detail.html:69
 msgid "Phones"
 msgstr "Telefones"
 
-#: templates/company/list.html:24 templates/company/list.html:29
-msgid "Welcome to our page"
-msgstr ""
-
-#: templates/company/list.html:63
+#: templates/company/list.html:45 templates/department/list.html:45
 msgid "Remove"
 msgstr "Remover"
+
+#: templates/default/_messages.html:14
+msgid "Successful action."
+msgstr "Ação completada com sucesso."
+
+#: templates/default/_messages.html:16
+msgid " Alert! Action not performed"
+msgstr "Alerta! Ação não executada."
+
+#: templates/default/_messages.html:18
+msgid "Atention!"
+msgstr "Atenção!"
 
 #: templates/default/_modal_checkbox.html:8
 #: templates/default/_modal_delete.html:8
@@ -236,46 +256,87 @@ msgstr "Fechar"
 msgid "Are you sure?"
 msgstr "Você tem certeza?"
 
-#: views.py:36
+#: templates/department/_table.html:17 templates/department/detail.html:45
+msgid "Code"
+msgstr "Código"
+
+#: views.py:38
 msgid "Create Company"
 msgstr "Criar Empresa"
 
-#: views.py:37 views.py:52
+#: views.py:39 views.py:55 views.py:149 views.py:165
 msgid "Back"
 msgstr "Voltar"
 
-#: views.py:38 views.py:53
+#: views.py:40 views.py:56 views.py:150 views.py:166
 msgid "Save"
 msgstr "Salvar"
 
-#: views.py:39 views.py:54
+#: views.py:41 views.py:57 views.py:151 views.py:167
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:51 views.py:80
+#: views.py:54 views.py:85 views.py:164 views.py:195
 msgid "Edit"
 msgstr "Editar"
 
-#: views.py:69
+#: views.py:73
 msgid "Registered Companies"
 msgstr "Empresas Cadastradas"
 
-#: views.py:70
+#: views.py:74 views.py:184
 msgid "Add"
 msgstr "Adicionar"
 
-#: views.py:79
+#: views.py:84 views.py:194
 msgid "Detail Info"
 msgstr "Informações Detalhadas"
 
-#: views.py:81
-msgid "List All"
-msgstr "Listar todos"
+#: views.py:86
+msgid "List Companies"
+msgstr "Empresas"
 
-#: views.py:92 views.py:111
+#: views.py:96 views.py:116 views.py:206 views.py:226
 msgid "Completed successful."
 msgstr "Completado com sucesso."
 
-#: views.py:95 views.py:113
-msgid "You cannot delete. This company has an existing department."
+#: views.py:99 views.py:118
+msgid "You cannot delete. This company has an existing dependency."
 msgstr "Você não pode deletar. Esta Empresa tem departamentos cadastrados."
+
+#: views.py:148
+msgid "Create Department"
+msgstr "Criar Departamentos"
+
+#: views.py:183
+msgid "Registered Departments"
+msgstr "Departamentos Cadastrados"
+
+#: views.py:196
+msgid "List Departments"
+msgstr "Departamentos"
+
+#: views.py:209 views.py:228
+msgid "You cannot delete. This department has an existing dependency."
+msgstr "Você não pode deletar. Esta Empresa tem departamentos cadastrados."
+
+#~ msgid "Discount"
+#~ msgstr "Desconto"
+
+#~ msgid "MaxDiscount"
+#~ msgstr "DescontoMAx"
+
+#~ msgid "MaxDiscounts"
+#~ msgstr "DescontosMax"
+
+#~ msgid "Max Discount"
+#~ msgstr "Desconto maximo"
+
+#~ msgid "PersonType"
+#~ msgstr "Tipos de Pessoa"
+
+#~ msgid "PersonTypes"
+#~ msgstr "Tipos de pessoas"
+
+#~ msgid "List All"
+#~ msgstr "Listar todos"

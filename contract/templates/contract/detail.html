@@ -33,10 +33,7 @@
                     <!-- Media Body -->
                     <div class="media-body ml-4">
                         <h4 class="mb-15">{{ contract.name }}</h4>                                                                                
-                        <a href="{% url 'contract:url_contract_edit' contract.slug %}"><button type="button" class="btn btn-success btn-sm mb-15">{{ edit }}</button></a>
-                        <a href="#"><button type="button" data-toggle="modal" data-target="#modal-upload-contract" class="btn btn-warning btn-sm mb-15">{{ attachments }}</button></a>
-                        <a href="#"><button type="button" data-toggle="modal" data-target="#modal-nimbi-contract" class="btn btn-primary btn-sm mb-15">{{ nimbi_alias }}</button></a>
-                        <a href="#"><button type="button" data-toggle="modal" data-target="#modal-contact-provider" class="btn btn-default btn-sm mb-15">{{ contact_alias }}</button></a>
+                        <a href="{% url 'contract:url_contract_edit' contract.slug %}"><button type="button" class="btn btn-success btn-sm mb-15">{{ edit }}</button></a>                        
                         <!-- <a href="{% url 'annotation:url_annotations_list' contract.slug %}"><button type="button" class="btn btn-secondary btn-sm mb-15">{{ annotations }}</button></a> -->
                         {% if contract.status == 'Ativo' %}
                             <a href="{% url 'contract:url_contracts_list'%}" class="btn btn-info btn-sm mb-15">{{ list_contracts_actives }}</a>
@@ -59,11 +56,19 @@
                         </li>
                         <!-- Nav Item -->
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#item-images">{% trans "Nimbi" %}</a>
+                            <a class="nav-link" data-toggle="tab" href="#item-images">{% trans "Nimbi/SAP" %}</a>
+                        </li>                        
+                         <!-- Nav Item -->
+                         <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#item-cost-center">{% trans "Cost Center" %}</a>
                         </li>
                         <!-- Nav Item -->
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#item-contacts">{% trans "Contacts" %}</a>
+                            <a class="nav-link" data-toggle="tab" href="#item-users">{% trans "Users" %}</a>
+                        </li>
+                        <!-- Nav Item -->
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#item-contacts">{% trans "Provider Contacts" %}</a>
                         </li>
                     </ul>
 
@@ -95,6 +100,20 @@
                             
                         </div>
                         <!-- / Contacts -->
+                        
+                        <!-- Cost Center -->
+                        <div class="tab-pane fade" id="item-cost-center">
+                            {% include "department_contract/_table_department_contract.html"%}                    
+                            
+                        </div>
+                        <!-- / Cost Center -->
+
+                        <!-- Cost Center -->
+                        <div class="tab-pane fade" id="item-users">
+                            {% include "user_contract/_table_user_contract.html"%}                    
+                            
+                        </div>
+                        <!-- / Csst Center -->
 
                     </div>
                 </div> 
@@ -103,6 +122,7 @@
                 {% include 'contract/_modal_nimbi_contract.html' %} 
                 {% include 'default/_modal_delete.html' %}
                 {% include 'contract/_modal_contact_provider.html' %}
+                {% include 'department_contract/_modal_department_contract.html' %}                
             </div>
         </div>
     

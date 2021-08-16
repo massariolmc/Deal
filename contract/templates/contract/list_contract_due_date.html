@@ -2,10 +2,6 @@
 {% load static %}
 {% load i18n %}
 
-{% block css %}  
-  <!-- DATA TABLES -->
-  <link rel="stylesheet" href="{% static 'contract/css/plugins/data-table-css/datatables.min.css' %}">    
-{% endblock css %}
 
 {% block content %}
 
@@ -23,8 +19,8 @@
           </div>
         </div>
         <br/>       
-      </div>                
-
+      </div>           
+      {% include 'contract/_search.html' %}   
 
       <!-- Ibox Content -->
       <div class="ibox-content">        
@@ -39,8 +35,5 @@
 {% endblock content %}
 
 {% block js %}
-<!-- Data Table js -->
-<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.bootstrap.min.js'%}"></script>
-<script src="{% static 'contract/js/plugins-js/data-table-js/data-table.min.js'%}"></script>
-<script src="{% static 'contract/default/js/dataTables_default.js'%}"></script>
+<script type="text/javascript" src="{% static 'contract/js/js_dev/data_table_dev.js' %}"></script>    
 {% endblock js %}

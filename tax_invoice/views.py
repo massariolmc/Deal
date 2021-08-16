@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import TaxInvoice, UploadTaxInvoice
 from .form import TaxInvoiceForm
+from .decorators import user_has_access_contract, user_contract_delete
 from contract.models import Contract
 from account.models import User
 from django.db import IntegrityError
@@ -59,16 +60,17 @@ def tax_invoice_save_form(request,form,template_name, data, user_created=None):
                     arqs += f"{i}, "
                 messages.warning(request, _(f"Errors in the following files: {arqs}. Maximum size allowed: 3MB. This format is allowed: PDF"))       
             ###### FIM Faz a parte do Upload #################    
-            return redirect('tax_invoice:url_tax_invoices_list', data['contract'].slug)
+            return redirect('tax_invoice:url_tax_invoice_detail', obj.slug)
         else:
             print("algo não está valido.")               
     
     data['form'] = form
     return render(request,template_name,data)
 
-@login_required
-def tax_invoice_create(request, contract):
-    contract = get_object_or_404(Contract, slug=contract)
+@login_required(login_url='login')
+@user_has_access_contract
+def tax_invoice_create(request, slug):
+    contract = get_object_or_404(Contract, slug=slug)
     template_name = 'tax_invoice/form.html'    
     data = {
             "title": _("Create TaxInvoice"),
@@ -85,7 +87,8 @@ def tax_invoice_create(request, contract):
     
     return tax_invoice_save_form(request, form, template_name, data)
 
-@login_required
+@login_required(login_url='login')
+@user_has_access_contract
 def tax_invoice_edit(request, slug): 
     tax_invoice = get_object_or_404(TaxInvoice, slug=slug)           
     contract = get_object_or_404(Contract, slug=tax_invoice.contract.slug)   
@@ -106,11 +109,17 @@ def tax_invoice_edit(request, slug):
         form = TaxInvoiceForm(instance=tax_invoice)       
     return tax_invoice_save_form(request, form, template_name, data, user_created=user_created)
 
-@login_required    
-def tax_invoices_list(request,contract):
-    contract = get_object_or_404(Contract, slug=contract)  
+@login_required(login_url='login')  
+@user_has_access_contract 
+def tax_invoices_list(request,slug):
+    contract = get_object_or_404(Contract, slug=slug)  
     template_name = "tax_invoice/list.html"
-    tax_invoices = TaxInvoice.objects.filter(contract=contract.id)    
+    #if request.user.is_superuser:        
+    #    tax_invoices = TaxInvoice.objects.prefetch_related('contract').filter(contract=contract.id)
+    #else:
+        #contracts = request.user.members_user_contract.filter(status='Ativo') 
+    tax_invoices = contract.tax_invoice_contract_created_id.all()
+      
     context = {
         'tax_invoices': tax_invoices,
         'contract': contract,
@@ -121,10 +130,14 @@ def tax_invoices_list(request,contract):
     }    
     return render(request,template_name,context)
 
-@login_required
+@login_required(login_url='login')
 def providers_choose(request):
     template_name = "tax_invoice/providers_choose.html"
-    contracts = Contract.objects.filter(status='Ativo')        
+    #contracts = Contract.objects.filter(status='Ativo')  
+    if request.user.is_superuser:        
+        contracts = Contract.objects.prefetch_related('members_contract').filter(status='Ativo')               
+    else:
+        contracts = request.user.members_user_contract.filter(status='Ativo')         
     context = {
         'contracts': contracts,
         'title': _("Entry with a tax invoice"),
@@ -132,7 +145,8 @@ def providers_choose(request):
     }
     return render(request,template_name,context)
 
-@login_required
+@login_required(login_url='login')
+@user_has_access_contract
 def tax_invoice_detail(request, slug):    
     template_name = "tax_invoice/detail.html"
     tax_invoice = get_object_or_404(TaxInvoice,slug=slug)
@@ -149,7 +163,8 @@ def tax_invoice_detail(request, slug):
     }
     return render(request, template_name, context)
 
-@login_required
+@login_required(login_url='login')
+@user_has_access_contract
 def tax_invoice_delete(request, slug):    
     tax_invoice = get_object_or_404(TaxInvoice, slug=slug)  
     slug = tax_invoice.contract.slug      
@@ -157,12 +172,12 @@ def tax_invoice_delete(request, slug):
        try:
            tax_invoice.delete()
            messages.success(request, _('Completed successful.'))
-           return redirect('tax_invoice:url_tax_invoices_list', contract=slug)
+           return redirect('tax_invoice:url_tax_invoices_list', slug=slug)
        except IntegrityError:
            messages.warning(request, _('You cannot delete. This tax_invoice has an existing department.'))
-           return redirect('tax_invoice:url_tax_invoices_list', contract=slug)    
+           return redirect('tax_invoice:url_tax_invoices_list', slug=slug)    
 
-@login_required
+@login_required(login_url='login')
 def tax_invoice_delete_all(request):
     marc = 0    
     if request.method == "POST":        
@@ -182,9 +197,9 @@ def tax_invoice_delete_all(request):
     else:
         messages.warning(request, _('You cannot delete. This tax_invoice has an existing department.'))
     
-    return redirect('tax_invoice:url_tax_invoices_list', contract=contract_slug)
+    return redirect('tax_invoice:url_tax_invoices_list', slug=contract_slug)
 
-@login_required
+@login_required(login_url='login')
 def upload_delete(request, slug):    
     upload = get_object_or_404(UploadTaxInvoice, slug=slug)   
     tax_invoice =  upload.tax_invoice.slug
