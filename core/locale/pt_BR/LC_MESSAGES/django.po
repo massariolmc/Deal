@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-04 20:52-0400\n"
+"POT-Creation-Date: 2021-08-16 15:46-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,36 +63,57 @@ msgid "Contracts"
 msgstr "Contratos"
 
 #: templates/core/_navbar.html:35
-msgid "Create Contracts"
+msgid "Create"
 msgstr "Criar"
 
 #: templates/core/_navbar.html:36
-msgid "Actives Contracts"
+msgid "Actives"
 msgstr "Ativos"
 
 #: templates/core/_navbar.html:37
-msgid "Contracts Inactives"
+msgid "Inactives"
 msgstr "Encerrados"
 
 #: templates/core/_navbar.html:38
-msgid "Finish Contracts"
-msgstr "Renovações"
+msgid "Renovation"
+msgstr "Renova/Reajuste"
 
 #: templates/core/_navbar.html:39
+msgid "Finish"
+msgstr "Término"
+
+#: templates/core/_navbar.html:40
 msgid "Cost Centers"
 msgstr "Centros de Custo"
 
-#: templates/core/_navbar.html:42
+#: templates/core/_navbar.html:43
 msgid "Tax invoices"
 msgstr "Notas Fiscais"
 
-#: templates/core/_navbar.html:44
+#: templates/core/_navbar.html:45
 msgid "List Providers"
 msgstr "Lançar Notas"
 
-#: templates/core/_navbar.html:45
+#: templates/core/_navbar.html:46
 msgid "Finish invoices"
 msgstr "Vencimentos"
+
+#: templates/core/not_authorized.html:11
+msgid "Not authorized"
+msgstr "Não autorizado"
+
+#: templates/core/not_authorized.html:14
+msgid "Contact the administratior of system."
+msgstr "Contate o administrador do sistema."
+
+#~ msgid "Create Contracts"
+#~ msgstr "Criar"
+
+#~ msgid "Actives Contracts"
+#~ msgstr "Ativos"
+
+#~ msgid "Finish Contracts"
+#~ msgstr "Renovações"
 
 #~ msgid "Due Date"
 #~ msgstr "Lista - Término dos Contratos"

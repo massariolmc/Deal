@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+  
+<div class="col-lg-12 mt-3">    
+      <!-- Ibox -->
+    <div class="ibox bg-boxshadow"> 
+        <div class="ibox-title mb-30">
+            <!--
+                <div class="row">
+                <div class="col-sm-6">
+                    <h6 class="m-0 font-weight-bold text-primary">LEGENDA</h6>
+                </div>
+                <div class="col-sm-6">
+                    <span class="float-right">
+                    <a href="#">
+                        <button type="button" class="btn btn-success">
+                        </button>
+                    </a>
+                    </span>
+                </div>
+                </div>
+            -->  
+        </div><!-- ibox-title -->
+
+      <!-- Ibox Content -->
+      <div class="ibox-content">                       
+        <iframe
+            src="http://mlxtech.com.br/metabase/public/dashboard/da547c98-ae02-44db-b61f-96b5a719bab2"
+            frameborder="0"
+            class="iframe_metabase"            
+            allowtransparency
+        ></iframe>
+      </div>
+    </div><!--ibox bg-boxshadow-->
+</div><!--col-lg-12 -->
+{% endblock content %}

@@ -113,9 +113,7 @@ class ContractCompany(models.Model):
 
 class NimbiContract(models.Model):    
     contract = models.ForeignKey(Contract, related_name="nimbi_contract", verbose_name=_("Contract"), blank=False, on_delete=models.CASCADE)
-    number_req_nimbi = models.CharField(_('Number Requisition Nimbi'), max_length=100, blank=False)
-    #number_cod_nimbi = models.CharField(_('Number PC Nimbi'), max_length=100, blank=True)
-    #number_pc_nimbi = models.CharField(_('Number PC SAP'), max_length=100, blank=True)
+    number_req_nimbi = models.CharField(_('Number Requisition Nimbi'), max_length=100, blank=False)    
     number_pc_nimbi = models.CharField(_('Number PC Nimbi'), max_length=100, blank=True)
     number_pc_sap = models.CharField(_('Number PC SAP'), max_length=100, blank=True)
     number_cod_project = models.CharField(_('Number Cod Project'), max_length=100, blank=True)        

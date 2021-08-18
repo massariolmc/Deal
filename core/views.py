@@ -11,7 +11,8 @@ import locale
 
 @login_required(login_url='login')
 def home(request):
-    template_name = "core/base.html"    
+    #template_name = "core/base.html"    
+    template_name = "core/home.html"    
     return render(request,template_name,{})
 
 @login_required(login_url='login')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-20 09:55-0400\n"
+"POT-Creation-Date: 2021-08-16 16:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: form.py:116
+msgid "Mismatch Password."
+msgstr "Senha incorreta."
+
+#: templates/contract/_table_contract.html:8
+#: templates/signup_user_contract/_table_contract.html:12
+msgid "Provider"
+msgstr "Fornecedor"
+
+#: templates/contract/_table_contract.html:9
+#: templates/signup_user_contract/_table_contract.html:13
+msgid "Company"
+msgstr "Empresa"
+
+#: templates/contract/_table_contract.html:10
+#: templates/signup_user_contract/_table_contract.html:14
+msgid "Name"
+msgstr "Nome completo"
+
+#: templates/contract/_table_contract.html:11
+#: templates/signup_user_contract/_table_contract.html:15
+msgid "Type"
+msgstr "Tipo"
+
+#: templates/contract/_table_contract.html:12
+#: templates/signup_user_contract/_table_contract.html:16
+msgid "Annual Budget"
+msgstr "Pedido Anual"
 
 #: templates/default/_messages.html:7 templates/default/_messages_async.html:6
 #: templates/signup/_form_errors.html:6
@@ -45,14 +74,16 @@ msgid "Do you want to inactive?"
 msgstr "Você deseja inativar?"
 
 #: templates/default/_modal_checkbox.html:17
-#: templates/default/_modal_delete.html:17 templates/signup/_table.html:44
-#: templates/signup/detail.html:69
+#: templates/default/_modal_delete.html:17
+#: templates/signup/_table_details.html:37
+#: templates/signup/_table_details.html:45 templates/signup/detail_old.html:69
 msgid "No"
 msgstr "Não"
 
 #: templates/default/_modal_checkbox.html:21
-#: templates/default/_modal_delete.html:20 templates/signup/_table.html:42
-#: templates/signup/detail.html:67
+#: templates/default/_modal_delete.html:20
+#: templates/signup/_table_details.html:35
+#: templates/signup/_table_details.html:43 templates/signup/detail_old.html:67
 msgid "Yes"
 msgstr "Sim"
 
@@ -72,6 +103,14 @@ msgstr "Fechar"
 msgid "Are you sure?"
 msgstr "Você tem certeza?"
 
+#: templates/signup/_password_change.html:11
+msgid "Change Password"
+msgstr "Alterar senha"
+
+#: templates/signup/_password_change.html:15
+msgid "Change"
+msgstr "Alterar"
+
 #: templates/signup/_table.html:6
 msgid "Showing"
 msgstr "Mostrando"
@@ -80,124 +119,193 @@ msgstr "Mostrando"
 msgid "Choose"
 msgstr "Escolha"
 
-#: templates/signup/_table.html:18 templates/signup/detail.html:41
+#: templates/signup/_table.html:18 templates/signup/_table_details.html:9
+#: templates/signup/detail_old.html:41
 msgid "CPF"
 msgstr "CPF"
 
-#: templates/signup/_table.html:19 templates/signup/detail.html:45
+#: templates/signup/_table.html:19 templates/signup/_table_details.html:13
+#: templates/signup/detail_old.html:45
 msgid "Full Name"
 msgstr "Nome completo"
 
-#: templates/signup/_table.html:20 templates/signup/detail.html:53
+#: templates/signup/_table.html:20 templates/signup/_table_details.html:21
+#: templates/signup/detail_old.html:53
 msgid "Email"
 msgstr "Email"
 
 #: templates/signup/_table.html:21
-msgid "Data de Criação"
-msgstr "Data de Criação"
+msgid "Perfil"
+msgstr "Perfil"
 
-#: templates/signup/_table.html:22 templates/signup/detail.html:65
-msgid "Active"
-msgstr "Ativo"
+#: templates/signup/_table.html:22
+#: templates/signup_user_contract/_table_contract.html:17
+msgid "Status"
+msgstr "Status"
 
 #: templates/signup/_table.html:23
+#: templates/signup_user_contract/_table_contract.html:18
 msgid "Options"
 msgstr "Opções"
 
-#: templates/signup/_table.html:48
+#: templates/signup/_table.html:41
+msgid "Admin"
+msgstr "Admin"
+
+#: templates/signup/_table.html:43
+msgid "---"
+msgstr "---"
+
+#: templates/signup/_table.html:48 templates/signup/_table_details.html:41
+#: templates/signup/detail_old.html:65
+msgid "Active"
+msgstr "Ativo"
+
+#: templates/signup/_table.html:50
+msgid "Not Active"
+msgstr "Inativo"
+
+#: templates/signup/_table.html:54
 msgid "edit"
 msgstr "editar"
 
-#: templates/signup/_table.html:49
+#: templates/signup/_table.html:55
 msgid "detail"
 msgstr "detalhes"
 
-#: templates/signup/_table.html:50
+#: templates/signup/_table.html:56
+#: templates/signup_user_contract/_table_contract.html:34
 msgid "delete"
 msgstr "deletar"
 
-#: templates/signup/detail.html:49
+#: templates/signup/_table_details.html:17 templates/signup/detail_old.html:49
 msgid "Username"
 msgstr "Usuário"
 
-#: templates/signup/detail.html:57
+#: templates/signup/_table_details.html:25
+msgid "Painel Admin Access"
+msgstr "Acesso de Admin"
+
+#: templates/signup/_table_details.html:33 templates/signup/detail_old.html:57
 msgid "Admin Access"
 msgstr "Acesso de Admin"
 
-#: templates/signup/detail.html:73
+#: templates/signup/_table_details.html:49 templates/signup/detail_old.html:73
 msgid "Created At"
 msgstr "Criado em"
 
-#: templates/signup/detail.html:77
+#: templates/signup/_table_details.html:53 templates/signup/detail_old.html:77
 msgid "Last Login"
 msgstr "Ultimo login"
 
-#: templates/signup/detail.html:78
+#: templates/signup/_table_details.html:54 templates/signup/detail_old.html:78
 msgid "Login at: "
 msgstr "Login em: "
 
-#: templates/signup/detail.html:78
+#: templates/signup/_table_details.html:54 templates/signup/detail_old.html:78
 msgid "Logout At: "
 msgstr "Logout em: "
 
-#: templates/signup/detail.html:81
+#: templates/signup/_table_details.html:57 templates/signup/detail_old.html:81
 msgid "Created by"
 msgstr "Criado por"
 
-#: templates/signup/detail.html:85
+#: templates/signup/_table_details.html:61 templates/signup/detail_old.html:85
 msgid "Updated by"
 msgstr "Atualizado por"
 
+#: templates/signup/detail.html:38
+msgid "Details"
+msgstr "detalhes"
+
+#: templates/signup/detail.html:42
+msgid "Password Change"
+msgstr "Alterar senha"
+
+#: templates/signup/detail.html:46
+#: templates/signup_user_contract/_modal_user_contract.html:11
+msgid "Contracts"
+msgstr "Contratos"
+
 #: templates/signup/list.html:34
 msgid "Inactive"
-msgstr "INativo"
+msgstr "Inativo"
 
-#: views.py:33
-msgid "Create User"
-msgstr "Criar Usuário"
-
-#: views.py:34 views.py:95
-msgid "Back"
-msgstr "Voltar"
-
-#: views.py:35 views.py:96
+#: templates/signup_user_contract/_modal_user_contract.html:24 views.py:43
+#: views.py:109
 msgid "Save"
 msgstr "Salvar"
 
-#: views.py:36 views.py:97
+#: views.py:41
+msgid "Create User"
+msgstr "Criar Usuário"
+
+#: views.py:42 views.py:108
+msgid "Back"
+msgstr "Voltar"
+
+#: views.py:44 views.py:110
 msgid "Clear"
 msgstr "Limpar"
 
-#: views.py:86
+#: views.py:97
 msgid "Registered Users"
 msgstr "Cadastrar Usuário"
 
-#: views.py:87
+#: views.py:98
 msgid "Add"
 msgstr "Adicionar"
 
-#: views.py:94 views.py:113
+#: views.py:107 views.py:131
 msgid "Edit"
 msgstr "Editar"
 
-#: views.py:112
+#: views.py:130
 msgid "Detail Info"
 msgstr "Informações Detalhadas"
 
-#: views.py:114
-msgid "List All"
-msgstr "Listar todos"
+#: views.py:132
+msgid "List Users"
+msgstr "Cadastrar Usuário"
 
-#: views.py:124 views.py:138
+#: views.py:133
+msgid "Add Contract"
+msgstr "Adicionar contrato"
+
+#: views.py:149 views.py:165 views.py:184 views.py:224
 msgid "Completed successful."
 msgstr "Completado com sucesso."
 
-#: views.py:127
+#: views.py:152
 msgid "You cannot delete. This user has an existing related."
-msgstr "Você não pode deletar. Este usuário possui relacionamento com outras informações do sistema."
+msgstr ""
+"Você não pode deletar. Este usuário possui relacionamento com outras "
+"informações do sistema."
 
-#: views.py:130
+#: views.py:155
 msgid ""
 "You cannot delete. This user has already accessed the system. You can "
 "inactivate it. "
-msgstr "VOcê não pode deltar. Este usuário possui acesso ao sistema. Você poderá inativá-lo."
+msgstr ""
+"VOcê não pode deltar. Este usuário possui acesso ao sistema. Você poderá "
+"inativá-lo."
+
+#: views.py:187
+msgid "Password not change. Input password again"
+msgstr "Senha não alterada. Tente novamente."
+
+#: views.py:210
+msgid "Contract not added. This name already exists or was entered incorrectly"
+msgstr "Contrato não adicionado. Este nome já existe ou foi inserido incorretamente."
+
+#: views.py:227
+msgid "You cannot delete. This contract has an existing tax invoices."
+msgstr ""
+"Você não pode deletar. Este usuário possui relacionamento com outras "
+"informações do sistema."
+
+#~ msgid "Data de Criação"
+#~ msgstr "Data de Criação"
+
+#~ msgid "List All"
+#~ msgstr "Listar todos"

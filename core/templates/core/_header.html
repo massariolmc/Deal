@@ -6,7 +6,7 @@
     <div class="logo-trigger-area d-flex align-items-center">
 
         <!-- logo -->
-        <a href="#" class="logo mr-0">
+        <a href="{% url 'core:home'%}" class="logo mr-0">
             <span class="big-logo">                       
                 <img src="{% static 'core/img/vetorial.jpg'%}" alt="">
             </span>       
@@ -25,7 +25,7 @@
         <div class="topbar-profile">
             <!-- Thumb -->
             <div class="user---thumb">                            
-                <p class="text-warning">{% trans 'User' %}: {{ request.user.first_name}}</p>
+                <p class="text-white"><strong>{% trans 'User' %}: {{ request.user.first_name}}</strong></p>
             </div>
             <!-- Profile Data -->
             <div class="profile-data">               
