@@ -22,16 +22,20 @@
     {% for n in nimbi %}    
     <tr class="text-sm-center">      
       <td>{{ n.dt_create_rc|default_if_none:"" }}</td>  
-      <td>{{ n.number_req_nimbi }}</td>
-      <td>{{ n.number_cod_nimbi }}</td>                                
-      <td>{{ n.number_pc_nimbi }}</td>                                                                       
+      <td>{{ n.number_req_nimbi }}</td>      
+      <td>{{ n.number_pc_nimbi }}</td> 
+      <td>{{ n.number_pc_sap }}</td>                                                                                                      
       <td>{{ n.number_cod_project }}</td>                                                                                                                   
       <td>{{ n.dt_send_nf_fiscal|default_if_none:"" }}</td>
       <td>{{ n.description }}</td>  
       <td class="text-center">         
         <a href="" data-url="{% url 'contract:url_nimbi_contract_delete' n.slug %}" id="button_modal_{{ n.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>        
       </td>                                                                                       
-    </tr>  
+    </tr>
+    {% empty %}
+        <tr>
+          <td colspan="8" class="text-center bg-secondary">{% trans 'No results' %}</td>
+        </tr>   
     {% endfor %}                 
   </tbody>                  
 </table>                

@@ -29,7 +29,11 @@
       <td class="text-center">         
         <a href="" data-url="{% url 'contract:url_contact_provider_delete' contact.slug %}" id="button_modal_{{ contact.slug }}" class='badge badge-danger' data-js="link_delete">{% trans "delete" %}</a>        
       </td>                                                                                       
-    </tr>  
+    </tr>
+    {% empty %}
+        <tr>
+          <td colspan="7" class="text-center bg-secondary">{% trans 'No results' %}</td>
+        </tr>   
     {% endfor %}                 
   </tbody>                  
 </table>                

@@ -19,7 +19,11 @@
       {% else %}
         <td>{% trans "No"%}</td>         
       {% endif %}                                                                                            
-    </tr>  
+    </tr>
+    {% empty %}
+        <tr>
+          <td colspan="3" class="text-center bg-secondary">{% trans 'No results' %}</td>
+        </tr>   
     {% endfor %}                 
   </tbody>                  
 </table>                

@@ -60,14 +60,7 @@
                         <tr>
                             <th class="text-right">{% trans "Address" %}</th>
                             <td>{{ provider.address}}, {{ provider.address_number}}, {{provider.neighborhood}} - {{provider.city}}/{{provider.state}} - {% trans "Zip Code" %}: <span class="cep">{{provider.zip_code}}</span></td>
-                        </tr>
-                        <tr>
-                            <th class="text-right">{% trans "Contact Provider" %}</th>
-                            <td>
-                                <button type="button" data-toggle="modal" data-target="#modal-contact-provider" class="btn m-2 btn-xs rounded-0 btn-info">{{ show }}
-                                </button>
-                              </td>
-                        </tr>
+                        </tr>                        
                         <tr>
                             <th class="text-right">{% trans "Phones" %}</th>
                             <td>{{ provider.phone_1 }} / {{ provider.phone_2 }}</td>
