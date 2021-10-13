@@ -24,7 +24,7 @@ class TaxInvoice(models.Model):
     slug = models.SlugField(_('Slug'), max_length=200, unique=True, blank=True)
     dt_issue = models.DateField(_('Issue Date'), max_length=100, blank=True, null=True)
     number_invoice = models.CharField(_('Number Invoice'), max_length=100, blank=False)    
-    ref_month = models.CharField(_('Reference Month'), max_length=7, blank=False, help_text = "Formato: DDAAAA")
+    ref_month = models.CharField(_('Reference Month'), max_length=7, blank=False, help_text = "Formato: MMAAAA")
     value = models.DecimalField(_('Invoice Value'), decimal_places=2, max_digits=20, blank=False)
     pay_day = models.DateField(_('Payment Day'), max_length=100, blank=True, null = True)
     telecom_data = models.CharField(_('Telecom Data'), max_length=100, blank=True, help_text=_("Field used for telecommunications contracts.."))

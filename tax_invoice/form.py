@@ -40,9 +40,9 @@ class TaxInvoiceForm(ModelForm):
         ref_month = self.cleaned_data['ref_month']
         msg_format =  _(f"This format not allowed.")
         try:
-            datetime.strptime(ref_month, '%m/%Y')
+            datetime.strptime(ref_month, '%m%Y')
 
-        except ValueError:
+        except ValueError:            
             raise ValidationError(msg_format)
         
         return ref_month
